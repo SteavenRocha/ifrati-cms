@@ -1,0 +1,26 @@
+{
+  "collectionName": "components_shared_videos",
+  "info": {
+    "displayName": "Video"
+  },
+  "options": {},
+  "attributes": {
+    "videoLink": {
+      "type": "string",
+      "required": false,
+      "minLength": 1
+    },
+    "video": {
+      "allowedTypes": [
+        "videos"
+      ],
+      "type": "media",
+      "multiple": false
+    },
+    "videoDescription": {
+      "type": "text",
+      "required": true,
+      "minLength": 1
+    }
+  }
+}

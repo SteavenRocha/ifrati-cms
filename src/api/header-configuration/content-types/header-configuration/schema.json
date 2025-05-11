@@ -1,0 +1,26 @@
+{
+  "kind": "singleType",
+  "collectionName": "header_configurations",
+  "info": {
+    "singularName": "header-configuration",
+    "pluralName": "header-configurations",
+    "displayName": "Header Configuration"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "header": {
+      "type": "component",
+      "repeatable": false,
+      "component": "component.header",
+      "required": true
+    },
+    "headerUp": {
+      "type": "component",
+      "repeatable": false,
+      "component": "component.header-up",
+      "required": true
+    }
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "collectionName": "components_component_heroes",
+  "info": {
+    "displayName": "Hero",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "text",
+      "required": true,
+      "minLength": 1
+    },
+    "style": {
+      "type": "enumeration",
+      "enum": [
+        "STYLE__1",
+        "STYLE__2",
+        "STYLE__3",
+        "STYLE__4"
+      ],
+      "default": "STYLE__1",
+      "required": true
+    },
+    "description": {
+      "type": "text",
+      "required": true,
+      "minLength": 1
+    },
+    "sideImage": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "buttons": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.button",
+      "max": 2,
+      "min": 1,
+      "required": true
+    },
+    "heroStyle": {
+      "type": "component",
+      "repeatable": false,
+      "component": "settings.hero-styles",
+      "required": false
+    }
+  }
+}

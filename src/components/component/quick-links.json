@@ -1,0 +1,21 @@
+{
+  "collectionName": "components_component_quick_links",
+  "info": {
+    "displayName": "Quick Links"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true,
+      "minLength": 1
+    },
+    "links": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.header-link",
+      "required": true,
+      "max": 6
+    }
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "collectionName": "components_shared_complaints_books",
+  "info": {
+    "displayName": "Complaints Book",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "href": {
+      "type": "string",
+      "required": true,
+      "minLength": 1
+    },
+    "markdown": {
+      "type": "richtext",
+      "required": false
+    }
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "collectionName": "components_component_footer_components",
+  "info": {
+    "displayName": "Footer Component",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "disclaimer": {
+      "type": "text",
+      "required": true,
+      "minLength": 1
+    },
+    "socialLinks": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.logo-link",
+      "required": true,
+      "max": 5
+    },
+    "complaintsBook": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.complaints-book",
+      "required": true
+    },
+    "backgroundColor": {
+      "type": "customField",
+      "regex": "^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$",
+      "customField": "plugin::color-picker.color"
+    }
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "collectionName": "components_shared_markdown_links",
+  "info": {
+    "displayName": "Markdown Link"
+  },
+  "options": {},
+  "attributes": {
+    "text": {
+      "type": "string",
+      "required": true,
+      "minLength": 1
+    },
+    "href": {
+      "type": "string",
+      "required": true,
+      "minLength": 1
+    },
+    "markdown": {
+      "type": "richtext",
+      "required": false
+    }
+  }
+}

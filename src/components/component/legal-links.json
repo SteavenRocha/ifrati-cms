@@ -1,0 +1,22 @@
+{
+  "collectionName": "components_component_legal_links",
+  "info": {
+    "displayName": "Legal Links",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true,
+      "minLength": 1
+    },
+    "links": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.markdown-link",
+      "required": true,
+      "max": 6
+    }
+  }
+}

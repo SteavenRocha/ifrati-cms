@@ -1,0 +1,22 @@
+{
+  "collectionName": "components_component_social_proofs",
+  "info": {
+    "displayName": "Social Proof"
+  },
+  "options": {},
+  "attributes": {
+    "statistics": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.statistics",
+      "max": 4,
+      "min": 3,
+      "required": true
+    },
+    "statisticsStyle": {
+      "type": "component",
+      "repeatable": false,
+      "component": "settings.section-styles"
+    }
+  }
+}

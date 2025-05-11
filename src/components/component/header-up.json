@@ -1,0 +1,35 @@
+{
+  "collectionName": "components_component_header_ups",
+  "info": {
+    "displayName": "Header Up",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "social": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.logo-link",
+      "required": false,
+      "max": 5
+    },
+    "data": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.link",
+      "max": 3,
+      "min": 1,
+      "required": true
+    },
+    "isActive": {
+      "type": "boolean",
+      "default": true,
+      "required": true
+    },
+    "headerUpStyle": {
+      "type": "component",
+      "repeatable": false,
+      "component": "settings.header-styles"
+    }
+  }
+}

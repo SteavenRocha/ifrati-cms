@@ -1,0 +1,21 @@
+{
+  "collectionName": "components_shared_header_links",
+  "info": {
+    "displayName": "Internal Link",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "text": {
+      "type": "string",
+      "required": true,
+      "minLength": 1
+    },
+    "href": {
+      "type": "string",
+      "required": true,
+      "minLength": 1,
+      "default": "/"
+    }
+  }
+}

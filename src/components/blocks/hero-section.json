@@ -1,0 +1,22 @@
+{
+  "collectionName": "components_blocks_hero_sections",
+  "info": {
+    "displayName": "Hero Section",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "hero": {
+      "type": "component",
+      "repeatable": false,
+      "component": "component.hero",
+      "required": true
+    },
+    "socialProof": {
+      "type": "component",
+      "repeatable": false,
+      "component": "component.social-proof",
+      "required": true
+    }
+  }
+}

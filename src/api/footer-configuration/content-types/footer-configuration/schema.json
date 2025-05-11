@@ -1,0 +1,32 @@
+{
+  "kind": "singleType",
+  "collectionName": "footer_configurations",
+  "info": {
+    "singularName": "footer-configuration",
+    "pluralName": "footer-configurations",
+    "displayName": "Footer Configuration",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "footer": {
+      "type": "component",
+      "repeatable": false,
+      "component": "component.footer",
+      "required": true
+    },
+    "footerComponent": {
+      "type": "component",
+      "repeatable": false,
+      "component": "component.footer-component",
+      "required": true
+    },
+    "footerStyle": {
+      "type": "component",
+      "repeatable": false,
+      "component": "settings.section-styles"
+    }
+  }
+}

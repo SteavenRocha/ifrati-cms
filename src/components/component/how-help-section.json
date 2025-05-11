@@ -1,0 +1,37 @@
+{
+  "collectionName": "components_component_how_help_sections",
+  "info": {
+    "displayName": "How Help Section",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true,
+      "minLength": 1
+    },
+    "description": {
+      "type": "text",
+      "required": true,
+      "minLength": 1
+    },
+    "cardSection": {
+      "type": "component",
+      "repeatable": false,
+      "component": "component.card-section",
+      "required": true
+    },
+    "button": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.button"
+    },
+    "sectionStyle": {
+      "type": "component",
+      "repeatable": false,
+      "component": "settings.section-styles",
+      "required": false
+    }
+  }
+}

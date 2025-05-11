@@ -1,0 +1,27 @@
+{
+  "kind": "singleType",
+  "collectionName": "website_configurations",
+  "info": {
+    "singularName": "website-configuration",
+    "pluralName": "website-configurations",
+    "displayName": "Website Configuration",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "globalSettings": {
+      "type": "component",
+      "repeatable": false,
+      "component": "settings.global",
+      "required": true
+    },
+    "styleSettings": {
+      "type": "component",
+      "repeatable": false,
+      "component": "settings.website-styles",
+      "required": true
+    }
+  }
+}

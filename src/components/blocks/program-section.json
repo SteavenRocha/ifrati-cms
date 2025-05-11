@@ -1,0 +1,22 @@
+{
+  "collectionName": "components_blocks_program_sections",
+  "info": {
+    "displayName": "Program Section",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "program": {
+      "type": "component",
+      "repeatable": false,
+      "component": "component.program-section",
+      "required": true
+    },
+    "howHelp": {
+      "type": "component",
+      "repeatable": false,
+      "component": "component.how-help-section",
+      "required": true
+    }
+  }
+}

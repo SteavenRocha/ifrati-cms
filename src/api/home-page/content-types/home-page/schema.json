@@ -1,0 +1,29 @@
+{
+  "kind": "singleType",
+  "collectionName": "home_pages",
+  "info": {
+    "singularName": "home-page",
+    "pluralName": "home-pages",
+    "displayName": "Home Page",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true,
+      "minLength": 1
+    },
+    "sections": {
+      "type": "dynamiczone",
+      "components": [
+        "blocks.hero-section",
+        "blocks.about-section",
+        "blocks.program-section"
+      ],
+      "required": true
+    }
+  }
+}
