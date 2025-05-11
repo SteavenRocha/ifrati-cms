@@ -48,6 +48,14 @@ const populate = {
       },
       "blocks.about-section": {
         populate: {
+          pill: {
+            populate: {
+              icon: {
+                fields: ["url", "alternativeText"]
+              },
+              pillStyle: true
+            }
+          },
           button: {
             populate: {
               icon: {
@@ -65,6 +73,14 @@ const populate = {
         populate: {
           program: {
             populate: {
+              pill: {
+                populate: {
+                  icon: {
+                    fields: ["url", "alternativeText"]
+                  },
+                  pillStyle: true
+                }
+              },
               video: {
                 populate: {
                   video: {
@@ -77,6 +93,14 @@ const populate = {
           },
           howHelp: {
             populate: {
+              pill: {
+                populate: {
+                  icon: {
+                    fields: ["url", "alternativeText"]
+                  },
+                  pillStyle: true
+                }
+              },
               cardSection: {
                 populate: {
                   card: {

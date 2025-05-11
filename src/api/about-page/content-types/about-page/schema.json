@@ -1,0 +1,29 @@
+{
+  "kind": "singleType",
+  "collectionName": "about_pages",
+  "info": {
+    "singularName": "about-page",
+    "pluralName": "about-pages",
+    "displayName": "About Page",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true,
+      "minLength": 1
+    },
+    "sections": {
+      "type": "dynamiczone",
+      "components": [
+        "about-blocks.hero-section",
+        "about-blocks.mission-section",
+        "about-blocks.vision-section"
+      ],
+      "required": true
+    }
+  }
+}

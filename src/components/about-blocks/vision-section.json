@@ -1,8 +1,7 @@
 {
-  "collectionName": "components_component_program_sections",
+  "collectionName": "components_about_blocks_vision_sections",
   "info": {
-    "displayName": "Program Section",
-    "description": ""
+    "displayName": "Vision Section"
   },
   "options": {},
   "attributes": {
@@ -16,22 +15,23 @@
       "required": true,
       "minLength": 1
     },
-    "video": {
+    "pill": {
       "type": "component",
       "repeatable": false,
-      "component": "shared.video",
+      "component": "component.pill"
+    },
+    "sideImage": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false,
       "required": true
     },
     "sectionStyle": {
       "type": "component",
       "repeatable": false,
       "component": "settings.section-styles"
-    },
-    "pill": {
-      "type": "component",
-      "repeatable": false,
-      "component": "component.pill",
-      "required": true
     }
   }
 }

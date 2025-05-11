@@ -1,5 +1,71 @@
 import type { Schema, Struct } from '@strapi/strapi';
 
+export interface AboutBlocksHeroSection extends Struct.ComponentSchema {
+  collectionName: 'components_about_blocks_hero_sections';
+  info: {
+    description: '';
+    displayName: 'Hero Section';
+  };
+  attributes: {
+    description: Schema.Attribute.Text &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        minLength: 1;
+      }>;
+    heroStyle: Schema.Attribute.Component<'settings.hero-styles', false>;
+    title: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        minLength: 1;
+      }>;
+  };
+}
+
+export interface AboutBlocksMissionSection extends Struct.ComponentSchema {
+  collectionName: 'components_about_blocks_mission_sections';
+  info: {
+    displayName: 'Mission Section';
+  };
+  attributes: {
+    description: Schema.Attribute.Text &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        minLength: 1;
+      }>;
+    pill: Schema.Attribute.Component<'component.pill', false> &
+      Schema.Attribute.Required;
+    sectionStyle: Schema.Attribute.Component<'settings.section-styles', false>;
+    sideImage: Schema.Attribute.Media<'images'>;
+    title: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        minLength: 1;
+      }>;
+  };
+}
+
+export interface AboutBlocksVisionSection extends Struct.ComponentSchema {
+  collectionName: 'components_about_blocks_vision_sections';
+  info: {
+    displayName: 'Vision Section';
+  };
+  attributes: {
+    description: Schema.Attribute.Text &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        minLength: 1;
+      }>;
+    pill: Schema.Attribute.Component<'component.pill', false>;
+    sectionStyle: Schema.Attribute.Component<'settings.section-styles', false>;
+    sideImage: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
+    title: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        minLength: 1;
+      }>;
+  };
+}
+
 export interface BlocksAboutSection extends Struct.ComponentSchema {
   collectionName: 'components_blocks_about_sections';
   info: {
@@ -20,6 +86,8 @@ export interface BlocksAboutSection extends Struct.ComponentSchema {
       Schema.Attribute.SetMinMaxLength<{
         minLength: 1;
       }>;
+    pill: Schema.Attribute.Component<'component.pill', false> &
+      Schema.Attribute.Required;
     sectionStyle: Schema.Attribute.Component<'settings.section-styles', false>;
     sideImage: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
     title: Schema.Attribute.String &
@@ -260,6 +328,8 @@ export interface ComponentHowHelpSection extends Struct.ComponentSchema {
       Schema.Attribute.SetMinMaxLength<{
         minLength: 1;
       }>;
+    pill: Schema.Attribute.Component<'component.pill', false> &
+      Schema.Attribute.Required;
     sectionStyle: Schema.Attribute.Component<'settings.section-styles', false>;
     title: Schema.Attribute.String &
       Schema.Attribute.Required &
@@ -292,6 +362,23 @@ export interface ComponentLegalLinks extends Struct.ComponentSchema {
   };
 }
 
+export interface ComponentPill extends Struct.ComponentSchema {
+  collectionName: 'components_component_pills';
+  info: {
+    description: '';
+    displayName: 'Pill';
+  };
+  attributes: {
+    icon: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
+    pillStyle: Schema.Attribute.Component<'settings.header-styles', false>;
+    text: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        minLength: 1;
+      }>;
+  };
+}
+
 export interface ComponentProgramSection extends Struct.ComponentSchema {
   collectionName: 'components_component_program_sections';
   info: {
@@ -304,6 +391,8 @@ export interface ComponentProgramSection extends Struct.ComponentSchema {
       Schema.Attribute.SetMinMaxLength<{
         minLength: 1;
       }>;
+    pill: Schema.Attribute.Component<'component.pill', false> &
+      Schema.Attribute.Required;
     sectionStyle: Schema.Attribute.Component<'settings.section-styles', false>;
     title: Schema.Attribute.String &
       Schema.Attribute.Required &
@@ -637,6 +726,9 @@ export interface SharedVideo extends Struct.ComponentSchema {
 declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
+      'about-blocks.hero-section': AboutBlocksHeroSection;
+      'about-blocks.mission-section': AboutBlocksMissionSection;
+      'about-blocks.vision-section': AboutBlocksVisionSection;
       'blocks.about-section': BlocksAboutSection;
       'blocks.hero-section': BlocksHeroSection;
       'blocks.program-section': BlocksProgramSection;
@@ -649,6 +741,7 @@ declare module '@strapi/strapi' {
       'component.hero': ComponentHero;
       'component.how-help-section': ComponentHowHelpSection;
       'component.legal-links': ComponentLegalLinks;
+      'component.pill': ComponentPill;
       'component.program-section': ComponentProgramSection;
       'component.quick-links': ComponentQuickLinks;
       'component.social-proof': ComponentSocialProof;

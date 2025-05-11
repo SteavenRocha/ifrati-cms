@@ -1,8 +1,7 @@
 {
-  "collectionName": "components_component_program_sections",
+  "collectionName": "components_about_blocks_mission_sections",
   "info": {
-    "displayName": "Program Section",
-    "description": ""
+    "displayName": "Mission Section"
   },
   "options": {},
   "attributes": {
@@ -16,22 +15,23 @@
       "required": true,
       "minLength": 1
     },
-    "video": {
-      "type": "component",
-      "repeatable": false,
-      "component": "shared.video",
-      "required": true
-    },
-    "sectionStyle": {
-      "type": "component",
-      "repeatable": false,
-      "component": "settings.section-styles"
-    },
     "pill": {
       "type": "component",
       "repeatable": false,
       "component": "component.pill",
       "required": true
+    },
+    "sideImage": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false
+    },
+    "sectionStyle": {
+      "type": "component",
+      "repeatable": false,
+      "component": "settings.section-styles"
     }
   }
 }

@@ -1,0 +1,26 @@
+{
+  "collectionName": "components_about_blocks_hero_sections",
+  "info": {
+    "displayName": "Hero Section",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true,
+      "minLength": 1
+    },
+    "description": {
+      "type": "text",
+      "required": true,
+      "minLength": 1
+    },
+    "heroStyle": {
+      "type": "component",
+      "repeatable": false,
+      "component": "settings.hero-styles",
+      "required": false
+    }
+  }
+}

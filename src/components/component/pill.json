@@ -1,0 +1,28 @@
+{
+  "collectionName": "components_component_pills",
+  "info": {
+    "displayName": "Pill",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "text": {
+      "type": "string",
+      "required": true,
+      "minLength": 1
+    },
+    "icon": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "pillStyle": {
+      "type": "component",
+      "repeatable": false,
+      "component": "settings.header-styles"
+    }
+  }
+}
