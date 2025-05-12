@@ -1,23 +1,26 @@
 {
-  "collectionName": "components_shared_statistics",
+  "collectionName": "components_shared_team_cards",
   "info": {
-    "displayName": "Statistics",
-    "description": ""
+    "displayName": "Team Card"
   },
   "options": {},
   "attributes": {
-    "icon": {
-      "type": "media",
-      "multiple": false,
-      "required": true,
+    "image": {
       "allowedTypes": [
         "images"
-      ]
+      ],
+      "type": "media",
+      "multiple": false,
+      "required": true
     },
     "title": {
       "type": "string",
-      "unique": false,
       "required": true,
+      "minLength": 1
+    },
+    "subTitle": {
+      "type": "string",
+      "required": false,
       "minLength": 1
     },
     "description": {

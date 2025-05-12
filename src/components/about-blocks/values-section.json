@@ -1,0 +1,37 @@
+{
+  "collectionName": "components_about_blocks_values_sections",
+  "info": {
+    "displayName": "Values Section",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true,
+      "minLength": 1
+    },
+    "description": {
+      "type": "text",
+      "required": false,
+      "minLength": 1
+    },
+    "pill": {
+      "type": "component",
+      "repeatable": false,
+      "component": "component.pill",
+      "required": true
+    },
+    "cardSection": {
+      "type": "component",
+      "repeatable": false,
+      "component": "component.values-card-section",
+      "required": true
+    },
+    "sectionStyle": {
+      "type": "component",
+      "repeatable": false,
+      "component": "settings.section-styles"
+    }
+  }
+}

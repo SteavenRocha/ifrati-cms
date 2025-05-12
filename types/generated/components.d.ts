@@ -1,5 +1,35 @@
 import type { Schema, Struct } from '@strapi/strapi';
 
+export interface AboutBlocksCtaSection extends Struct.ComponentSchema {
+  collectionName: 'components_about_blocks_cta_sections';
+  info: {
+    description: '';
+    displayName: 'Cta Section';
+  };
+  attributes: {
+    button: Schema.Attribute.Component<'shared.button', true> &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          max: 2;
+          min: 1;
+        },
+        number
+      >;
+    ctaStyle: Schema.Attribute.Component<'settings.cta-styles', false>;
+    description: Schema.Attribute.Text &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        minLength: 1;
+      }>;
+    title: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        minLength: 1;
+      }>;
+  };
+}
+
 export interface AboutBlocksHeroSection extends Struct.ComponentSchema {
   collectionName: 'components_about_blocks_hero_sections';
   info: {
@@ -36,6 +66,60 @@ export interface AboutBlocksMissionSection extends Struct.ComponentSchema {
       Schema.Attribute.Required;
     sectionStyle: Schema.Attribute.Component<'settings.section-styles', false>;
     sideImage: Schema.Attribute.Media<'images'>;
+    title: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        minLength: 1;
+      }>;
+  };
+}
+
+export interface AboutBlocksTeamSection extends Struct.ComponentSchema {
+  collectionName: 'components_about_blocks_team_sections';
+  info: {
+    description: '';
+    displayName: 'Team Section';
+  };
+  attributes: {
+    cardSection: Schema.Attribute.Component<
+      'component.team-card-section',
+      false
+    > &
+      Schema.Attribute.Required;
+    description: Schema.Attribute.Text &
+      Schema.Attribute.SetMinMaxLength<{
+        minLength: 1;
+      }>;
+    pill: Schema.Attribute.Component<'component.pill', false> &
+      Schema.Attribute.Required;
+    sectionStyle: Schema.Attribute.Component<'settings.section-styles', false>;
+    title: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        minLength: 1;
+      }>;
+  };
+}
+
+export interface AboutBlocksValuesSection extends Struct.ComponentSchema {
+  collectionName: 'components_about_blocks_values_sections';
+  info: {
+    description: '';
+    displayName: 'Values Section';
+  };
+  attributes: {
+    cardSection: Schema.Attribute.Component<
+      'component.values-card-section',
+      false
+    > &
+      Schema.Attribute.Required;
+    description: Schema.Attribute.Text &
+      Schema.Attribute.SetMinMaxLength<{
+        minLength: 1;
+      }>;
+    pill: Schema.Attribute.Component<'component.pill', false> &
+      Schema.Attribute.Required;
+    sectionStyle: Schema.Attribute.Component<'settings.section-styles', false>;
     title: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.SetMinMaxLength<{
@@ -448,6 +532,62 @@ export interface ComponentSocialProof extends Struct.ComponentSchema {
   };
 }
 
+export interface ComponentTeamCardSection extends Struct.ComponentSchema {
+  collectionName: 'components_component_team_card_sections';
+  info: {
+    description: '';
+    displayName: 'Team Card Section';
+  };
+  attributes: {
+    card: Schema.Attribute.Component<'shared.team-card', true> &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          min: 1;
+        },
+        number
+      >;
+    cardStyle: Schema.Attribute.Component<'settings.section-styles', false>;
+  };
+}
+
+export interface ComponentValuesCardSection extends Struct.ComponentSchema {
+  collectionName: 'components_component_values_card_sections';
+  info: {
+    description: '';
+    displayName: 'Values Card Section';
+  };
+  attributes: {
+    card: Schema.Attribute.Component<'shared.statistics', true> &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          min: 3;
+        },
+        number
+      >;
+    cardStyle: Schema.Attribute.Component<'settings.section-styles', false>;
+  };
+}
+
+export interface SettingsCtaStyles extends Struct.ComponentSchema {
+  collectionName: 'components_settings_cta_styles';
+  info: {
+    displayName: 'Cta Styles';
+  };
+  attributes: {
+    backgroundColor: Schema.Attribute.String &
+      Schema.Attribute.CustomField<'plugin::color-picker.color'>;
+    backgroundImage: Schema.Attribute.Media<'images'>;
+    sectionBackgroundColor: Schema.Attribute.String &
+      Schema.Attribute.CustomField<'plugin::color-picker.color'>;
+    textColor: Schema.Attribute.String &
+      Schema.Attribute.CustomField<'plugin::color-picker.color'>;
+    titleColor: Schema.Attribute.String &
+      Schema.Attribute.CustomField<'plugin::color-picker.color'>;
+  };
+}
+
 export interface SettingsGlobal extends Struct.ComponentSchema {
   collectionName: 'components_settings_globals';
   info: {
@@ -687,15 +827,40 @@ export interface SharedMarkdownLink extends Struct.ComponentSchema {
 export interface SharedStatistics extends Struct.ComponentSchema {
   collectionName: 'components_shared_statistics';
   info: {
+    description: '';
     displayName: 'Statistics';
   };
   attributes: {
-    description: Schema.Attribute.String &
+    description: Schema.Attribute.Text &
       Schema.Attribute.Required &
       Schema.Attribute.SetMinMaxLength<{
         minLength: 1;
       }>;
     icon: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
+    title: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        minLength: 1;
+      }>;
+  };
+}
+
+export interface SharedTeamCard extends Struct.ComponentSchema {
+  collectionName: 'components_shared_team_cards';
+  info: {
+    displayName: 'Team Card';
+  };
+  attributes: {
+    description: Schema.Attribute.Text &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        minLength: 1;
+      }>;
+    image: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
+    subTitle: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        minLength: 1;
+      }>;
     title: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.SetMinMaxLength<{
@@ -726,8 +891,11 @@ export interface SharedVideo extends Struct.ComponentSchema {
 declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
+      'about-blocks.cta-section': AboutBlocksCtaSection;
       'about-blocks.hero-section': AboutBlocksHeroSection;
       'about-blocks.mission-section': AboutBlocksMissionSection;
+      'about-blocks.team-section': AboutBlocksTeamSection;
+      'about-blocks.values-section': AboutBlocksValuesSection;
       'about-blocks.vision-section': AboutBlocksVisionSection;
       'blocks.about-section': BlocksAboutSection;
       'blocks.hero-section': BlocksHeroSection;
@@ -745,6 +913,9 @@ declare module '@strapi/strapi' {
       'component.program-section': ComponentProgramSection;
       'component.quick-links': ComponentQuickLinks;
       'component.social-proof': ComponentSocialProof;
+      'component.team-card-section': ComponentTeamCardSection;
+      'component.values-card-section': ComponentValuesCardSection;
+      'settings.cta-styles': SettingsCtaStyles;
       'settings.global': SettingsGlobal;
       'settings.header-styles': SettingsHeaderStyles;
       'settings.hero-styles': SettingsHeroStyles;
@@ -758,6 +929,7 @@ declare module '@strapi/strapi' {
       'shared.logo-link': SharedLogoLink;
       'shared.markdown-link': SharedMarkdownLink;
       'shared.statistics': SharedStatistics;
+      'shared.team-card': SharedTeamCard;
       'shared.video': SharedVideo;
     }
   }

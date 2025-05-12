@@ -21,7 +21,10 @@
       "components": [
         "about-blocks.hero-section",
         "about-blocks.mission-section",
-        "about-blocks.vision-section"
+        "about-blocks.vision-section",
+        "about-blocks.values-section",
+        "about-blocks.team-section",
+        "about-blocks.cta-section"
       ],
       "required": true
     }

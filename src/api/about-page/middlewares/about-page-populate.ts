@@ -50,6 +50,74 @@ const populate = {
           sectionStyle: true
         }
       },
+      "about-blocks.values-section": {
+        populate: {
+          pill: {
+            populate: {
+              icon: {
+                fields: ["url", "alternativeText"]
+              },
+              pillStyle: true
+            }
+          },
+          cardSection: {
+            populate: {
+              card: {
+                populate: {
+                  icon: {
+                    fields: ["url", "alternativeText"]
+                  }
+                }
+              },
+              cardStyle: true
+            }
+          },
+          sectionStyle: true
+        }
+      },
+      "about-blocks.team-section": {
+        populate: {
+          pill: {
+            populate: {
+              icon: {
+                fields: ["url", "alternativeText"]
+              },
+              pillStyle: true
+            }
+          },
+          cardSection: {
+            populate: {
+              card: {
+                populate: {
+                  image: {
+                    fields: ["url", "alternativeText"]
+                  }
+                }
+              },
+              cardStyle: true
+            }
+          },
+          sectionStyle: true
+        }
+      },
+      "about-blocks.cta-section": {
+        populate: {
+          button: {
+            populate: {
+              icon: {
+                fields: ["url", "alternativeText"]
+              },
+            }
+          },
+          ctaStyle: {
+            populate: {
+              backgroundImage: {
+                fields: ["url", "alternativeText"]
+              },
+            }
+          }
+        }
+      }
     }
   }
 }

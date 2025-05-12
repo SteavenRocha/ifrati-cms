@@ -400,6 +400,9 @@ export interface ApiAboutPageAboutPage extends Struct.SingleTypeSchema {
         'about-blocks.hero-section',
         'about-blocks.mission-section',
         'about-blocks.vision-section',
+        'about-blocks.values-section',
+        'about-blocks.team-section',
+        'about-blocks.cta-section',
       ]
     > &
       Schema.Attribute.Required;

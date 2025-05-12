@@ -1,0 +1,22 @@
+{
+  "collectionName": "components_component_team_card_sections",
+  "info": {
+    "displayName": "Team Card Section",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "card": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.team-card",
+      "required": true,
+      "min": 1
+    },
+    "cardStyle": {
+      "type": "component",
+      "repeatable": false,
+      "component": "settings.section-styles"
+    }
+  }
+}

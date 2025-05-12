@@ -1,0 +1,33 @@
+{
+  "collectionName": "components_about_blocks_cta_sections",
+  "info": {
+    "displayName": "Cta Section",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true,
+      "minLength": 1
+    },
+    "description": {
+      "type": "text",
+      "required": true,
+      "minLength": 1
+    },
+    "button": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.button",
+      "required": true,
+      "max": 2,
+      "min": 1
+    },
+    "ctaStyle": {
+      "type": "component",
+      "repeatable": false,
+      "component": "settings.cta-styles"
+    }
+  }
+}
