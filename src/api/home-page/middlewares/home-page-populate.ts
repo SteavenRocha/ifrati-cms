@@ -34,7 +34,7 @@ const populate = {
             populate: {
               statistics: {
                 populate: {
-                  icon: {
+                  resource: {
                     fields: ["url", "alternativeText"]
                   }
                 }
@@ -88,6 +88,13 @@ const populate = {
                   }
                 }
               },
+              button: {
+                populate: {
+                  icon: {
+                    fields: ["url", "alternativeText"]
+                  }
+                }
+              },
               sectionStyle: true
             }
           },
@@ -121,13 +128,6 @@ const populate = {
                     }
                   },
                   cardStyle: true
-                }
-              },
-              button: {
-                populate: {
-                  icon: {
-                    fields: ["url", "alternativeText"]
-                  }
                 }
               },
               sectionStyle: true

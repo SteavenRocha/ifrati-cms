@@ -64,7 +64,7 @@ const populate = {
             populate: {
               card: {
                 populate: {
-                  icon: {
+                  resource: {
                     fields: ["url", "alternativeText"]
                   }
                 }

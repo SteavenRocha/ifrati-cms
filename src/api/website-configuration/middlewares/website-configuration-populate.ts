@@ -16,6 +16,7 @@ const populate = {
     },
   },
   styleSettings: true,
+  pillSettings: true,
 }
 
 export default (config, { strapi }: { strapi: Core.Strapi }) => {

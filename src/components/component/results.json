@@ -1,0 +1,26 @@
+{
+  "collectionName": "components_component_results",
+  "info": {
+    "displayName": "Results"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true,
+      "minLength": 1
+    },
+    "card": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.statistics",
+      "required": true,
+      "min": 1
+    },
+    "cardStyle": {
+      "type": "component",
+      "repeatable": false,
+      "component": "settings.section-styles"
+    }
+  }
+}

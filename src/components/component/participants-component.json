@@ -1,0 +1,21 @@
+{
+  "collectionName": "components_component_participants_components",
+  "info": {
+    "displayName": "Participants Component"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true,
+      "minLength": 1
+    },
+    "textComponent": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.methodology-component",
+      "required": true,
+      "min": 1
+    }
+  }
+}

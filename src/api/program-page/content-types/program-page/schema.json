@@ -1,0 +1,32 @@
+{
+  "kind": "singleType",
+  "collectionName": "program_pages",
+  "info": {
+    "singularName": "program-page",
+    "pluralName": "program-pages",
+    "displayName": "Program Page",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true,
+      "minLength": 1
+    },
+    "sections": {
+      "type": "dynamiczone",
+      "components": [
+        "program-blocks.hero-section",
+        "program-blocks.purpose-section",
+        "program-blocks.pillars-section",
+        "program-blocks.requirements-section",
+        "program-blocks.results-section",
+        "program-blocks.participate-section"
+      ],
+      "required": true
+    }
+  }
+}

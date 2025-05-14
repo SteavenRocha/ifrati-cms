@@ -210,6 +210,28 @@ export interface BlocksProgramSection extends Struct.ComponentSchema {
   };
 }
 
+export interface ComponentCardButton extends Struct.ComponentSchema {
+  collectionName: 'components_component_card_buttons';
+  info: {
+    description: '';
+    displayName: 'Card Button';
+  };
+  attributes: {
+    button: Schema.Attribute.Component<'shared.button', false>;
+    description: Schema.Attribute.Text &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        minLength: 1;
+      }>;
+    icon: Schema.Attribute.Media<'images'>;
+    title: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        minLength: 1;
+      }>;
+  };
+}
+
 export interface ComponentCardSection extends Struct.ComponentSchema {
   collectionName: 'components_component_card_sections';
   info: {
@@ -231,6 +253,48 @@ export interface ComponentCardSection extends Struct.ComponentSchema {
   };
 }
 
+export interface ComponentCollaboratorsSection extends Struct.ComponentSchema {
+  collectionName: 'components_component_collaborators_sections';
+  info: {
+    description: '';
+    displayName: 'Collaborators Section';
+  };
+  attributes: {
+    card: Schema.Attribute.Component<'component.card-button', true> &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          min: 1;
+        },
+        number
+      >;
+    cardStyle: Schema.Attribute.Component<'settings.section-styles', false>;
+    sideImage: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
+    title: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        minLength: 1;
+      }>;
+  };
+}
+
+export interface ComponentComponent extends Struct.ComponentSchema {
+  collectionName: 'components_component_components';
+  info: {
+    description: '';
+    displayName: 'Component';
+  };
+  attributes: {
+    textComponent: Schema.Attribute.Component<'shared.component', true> &
+      Schema.Attribute.Required;
+    title: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        minLength: 1;
+      }>;
+  };
+}
+
 export interface ComponentContactLinks extends Struct.ComponentSchema {
   collectionName: 'components_component_contact_links';
   info: {
@@ -245,6 +309,29 @@ export interface ComponentContactLinks extends Struct.ComponentSchema {
         },
         number
       >;
+    title: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        minLength: 1;
+      }>;
+  };
+}
+
+export interface ComponentCtaComponent extends Struct.ComponentSchema {
+  collectionName: 'components_component_cta_components';
+  info: {
+    description: '';
+    displayName: 'Cta Component';
+  };
+  attributes: {
+    button: Schema.Attribute.Component<'shared.button', false> &
+      Schema.Attribute.Required;
+    ctaStyle: Schema.Attribute.Component<'settings.texts-styles', false>;
+    description: Schema.Attribute.Text &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        minLength: 1;
+      }>;
     title: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.SetMinMaxLength<{
@@ -404,7 +491,6 @@ export interface ComponentHowHelpSection extends Struct.ComponentSchema {
     displayName: 'How Help Section';
   };
   attributes: {
-    button: Schema.Attribute.Component<'shared.button', false>;
     cardSection: Schema.Attribute.Component<'component.card-section', false> &
       Schema.Attribute.Required;
     description: Schema.Attribute.Text &
@@ -446,6 +532,31 @@ export interface ComponentLegalLinks extends Struct.ComponentSchema {
   };
 }
 
+export interface ComponentParticipantsComponent extends Struct.ComponentSchema {
+  collectionName: 'components_component_participants_components';
+  info: {
+    displayName: 'Participants Component';
+  };
+  attributes: {
+    textComponent: Schema.Attribute.Component<
+      'shared.methodology-component',
+      true
+    > &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          min: 1;
+        },
+        number
+      >;
+    title: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        minLength: 1;
+      }>;
+  };
+}
+
 export interface ComponentPill extends Struct.ComponentSchema {
   collectionName: 'components_component_pills';
   info: {
@@ -463,6 +574,48 @@ export interface ComponentPill extends Struct.ComponentSchema {
   };
 }
 
+export interface ComponentPillarCard extends Struct.ComponentSchema {
+  collectionName: 'components_component_pillar_cards';
+  info: {
+    description: '';
+    displayName: 'Pillar Card';
+  };
+  attributes: {
+    description: Schema.Attribute.Text &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        minLength: 1;
+      }>;
+    icon: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
+    methodology: Schema.Attribute.Component<
+      'shared.methodology-component',
+      false
+    > &
+      Schema.Attribute.Required;
+    programComponent: Schema.Attribute.Component<'component.component', false> &
+      Schema.Attribute.Required;
+    sideImage: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
+    title: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        minLength: 1;
+      }>;
+  };
+}
+
+export interface ComponentPillarCardSection extends Struct.ComponentSchema {
+  collectionName: 'components_component_pillar_card_sections';
+  info: {
+    description: '';
+    displayName: 'Pillar Card Section';
+  };
+  attributes: {
+    cardStyle: Schema.Attribute.Component<'settings.section-styles', false>;
+    pillarCard: Schema.Attribute.Component<'component.pillar-card', true> &
+      Schema.Attribute.Required;
+  };
+}
+
 export interface ComponentProgramSection extends Struct.ComponentSchema {
   collectionName: 'components_component_program_sections';
   info: {
@@ -470,6 +623,8 @@ export interface ComponentProgramSection extends Struct.ComponentSchema {
     displayName: 'Program Section';
   };
   attributes: {
+    button: Schema.Attribute.Component<'shared.button', false> &
+      Schema.Attribute.Required;
     description: Schema.Attribute.Text &
       Schema.Attribute.Required &
       Schema.Attribute.SetMinMaxLength<{
@@ -510,6 +665,29 @@ export interface ComponentQuickLinks extends Struct.ComponentSchema {
   };
 }
 
+export interface ComponentResults extends Struct.ComponentSchema {
+  collectionName: 'components_component_results';
+  info: {
+    displayName: 'Results';
+  };
+  attributes: {
+    card: Schema.Attribute.Component<'shared.statistics', true> &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          min: 1;
+        },
+        number
+      >;
+    cardStyle: Schema.Attribute.Component<'settings.section-styles', false>;
+    title: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        minLength: 1;
+      }>;
+  };
+}
+
 export interface ComponentSocialProof extends Struct.ComponentSchema {
   collectionName: 'components_component_social_proofs';
   info: {
@@ -529,6 +707,32 @@ export interface ComponentSocialProof extends Struct.ComponentSchema {
       'settings.section-styles',
       false
     >;
+  };
+}
+
+export interface ComponentStepsSection extends Struct.ComponentSchema {
+  collectionName: 'components_component_steps_sections';
+  info: {
+    description: '';
+    displayName: 'Steps Section';
+  };
+  attributes: {
+    button: Schema.Attribute.Component<'shared.button', false> &
+      Schema.Attribute.Required;
+    sideImage: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
+    steps: Schema.Attribute.Component<'shared.methodology-component', true> &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          min: 1;
+        },
+        number
+      >;
+    title: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        minLength: 1;
+      }>;
   };
 }
 
@@ -567,6 +771,170 @@ export interface ComponentValuesCardSection extends Struct.ComponentSchema {
         number
       >;
     cardStyle: Schema.Attribute.Component<'settings.section-styles', false>;
+  };
+}
+
+export interface ProgramBlocksHeroSection extends Struct.ComponentSchema {
+  collectionName: 'components_program_blocks_hero_sections';
+  info: {
+    description: '';
+    displayName: 'Hero Section';
+  };
+  attributes: {
+    description: Schema.Attribute.Text &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        minLength: 1;
+      }>;
+    heroStyle: Schema.Attribute.Component<'settings.hero-styles', false>;
+    title: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        minLength: 1;
+      }>;
+  };
+}
+
+export interface ProgramBlocksParticipateSection
+  extends Struct.ComponentSchema {
+  collectionName: 'components_program_blocks_participate_sections';
+  info: {
+    description: '';
+    displayName: 'Participate Section';
+  };
+  attributes: {
+    collaboratorsSection: Schema.Attribute.Component<
+      'component.collaborators-section',
+      false
+    > &
+      Schema.Attribute.Required;
+    description: Schema.Attribute.Text &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        minLength: 1;
+      }>;
+    pill: Schema.Attribute.Component<'component.pill', false>;
+    sectionStyle: Schema.Attribute.Component<'settings.section-styles', false>;
+    stepsSection: Schema.Attribute.Component<'component.steps-section', false> &
+      Schema.Attribute.Required;
+    title: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        minLength: 1;
+      }>;
+  };
+}
+
+export interface ProgramBlocksPillarsSection extends Struct.ComponentSchema {
+  collectionName: 'components_program_blocks_pillars_sections';
+  info: {
+    description: '';
+    displayName: 'Pillars Section';
+  };
+  attributes: {
+    description: Schema.Attribute.Text &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        minLength: 1;
+      }>;
+    pill: Schema.Attribute.Component<'component.pill', false> &
+      Schema.Attribute.Required;
+    pillars: Schema.Attribute.Component<
+      'component.pillar-card-section',
+      false
+    > &
+      Schema.Attribute.Required;
+    sectionStyle: Schema.Attribute.Component<'settings.section-styles', false>;
+    title: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        minLength: 1;
+      }>;
+  };
+}
+
+export interface ProgramBlocksPurposeSection extends Struct.ComponentSchema {
+  collectionName: 'components_program_blocks_purpose_sections';
+  info: {
+    displayName: 'Purpose Section';
+  };
+  attributes: {
+    description: Schema.Attribute.Text &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        minLength: 1;
+      }>;
+    pill: Schema.Attribute.Component<'component.pill', false> &
+      Schema.Attribute.Required;
+    sectionStyle: Schema.Attribute.Component<'settings.section-styles', false>;
+    sideImage: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
+    title: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        minLength: 1;
+      }>;
+  };
+}
+
+export interface ProgramBlocksRequirementsSection
+  extends Struct.ComponentSchema {
+  collectionName: 'components_program_blocks_requirements_sections';
+  info: {
+    description: '';
+    displayName: 'Requirements Section';
+  };
+  attributes: {
+    cta: Schema.Attribute.Component<'component.cta-component', false> &
+      Schema.Attribute.Required;
+    description: Schema.Attribute.Text &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        minLength: 1;
+      }>;
+    pill: Schema.Attribute.Component<'component.pill', false> &
+      Schema.Attribute.Required;
+    requirementsComponent: Schema.Attribute.Component<
+      'component.participants-component',
+      false
+    > &
+      Schema.Attribute.Required;
+    sectionStyle: Schema.Attribute.Component<'settings.section-styles', false>;
+    sideImage: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
+    title: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        minLength: 1;
+      }>;
+  };
+}
+
+export interface ProgramBlocksResultsSection extends Struct.ComponentSchema {
+  collectionName: 'components_program_blocks_results_sections';
+  info: {
+    description: '';
+    displayName: 'Results Section';
+  };
+  attributes: {
+    description: Schema.Attribute.Text &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        minLength: 1;
+      }>;
+    pill: Schema.Attribute.Component<'component.pill', false> &
+      Schema.Attribute.Required;
+    qualitativeResults: Schema.Attribute.Component<'component.results', false> &
+      Schema.Attribute.Required;
+    quantitativeResults: Schema.Attribute.Component<
+      'component.results',
+      false
+    > &
+      Schema.Attribute.Required;
+    sectionStyle: Schema.Attribute.Component<'settings.section-styles', false>;
+    title: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        minLength: 1;
+      }>;
   };
 }
 
@@ -646,6 +1014,19 @@ export interface SettingsSectionStyles extends Struct.ComponentSchema {
   attributes: {
     backgroundColor: Schema.Attribute.String &
       Schema.Attribute.CustomField<'plugin::color-picker.color'>;
+    textColor: Schema.Attribute.String &
+      Schema.Attribute.CustomField<'plugin::color-picker.color'>;
+    titleColor: Schema.Attribute.String &
+      Schema.Attribute.CustomField<'plugin::color-picker.color'>;
+  };
+}
+
+export interface SettingsTextsStyles extends Struct.ComponentSchema {
+  collectionName: 'components_settings_texts_styles';
+  info: {
+    displayName: 'Texts Styles';
+  };
+  attributes: {
     textColor: Schema.Attribute.String &
       Schema.Attribute.CustomField<'plugin::color-picker.color'>;
     titleColor: Schema.Attribute.String &
@@ -742,6 +1123,21 @@ export interface SharedComplaintsBook extends Struct.ComponentSchema {
   };
 }
 
+export interface SharedComponent extends Struct.ComponentSchema {
+  collectionName: 'components_shared_components';
+  info: {
+    description: '';
+    displayName: 'Component';
+  };
+  attributes: {
+    text: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        minLength: 1;
+      }>;
+  };
+}
+
 export interface SharedHeaderLink extends Struct.ComponentSchema {
   collectionName: 'components_shared_header_links';
   info: {
@@ -824,6 +1220,25 @@ export interface SharedMarkdownLink extends Struct.ComponentSchema {
   };
 }
 
+export interface SharedMethodologyComponent extends Struct.ComponentSchema {
+  collectionName: 'components_shared_methodology_components';
+  info: {
+    displayName: 'methodologyComponent';
+  };
+  attributes: {
+    description: Schema.Attribute.Text &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        minLength: 1;
+      }>;
+    title: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        minLength: 1;
+      }>;
+  };
+}
+
 export interface SharedStatistics extends Struct.ComponentSchema {
   collectionName: 'components_shared_statistics';
   info: {
@@ -836,7 +1251,7 @@ export interface SharedStatistics extends Struct.ComponentSchema {
       Schema.Attribute.SetMinMaxLength<{
         minLength: 1;
       }>;
-    icon: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
+    resource: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
     title: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.SetMinMaxLength<{
@@ -900,8 +1315,12 @@ declare module '@strapi/strapi' {
       'blocks.about-section': BlocksAboutSection;
       'blocks.hero-section': BlocksHeroSection;
       'blocks.program-section': BlocksProgramSection;
+      'component.card-button': ComponentCardButton;
       'component.card-section': ComponentCardSection;
+      'component.collaborators-section': ComponentCollaboratorsSection;
+      'component.component': ComponentComponent;
       'component.contact-links': ComponentContactLinks;
+      'component.cta-component': ComponentCtaComponent;
       'component.footer': ComponentFooter;
       'component.footer-component': ComponentFooterComponent;
       'component.header': ComponentHeader;
@@ -909,25 +1328,39 @@ declare module '@strapi/strapi' {
       'component.hero': ComponentHero;
       'component.how-help-section': ComponentHowHelpSection;
       'component.legal-links': ComponentLegalLinks;
+      'component.participants-component': ComponentParticipantsComponent;
       'component.pill': ComponentPill;
+      'component.pillar-card': ComponentPillarCard;
+      'component.pillar-card-section': ComponentPillarCardSection;
       'component.program-section': ComponentProgramSection;
       'component.quick-links': ComponentQuickLinks;
+      'component.results': ComponentResults;
       'component.social-proof': ComponentSocialProof;
+      'component.steps-section': ComponentStepsSection;
       'component.team-card-section': ComponentTeamCardSection;
       'component.values-card-section': ComponentValuesCardSection;
+      'program-blocks.hero-section': ProgramBlocksHeroSection;
+      'program-blocks.participate-section': ProgramBlocksParticipateSection;
+      'program-blocks.pillars-section': ProgramBlocksPillarsSection;
+      'program-blocks.purpose-section': ProgramBlocksPurposeSection;
+      'program-blocks.requirements-section': ProgramBlocksRequirementsSection;
+      'program-blocks.results-section': ProgramBlocksResultsSection;
       'settings.cta-styles': SettingsCtaStyles;
       'settings.global': SettingsGlobal;
       'settings.header-styles': SettingsHeaderStyles;
       'settings.hero-styles': SettingsHeroStyles;
       'settings.section-styles': SettingsSectionStyles;
+      'settings.texts-styles': SettingsTextsStyles;
       'settings.website-styles': SettingsWebsiteStyles;
       'shared.button': SharedButton;
       'shared.card': SharedCard;
       'shared.complaints-book': SharedComplaintsBook;
+      'shared.component': SharedComponent;
       'shared.header-link': SharedHeaderLink;
       'shared.link': SharedLink;
       'shared.logo-link': SharedLogoLink;
       'shared.markdown-link': SharedMarkdownLink;
+      'shared.methodology-component': SharedMethodologyComponent;
       'shared.statistics': SharedStatistics;
       'shared.team-card': SharedTeamCard;
       'shared.video': SharedVideo;

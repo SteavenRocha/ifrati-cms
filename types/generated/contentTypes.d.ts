@@ -405,7 +405,14 @@ export interface ApiAboutPageAboutPage extends Struct.SingleTypeSchema {
         'about-blocks.cta-section',
       ]
     > &
-      Schema.Attribute.Required;
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          max: 6;
+          min: 6;
+        },
+        number
+      >;
     title: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.SetMinMaxLength<{
@@ -523,6 +530,50 @@ export interface ApiHomePageHomePage extends Struct.SingleTypeSchema {
   };
 }
 
+export interface ApiProgramPageProgramPage extends Struct.SingleTypeSchema {
+  collectionName: 'program_pages';
+  info: {
+    description: '';
+    displayName: 'Program Page';
+    pluralName: 'program-pages';
+    singularName: 'program-page';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::program-page.program-page'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    sections: Schema.Attribute.DynamicZone<
+      [
+        'program-blocks.hero-section',
+        'program-blocks.purpose-section',
+        'program-blocks.pillars-section',
+        'program-blocks.requirements-section',
+        'program-blocks.results-section',
+        'program-blocks.participate-section',
+      ]
+    > &
+      Schema.Attribute.Required;
+    title: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        minLength: 1;
+      }>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiWebsiteConfigurationWebsiteConfiguration
   extends Struct.SingleTypeSchema {
   collectionName: 'website_configurations';
@@ -547,6 +598,8 @@ export interface ApiWebsiteConfigurationWebsiteConfiguration
       'api::website-configuration.website-configuration'
     > &
       Schema.Attribute.Private;
+    pillSettings: Schema.Attribute.Component<'settings.header-styles', false> &
+      Schema.Attribute.Required;
     publishedAt: Schema.Attribute.DateTime;
     styleSettings: Schema.Attribute.Component<
       'settings.website-styles',
@@ -1072,6 +1125,7 @@ declare module '@strapi/strapi' {
       'api::footer-configuration.footer-configuration': ApiFooterConfigurationFooterConfiguration;
       'api::header-configuration.header-configuration': ApiHeaderConfigurationHeaderConfiguration;
       'api::home-page.home-page': ApiHomePageHomePage;
+      'api::program-page.program-page': ApiProgramPageProgramPage;
       'api::website-configuration.website-configuration': ApiWebsiteConfigurationWebsiteConfiguration;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;

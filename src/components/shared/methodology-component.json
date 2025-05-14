@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_shared_methodology_components",
+  "info": {
+    "displayName": "methodologyComponent"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true,
+      "minLength": 1
+    },
+    "description": {
+      "type": "text",
+      "required": true,
+      "minLength": 1
+    }
+  }
+}

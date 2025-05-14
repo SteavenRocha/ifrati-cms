@@ -1,0 +1,21 @@
+{
+  "collectionName": "components_component_components",
+  "info": {
+    "displayName": "Component",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true,
+      "minLength": 1
+    },
+    "textComponent": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.component",
+      "required": true
+    }
+  }
+}

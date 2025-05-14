@@ -22,6 +22,12 @@
       "repeatable": false,
       "component": "settings.website-styles",
       "required": true
+    },
+    "pillSettings": {
+      "type": "component",
+      "repeatable": false,
+      "component": "settings.header-styles",
+      "required": true
     }
   }
 }

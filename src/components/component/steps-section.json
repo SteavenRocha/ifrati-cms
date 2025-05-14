@@ -1,0 +1,37 @@
+{
+  "collectionName": "components_component_steps_sections",
+  "info": {
+    "displayName": "Steps Section",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true,
+      "unique": false,
+      "minLength": 1
+    },
+    "steps": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.methodology-component",
+      "required": true,
+      "min": 1
+    },
+    "button": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.button",
+      "required": true
+    },
+    "sideImage": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false,
+      "required": true
+    }
+  }
+}

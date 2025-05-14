@@ -1,7 +1,7 @@
 {
-  "collectionName": "components_component_how_help_sections",
+  "collectionName": "components_program_blocks_participate_sections",
   "info": {
-    "displayName": "How Help Section",
+    "displayName": "Participate Section",
     "description": ""
   },
   "options": {},
@@ -16,23 +16,27 @@
       "required": true,
       "minLength": 1
     },
-    "cardSection": {
+    "pill": {
       "type": "component",
       "repeatable": false,
-      "component": "component.card-section",
+      "component": "component.pill"
+    },
+    "stepsSection": {
+      "type": "component",
+      "repeatable": false,
+      "component": "component.steps-section",
+      "required": true
+    },
+    "collaboratorsSection": {
+      "type": "component",
+      "repeatable": false,
+      "component": "component.collaborators-section",
       "required": true
     },
     "sectionStyle": {
       "type": "component",
       "repeatable": false,
-      "component": "settings.section-styles",
-      "required": false
-    },
-    "pill": {
-      "type": "component",
-      "repeatable": false,
-      "component": "component.pill",
-      "required": true
+      "component": "settings.section-styles"
     }
   }
 }

@@ -1,0 +1,38 @@
+{
+  "collectionName": "components_program_blocks_purpose_sections",
+  "info": {
+    "displayName": "Purpose Section"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true,
+      "minLength": 1
+    },
+    "description": {
+      "type": "text",
+      "required": true,
+      "minLength": 1
+    },
+    "pill": {
+      "type": "component",
+      "repeatable": false,
+      "component": "component.pill",
+      "required": true
+    },
+    "sideImage": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false,
+      "required": true
+    },
+    "sectionStyle": {
+      "type": "component",
+      "repeatable": false,
+      "component": "settings.section-styles"
+    }
+  }
+}

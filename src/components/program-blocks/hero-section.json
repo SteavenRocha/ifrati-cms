@@ -1,22 +1,13 @@
 {
-  "collectionName": "components_shared_statistics",
+  "collectionName": "components_program_blocks_hero_sections",
   "info": {
-    "displayName": "Statistics",
+    "displayName": "Hero Section",
     "description": ""
   },
   "options": {},
   "attributes": {
-    "resource": {
-      "type": "media",
-      "multiple": false,
-      "required": true,
-      "allowedTypes": [
-        "images"
-      ]
-    },
     "title": {
       "type": "string",
-      "unique": false,
       "required": true,
       "minLength": 1
     },
@@ -24,6 +15,11 @@
       "type": "text",
       "required": true,
       "minLength": 1
+    },
+    "heroStyle": {
+      "type": "component",
+      "repeatable": false,
+      "component": "settings.hero-styles"
     }
   }
 }

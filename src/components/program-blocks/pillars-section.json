@@ -1,7 +1,7 @@
 {
-  "collectionName": "components_component_how_help_sections",
+  "collectionName": "components_program_blocks_pillars_sections",
   "info": {
-    "displayName": "How Help Section",
+    "displayName": "Pillars Section",
     "description": ""
   },
   "options": {},
@@ -16,23 +16,22 @@
       "required": true,
       "minLength": 1
     },
-    "cardSection": {
-      "type": "component",
-      "repeatable": false,
-      "component": "component.card-section",
-      "required": true
-    },
-    "sectionStyle": {
-      "type": "component",
-      "repeatable": false,
-      "component": "settings.section-styles",
-      "required": false
-    },
     "pill": {
       "type": "component",
       "repeatable": false,
       "component": "component.pill",
       "required": true
+    },
+    "pillars": {
+      "type": "component",
+      "repeatable": false,
+      "component": "component.pillar-card-section",
+      "required": true
+    },
+    "sectionStyle": {
+      "type": "component",
+      "repeatable": false,
+      "component": "settings.section-styles"
     }
   }
 }

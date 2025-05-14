@@ -1,0 +1,35 @@
+{
+  "collectionName": "components_component_collaborators_sections",
+  "info": {
+    "displayName": "Collaborators Section",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true,
+      "minLength": 1
+    },
+    "card": {
+      "type": "component",
+      "repeatable": true,
+      "component": "component.card-button",
+      "required": true,
+      "min": 1
+    },
+    "cardStyle": {
+      "type": "component",
+      "repeatable": false,
+      "component": "settings.section-styles"
+    },
+    "sideImage": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false,
+      "required": true
+    }
+  }
+}

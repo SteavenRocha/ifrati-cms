@@ -1,7 +1,7 @@
 {
-  "collectionName": "components_component_how_help_sections",
+  "collectionName": "components_component_cta_components",
   "info": {
-    "displayName": "How Help Section",
+    "displayName": "Cta Component",
     "description": ""
   },
   "options": {},
@@ -16,23 +16,16 @@
       "required": true,
       "minLength": 1
     },
-    "cardSection": {
+    "button": {
       "type": "component",
       "repeatable": false,
-      "component": "component.card-section",
+      "component": "shared.button",
       "required": true
     },
-    "sectionStyle": {
+    "ctaStyle": {
       "type": "component",
       "repeatable": false,
-      "component": "settings.section-styles",
-      "required": false
-    },
-    "pill": {
-      "type": "component",
-      "repeatable": false,
-      "component": "component.pill",
-      "required": true
+      "component": "settings.texts-styles"
     }
   }
 }
