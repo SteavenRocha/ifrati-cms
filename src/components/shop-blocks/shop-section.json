@@ -1,0 +1,36 @@
+{
+  "collectionName": "components_shop_blocks_shop_sections",
+  "info": {
+    "displayName": "Shop Section",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true,
+      "minLength": 1
+    },
+    "subTitle": {
+      "type": "string",
+      "required": true,
+      "minLength": 1
+    },
+    "sectionStyle": {
+      "type": "component",
+      "repeatable": false,
+      "component": "settings.section-styles",
+      "required": false
+    },
+    "cardStyle": {
+      "type": "component",
+      "repeatable": false,
+      "component": "settings.section-styles"
+    },
+    "whatsappLink": {
+      "type": "string",
+      "required": true,
+      "minLength": 1
+    }
+  }
+}

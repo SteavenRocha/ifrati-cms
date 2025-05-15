@@ -1,0 +1,28 @@
+{
+  "kind": "singleType",
+  "collectionName": "shop_pages",
+  "info": {
+    "singularName": "shop-page",
+    "pluralName": "shop-pages",
+    "displayName": "Shop Page",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true,
+      "minLength": 1
+    },
+    "sections": {
+      "type": "dynamiczone",
+      "components": [
+        "shop-blocks.hero-section",
+        "shop-blocks.shop-section"
+      ],
+      "required": true
+    }
+  }
+}

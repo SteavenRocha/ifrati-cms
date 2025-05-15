@@ -1303,6 +1303,54 @@ export interface SharedVideo extends Struct.ComponentSchema {
   };
 }
 
+export interface ShopBlocksHeroSection extends Struct.ComponentSchema {
+  collectionName: 'components_shop_blocks_hero_sections';
+  info: {
+    description: '';
+    displayName: 'Hero Section';
+  };
+  attributes: {
+    description: Schema.Attribute.Text &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        minLength: 1;
+      }>;
+    heroStyle: Schema.Attribute.Component<'settings.hero-styles', false>;
+    title: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        minLength: 1;
+      }>;
+  };
+}
+
+export interface ShopBlocksShopSection extends Struct.ComponentSchema {
+  collectionName: 'components_shop_blocks_shop_sections';
+  info: {
+    description: '';
+    displayName: 'Shop Section';
+  };
+  attributes: {
+    cardStyle: Schema.Attribute.Component<'settings.section-styles', false>;
+    sectionStyle: Schema.Attribute.Component<'settings.section-styles', false>;
+    subTitle: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        minLength: 1;
+      }>;
+    title: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        minLength: 1;
+      }>;
+    whatsappLink: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        minLength: 1;
+      }>;
+  };
+}
+
 declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
@@ -1364,6 +1412,8 @@ declare module '@strapi/strapi' {
       'shared.statistics': SharedStatistics;
       'shared.team-card': SharedTeamCard;
       'shared.video': SharedVideo;
+      'shop-blocks.hero-section': ShopBlocksHeroSection;
+      'shop-blocks.shop-section': ShopBlocksShopSection;
     }
   }
 }
