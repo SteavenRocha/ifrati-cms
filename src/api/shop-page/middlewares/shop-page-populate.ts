@@ -24,6 +24,38 @@ const populate = {
           sectionStyle: true
         }
       },
+      "blocks.faq-section": {
+        populate: {
+          pill: {
+            populate: {
+              icon: {
+                fields: ["url", "alternativeText"]
+              },
+              pillStyle: true
+            }
+          },
+          questions: true,
+          sectionStyle: true
+        }
+      },
+      "about-blocks.cta-section": {
+        populate: {
+          button: {
+            populate: {
+              icon: {
+                fields: ["url", "alternativeText"]
+              },
+            }
+          },
+          ctaStyle: {
+            populate: {
+              backgroundImage: {
+                fields: ["url", "alternativeText"]
+              },
+            }
+          }
+        }
+      }
     }
   }
 }

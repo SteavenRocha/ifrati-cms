@@ -188,6 +188,20 @@ const populate = {
           sectionStyle: true
         }
       },
+      "blocks.faq-section": {
+        populate: {
+          pill: {
+            populate: {
+              icon: {
+                fields: ["url", "alternativeText"]
+              },
+              pillStyle: true
+            }
+          },
+          questions: true,
+          sectionStyle: true
+        }
+      },
     }
   }
 }

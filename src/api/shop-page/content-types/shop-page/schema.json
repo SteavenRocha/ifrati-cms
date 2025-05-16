@@ -20,7 +20,9 @@
       "type": "dynamiczone",
       "components": [
         "shop-blocks.hero-section",
-        "shop-blocks.shop-section"
+        "shop-blocks.shop-section",
+        "blocks.faq-section",
+        "about-blocks.cta-section"
       ],
       "required": true
     }

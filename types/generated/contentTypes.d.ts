@@ -648,6 +648,7 @@ export interface ApiProgramPageProgramPage extends Struct.SingleTypeSchema {
         'program-blocks.requirements-section',
         'program-blocks.results-section',
         'program-blocks.participate-section',
+        'blocks.faq-section',
       ]
     > &
       Schema.Attribute.Required;
@@ -685,7 +686,12 @@ export interface ApiShopPageShopPage extends Struct.SingleTypeSchema {
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
     sections: Schema.Attribute.DynamicZone<
-      ['shop-blocks.hero-section', 'shop-blocks.shop-section']
+      [
+        'shop-blocks.hero-section',
+        'shop-blocks.shop-section',
+        'blocks.faq-section',
+        'about-blocks.cta-section',
+      ]
     > &
       Schema.Attribute.Required;
     title: Schema.Attribute.String &

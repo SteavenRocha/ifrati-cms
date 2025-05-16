@@ -24,7 +24,8 @@
         "program-blocks.pillars-section",
         "program-blocks.requirements-section",
         "program-blocks.results-section",
-        "program-blocks.participate-section"
+        "program-blocks.participate-section",
+        "blocks.faq-section"
       ],
       "required": true
     }

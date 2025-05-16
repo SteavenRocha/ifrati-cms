@@ -182,6 +182,39 @@ export interface BlocksAboutSection extends Struct.ComponentSchema {
   };
 }
 
+export interface BlocksFaqSection extends Struct.ComponentSchema {
+  collectionName: 'components_blocks_faq_sections';
+  info: {
+    description: '';
+    displayName: 'Faq Section';
+  };
+  attributes: {
+    description: Schema.Attribute.Text &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        minLength: 1;
+      }>;
+    pill: Schema.Attribute.Component<'component.pill', false>;
+    questions: Schema.Attribute.Component<
+      'shared.methodology-component',
+      true
+    > &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          min: 3;
+        },
+        number
+      >;
+    sectionStyle: Schema.Attribute.Component<'settings.section-styles', false>;
+    title: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        minLength: 1;
+      }>;
+  };
+}
+
 export interface BlocksHeroSection extends Struct.ComponentSchema {
   collectionName: 'components_blocks_hero_sections';
   info: {
@@ -1361,6 +1394,7 @@ declare module '@strapi/strapi' {
       'about-blocks.values-section': AboutBlocksValuesSection;
       'about-blocks.vision-section': AboutBlocksVisionSection;
       'blocks.about-section': BlocksAboutSection;
+      'blocks.faq-section': BlocksFaqSection;
       'blocks.hero-section': BlocksHeroSection;
       'blocks.program-section': BlocksProgramSection;
       'component.card-button': ComponentCardButton;
