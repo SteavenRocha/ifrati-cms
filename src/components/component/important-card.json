@@ -1,0 +1,35 @@
+{
+  "collectionName": "components_component_important_cards",
+  "info": {
+    "displayName": "Important Card",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "listCard": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.component",
+      "required": true,
+      "min": 1
+    },
+    "icon": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false,
+      "required": true
+    },
+    "title": {
+      "type": "string",
+      "required": true,
+      "minLength": 1
+    },
+    "description": {
+      "type": "text",
+      "required": true,
+      "minLength": 1
+    }
+  }
+}

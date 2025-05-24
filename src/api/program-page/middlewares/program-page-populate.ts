@@ -202,6 +202,41 @@ const populate = {
           sectionStyle: true
         }
       },
+      "blocks.contact-section": {
+        populate: {
+          pill: {
+            populate: {
+              icon: {
+                fields: ["url", "alternativeText"]
+              },
+              pillStyle: true
+            }
+          },
+          contactCard: {
+            populate: {
+              button: {
+                populate: {
+                  icon: {
+                    fields: ["url", "alternativeText"]
+                  },
+                }
+              },
+            }
+          },
+          contactInformation: {
+            populate: {
+              information : {
+                populate: {
+                  resource: {
+                    fields: ["url", "alternativeText"]
+                  },
+                }
+              },
+            }
+          },
+          sectionStyle: true
+        }
+      },
     }
   }
 }

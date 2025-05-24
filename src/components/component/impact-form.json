@@ -1,0 +1,33 @@
+{
+  "collectionName": "components_component_impact_forms",
+  "info": {
+    "displayName": "Impact Form",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true,
+      "minLength": 1
+    },
+    "donationDetails": {
+      "type": "component",
+      "repeatable": true,
+      "component": "component.impact",
+      "required": true,
+      "min": 6,
+      "max": 6
+    },
+    "secondTitle": {
+      "type": "string",
+      "required": true,
+      "minLength": 1
+    },
+    "formStyle": {
+      "type": "component",
+      "repeatable": false,
+      "component": "settings.section-styles"
+    }
+  }
+}

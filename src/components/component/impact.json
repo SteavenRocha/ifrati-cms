@@ -1,0 +1,25 @@
+{
+  "collectionName": "components_component_impacts",
+  "info": {
+    "displayName": "Impact",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "impact": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.statistics",
+      "required": true
+    },
+    "amount": {
+      "type": "integer"
+    },
+    "aditionalImpact": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.methodology-component",
+      "required": true
+    }
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "collectionName": "components_donate_blocks_donation_forms",
+  "info": {
+    "displayName": "Donation Form",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true,
+      "minLength": 1
+    },
+    "description": {
+      "type": "text",
+      "required": true,
+      "minLength": 1
+    },
+    "pill": {
+      "type": "component",
+      "repeatable": false,
+      "component": "component.pill",
+      "required": true
+    },
+    "donationForm": {
+      "type": "component",
+      "repeatable": false,
+      "component": "component.impact-form",
+      "required": true
+    },
+    "sectionStyle": {
+      "type": "component",
+      "repeatable": false,
+      "component": "settings.section-styles"
+    }
+  }
+}

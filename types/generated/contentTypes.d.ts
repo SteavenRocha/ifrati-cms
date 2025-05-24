@@ -424,6 +424,48 @@ export interface ApiAboutPageAboutPage extends Struct.SingleTypeSchema {
   };
 }
 
+export interface ApiDonatePageDonatePage extends Struct.SingleTypeSchema {
+  collectionName: 'donate_pages';
+  info: {
+    description: '';
+    displayName: 'Donate Page';
+    pluralName: 'donate-pages';
+    singularName: 'donate-page';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::donate-page.donate-page'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    sections: Schema.Attribute.DynamicZone<
+      [
+        'about-blocks.hero-section',
+        'donate-blocks.donation-form',
+        'donate-blocks.important-section',
+        'blocks.faq-section',
+      ]
+    > &
+      Schema.Attribute.Required;
+    title: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        minLength: 1;
+      }>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiFooterConfigurationFooterConfiguration
   extends Struct.SingleTypeSchema {
   collectionName: 'footer_configurations';
@@ -649,6 +691,7 @@ export interface ApiProgramPageProgramPage extends Struct.SingleTypeSchema {
         'program-blocks.results-section',
         'program-blocks.participate-section',
         'blocks.faq-section',
+        'blocks.contact-section',
       ]
     > &
       Schema.Attribute.Required;
@@ -1253,6 +1296,7 @@ declare module '@strapi/strapi' {
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
       'api::about-page.about-page': ApiAboutPageAboutPage;
+      'api::donate-page.donate-page': ApiDonatePageDonatePage;
       'api::footer-configuration.footer-configuration': ApiFooterConfigurationFooterConfiguration;
       'api::header-configuration.header-configuration': ApiHeaderConfigurationHeaderConfiguration;
       'api::home-page.home-page': ApiHomePageHomePage;

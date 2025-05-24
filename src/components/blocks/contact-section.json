@@ -1,0 +1,42 @@
+{
+  "collectionName": "components_blocks_contact_sections",
+  "info": {
+    "displayName": "Contact Section",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true,
+      "minLength": 1
+    },
+    "description": {
+      "type": "string",
+      "required": true
+    },
+    "pill": {
+      "type": "component",
+      "repeatable": false,
+      "component": "component.pill",
+      "required": true
+    },
+    "contactCard": {
+      "type": "component",
+      "repeatable": false,
+      "component": "component.contact-card",
+      "required": true
+    },
+    "contactInformation": {
+      "type": "component",
+      "repeatable": false,
+      "component": "component.contact-information",
+      "required": true
+    },
+    "sectionStyle": {
+      "type": "component",
+      "repeatable": false,
+      "component": "settings.section-styles"
+    }
+  }
+}

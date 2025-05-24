@@ -1,0 +1,22 @@
+{
+  "collectionName": "components_component_card_importants",
+  "info": {
+    "displayName": "Card Important"
+  },
+  "options": {},
+  "attributes": {
+    "card": {
+      "type": "component",
+      "repeatable": true,
+      "component": "component.important-card",
+      "required": true,
+      "min": 1
+    },
+    "cardStyle": {
+      "type": "component",
+      "repeatable": false,
+      "component": "settings.section-styles",
+      "required": false
+    }
+  }
+}

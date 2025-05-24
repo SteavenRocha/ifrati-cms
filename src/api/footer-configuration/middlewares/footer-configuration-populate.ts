@@ -41,7 +41,7 @@ const populate = {
         populate: {
           links: true
         }
-      },
+      }
     }
   },
   footerComponent: {

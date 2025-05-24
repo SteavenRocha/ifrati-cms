@@ -1,0 +1,36 @@
+{
+  "collectionName": "components_donate_blocks_important_sections",
+  "info": {
+    "displayName": "Important Section",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true,
+      "minLength": 1
+    },
+    "description": {
+      "type": "text",
+      "required": true,
+      "minLength": 1
+    },
+    "pill": {
+      "type": "component",
+      "repeatable": false,
+      "component": "component.pill"
+    },
+    "cardSection": {
+      "type": "component",
+      "repeatable": false,
+      "component": "component.card-important",
+      "required": true
+    },
+    "sectionStyle": {
+      "type": "component",
+      "repeatable": false,
+      "component": "settings.section-styles"
+    }
+  }
+}

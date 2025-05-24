@@ -1,7 +1,8 @@
 {
   "collectionName": "components_shared_markdown_links",
   "info": {
-    "displayName": "Markdown Link"
+    "displayName": "Markdown Link",
+    "description": ""
   },
   "options": {},
   "attributes": {
@@ -10,14 +11,19 @@
       "required": true,
       "minLength": 1
     },
-    "href": {
+    "slug": {
       "type": "string",
       "required": true,
-      "minLength": 1
+      "minLength": 1,
+      "unique": true
     },
     "markdown": {
       "type": "richtext",
       "required": false
+    },
+    "updateDate": {
+      "type": "date",
+      "required": true
     }
   }
 }
