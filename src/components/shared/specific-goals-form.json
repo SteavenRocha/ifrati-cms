@@ -1,25 +1,12 @@
 {
-  "collectionName": "components_component_impact_forms",
+  "collectionName": "components_shared_specific_goals_forms",
   "info": {
-    "displayName": "Impact Form",
+    "displayName": "Specific Goals Form",
     "description": ""
   },
   "options": {},
   "attributes": {
     "title": {
-      "type": "string",
-      "required": true,
-      "minLength": 1
-    },
-    "donationDetails": {
-      "type": "component",
-      "repeatable": true,
-      "component": "component.impact",
-      "required": true,
-      "min": 6,
-      "max": 6
-    },
-    "secondTitle": {
       "type": "string",
       "required": true,
       "minLength": 1
@@ -33,6 +20,17 @@
       "type": "string",
       "required": true,
       "minLength": 1
+    },
+    "cta": {
+      "type": "component",
+      "repeatable": false,
+      "component": "component.cta-goals",
+      "required": true
+    },
+    "cardStyle": {
+      "type": "component",
+      "repeatable": false,
+      "component": "settings.section-styles"
     }
   }
 }

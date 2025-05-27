@@ -39,7 +39,25 @@ const populate = {
                       },
                     }
                   },
-                  aditionalImpact: true
+                  aditionalImpact: true,
+                  detailsCard: {
+                    populate: {
+                      resource: {
+                        fields: ["url", "alternativeText"]
+                      },
+                    }
+                  },
+                }
+              },
+              formStyle: true
+            }
+          },
+          specificGoalsForm: {
+            populate: {
+              cardStyle: true,
+              cta: {
+                populate: {
+                  ctaStyle: true
                 }
               },
               formStyle: true

@@ -1,0 +1,25 @@
+{
+  "collectionName": "components_component_cta_goals",
+  "info": {
+    "displayName": "Cta Goals",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true,
+      "minLength": 1
+    },
+    "description": {
+      "type": "text",
+      "required": true,
+      "minLength": 1
+    },
+    "ctaStyle": {
+      "type": "component",
+      "repeatable": false,
+      "component": "settings.section-styles"
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "collectionName": "components_component_card_goals",
+  "info": {
+    "displayName": "Card Goals",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "cardStyle": {
+      "type": "component",
+      "repeatable": false,
+      "component": "settings.section-styles"
+    }
+  }
+}

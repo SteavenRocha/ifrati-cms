@@ -503,6 +503,55 @@ export interface ApiFooterConfigurationFooterConfiguration
   };
 }
 
+export interface ApiGoalGoal extends Struct.CollectionTypeSchema {
+  collectionName: 'goals';
+  info: {
+    description: '';
+    displayName: 'Goal';
+    pluralName: 'goals';
+    singularName: 'goal';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    deadline: Schema.Attribute.Date & Schema.Attribute.Required;
+    description: Schema.Attribute.Text &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        minLength: 1;
+      }>;
+    goal: Schema.Attribute.Integer &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          min: 1;
+        },
+        number
+      >;
+    image: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::goal.goal'> &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    state: Schema.Attribute.Boolean &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<true>;
+    title: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        minLength: 1;
+      }>;
+    totalCollected: Schema.Attribute.Integer;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiHeaderConfigurationHeaderConfiguration
   extends Struct.SingleTypeSchema {
   collectionName: 'header_configurations';
@@ -1298,6 +1347,7 @@ declare module '@strapi/strapi' {
       'api::about-page.about-page': ApiAboutPageAboutPage;
       'api::donate-page.donate-page': ApiDonatePageDonatePage;
       'api::footer-configuration.footer-configuration': ApiFooterConfigurationFooterConfiguration;
+      'api::goal.goal': ApiGoalGoal;
       'api::header-configuration.header-configuration': ApiHeaderConfigurationHeaderConfiguration;
       'api::home-page.home-page': ApiHomePageHomePage;
       'api::product-category.product-category': ApiProductCategoryProductCategory;

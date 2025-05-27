@@ -291,6 +291,17 @@ export interface ComponentCardButton extends Struct.ComponentSchema {
   };
 }
 
+export interface ComponentCardGoals extends Struct.ComponentSchema {
+  collectionName: 'components_component_card_goals';
+  info: {
+    description: '';
+    displayName: 'Card Goals';
+  };
+  attributes: {
+    cardStyle: Schema.Attribute.Component<'settings.section-styles', false>;
+  };
+}
+
 export interface ComponentCardImportant extends Struct.ComponentSchema {
   collectionName: 'components_component_card_importants';
   info: {
@@ -447,6 +458,27 @@ export interface ComponentCtaComponent extends Struct.ComponentSchema {
     button: Schema.Attribute.Component<'shared.button', false> &
       Schema.Attribute.Required;
     ctaStyle: Schema.Attribute.Component<'settings.texts-styles', false>;
+    description: Schema.Attribute.Text &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        minLength: 1;
+      }>;
+    title: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        minLength: 1;
+      }>;
+  };
+}
+
+export interface ComponentCtaGoals extends Struct.ComponentSchema {
+  collectionName: 'components_component_cta_goals';
+  info: {
+    description: '';
+    displayName: 'Cta Goals';
+  };
+  attributes: {
+    ctaStyle: Schema.Attribute.Component<'settings.section-styles', false>;
     description: Schema.Attribute.Text &
       Schema.Attribute.Required &
       Schema.Attribute.SetMinMaxLength<{
@@ -642,6 +674,15 @@ export interface ComponentImpact extends Struct.ComponentSchema {
     > &
       Schema.Attribute.Required;
     amount: Schema.Attribute.Integer;
+    detailsCard: Schema.Attribute.Component<'shared.statistics', true> &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          max: 3;
+          min: 1;
+        },
+        number
+      >;
     impact: Schema.Attribute.Component<'shared.statistics', false> &
       Schema.Attribute.Required;
   };
@@ -665,6 +706,11 @@ export interface ComponentImpactForm extends Struct.ComponentSchema {
       >;
     formStyle: Schema.Attribute.Component<'settings.section-styles', false>;
     secondTitle: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        minLength: 1;
+      }>;
+    selectedTitle: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.SetMinMaxLength<{
         minLength: 1;
@@ -988,6 +1034,11 @@ export interface DonateBlocksDonationForm extends Struct.ComponentSchema {
     pill: Schema.Attribute.Component<'component.pill', false> &
       Schema.Attribute.Required;
     sectionStyle: Schema.Attribute.Component<'settings.section-styles', false>;
+    specificGoalsForm: Schema.Attribute.Component<
+      'shared.specific-goals-form',
+      false
+    > &
+      Schema.Attribute.Required;
     title: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.SetMinMaxLength<{
@@ -1488,6 +1539,30 @@ export interface SharedMethodologyComponent extends Struct.ComponentSchema {
   };
 }
 
+export interface SharedSpecificGoalsForm extends Struct.ComponentSchema {
+  collectionName: 'components_shared_specific_goals_forms';
+  info: {
+    description: '';
+    displayName: 'Specific Goals Form';
+  };
+  attributes: {
+    cardStyle: Schema.Attribute.Component<'settings.section-styles', false>;
+    cta: Schema.Attribute.Component<'component.cta-goals', false> &
+      Schema.Attribute.Required;
+    formStyle: Schema.Attribute.Component<'settings.section-styles', false>;
+    selectedTitle: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        minLength: 1;
+      }>;
+    title: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        minLength: 1;
+      }>;
+  };
+}
+
 export interface SharedStatistics extends Struct.ComponentSchema {
   collectionName: 'components_shared_statistics';
   info: {
@@ -1615,6 +1690,7 @@ declare module '@strapi/strapi' {
       'blocks.hero-section': BlocksHeroSection;
       'blocks.program-section': BlocksProgramSection;
       'component.card-button': ComponentCardButton;
+      'component.card-goals': ComponentCardGoals;
       'component.card-important': ComponentCardImportant;
       'component.card-section': ComponentCardSection;
       'component.collaborators-section': ComponentCollaboratorsSection;
@@ -1623,6 +1699,7 @@ declare module '@strapi/strapi' {
       'component.contact-information': ComponentContactInformation;
       'component.contact-links': ComponentContactLinks;
       'component.cta-component': ComponentCtaComponent;
+      'component.cta-goals': ComponentCtaGoals;
       'component.footer': ComponentFooter;
       'component.footer-component': ComponentFooterComponent;
       'component.header': ComponentHeader;
@@ -1668,6 +1745,7 @@ declare module '@strapi/strapi' {
       'shared.logo-link': SharedLogoLink;
       'shared.markdown-link': SharedMarkdownLink;
       'shared.methodology-component': SharedMethodologyComponent;
+      'shared.specific-goals-form': SharedSpecificGoalsForm;
       'shared.statistics': SharedStatistics;
       'shared.team-card': SharedTeamCard;
       'shared.video': SharedVideo;
