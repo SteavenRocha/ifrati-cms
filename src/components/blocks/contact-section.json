@@ -12,7 +12,7 @@
       "minLength": 1
     },
     "description": {
-      "type": "string",
+      "type": "text",
       "required": true
     },
     "pill": {

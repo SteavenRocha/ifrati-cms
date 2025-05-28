@@ -37,11 +37,6 @@
       "targetField": "title",
       "required": true
     },
-    "state": {
-      "type": "boolean",
-      "default": true,
-      "required": true
-    },
     "tag": {
       "type": "enumeration",
       "enum": [

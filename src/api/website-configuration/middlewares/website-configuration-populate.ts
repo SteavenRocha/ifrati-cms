@@ -17,6 +17,41 @@ const populate = {
   },
   styleSettings: true,
   pillSettings: true,
+  contactSettings: {
+    populate: {
+      pill: {
+        populate: {
+          icon: {
+            fields: ["url", "alternativeText"]
+          },
+          pillStyle: true
+        }
+      },
+      contactCard: {
+        populate: {
+          button: {
+            populate: {
+              icon: {
+                fields: ["url", "alternativeText"]
+              },
+            }
+          },
+        }
+      },
+      contactInformation: {
+        populate: {
+          information: {
+            populate: {
+              resource: {
+                fields: ["url", "alternativeText"]
+              },
+            }
+          },
+        }
+      },
+      sectionStyle: true
+    }
+  }
 }
 
 export default (config, { strapi }: { strapi: Core.Strapi }) => {

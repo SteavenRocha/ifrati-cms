@@ -38,11 +38,6 @@
       "type": "date",
       "required": true
     },
-    "state": {
-      "type": "boolean",
-      "default": true,
-      "required": true
-    },
     "totalCollected": {
       "type": "integer",
       "required": false

@@ -537,9 +537,6 @@ export interface ApiGoalGoal extends Struct.CollectionTypeSchema {
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::goal.goal'> &
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
-    state: Schema.Attribute.Boolean &
-      Schema.Attribute.Required &
-      Schema.Attribute.DefaultTo<true>;
     title: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.SetMinMaxLength<{
@@ -621,10 +618,41 @@ export interface ApiHomePageHomePage extends Struct.SingleTypeSchema {
   };
 }
 
+export interface ApiInboxInbox extends Struct.CollectionTypeSchema {
+  collectionName: 'inboxes';
+  info: {
+    description: '';
+    displayName: 'Inbox';
+    pluralName: 'inboxes';
+    singularName: 'inbox';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    email: Schema.Attribute.Email & Schema.Attribute.Required;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::inbox.inbox'> &
+      Schema.Attribute.Private;
+    message: Schema.Attribute.RichText & Schema.Attribute.Required;
+    name: Schema.Attribute.String & Schema.Attribute.Required;
+    phone: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    subject: Schema.Attribute.String & Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiProductCategoryProductCategory
   extends Struct.CollectionTypeSchema {
   collectionName: 'product_categories';
   info: {
+    description: '';
     displayName: 'Product Category';
     pluralName: 'product-categories';
     singularName: 'product-category';
@@ -649,9 +677,6 @@ export interface ApiProductCategoryProductCategory
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
     slug: Schema.Attribute.UID<'category'> & Schema.Attribute.Required;
-    state: Schema.Attribute.Boolean &
-      Schema.Attribute.Required &
-      Schema.Attribute.DefaultTo<true>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -692,9 +717,6 @@ export interface ApiProductProduct extends Struct.CollectionTypeSchema {
     >;
     publishedAt: Schema.Attribute.DateTime;
     slug: Schema.Attribute.UID<'title'> & Schema.Attribute.Required;
-    state: Schema.Attribute.Boolean &
-      Schema.Attribute.Required &
-      Schema.Attribute.DefaultTo<true>;
     tag: Schema.Attribute.Enumeration<['Nuevo', 'Oferta', 'Mas vendido']> &
       Schema.Attribute.Required &
       Schema.Attribute.DefaultTo<'Nuevo'>;
@@ -740,7 +762,6 @@ export interface ApiProgramPageProgramPage extends Struct.SingleTypeSchema {
         'program-blocks.results-section',
         'program-blocks.participate-section',
         'blocks.faq-section',
-        'blocks.contact-section',
       ]
     > &
       Schema.Attribute.Required;
@@ -797,6 +818,43 @@ export interface ApiShopPageShopPage extends Struct.SingleTypeSchema {
   };
 }
 
+export interface ApiSubjectSubject extends Struct.CollectionTypeSchema {
+  collectionName: 'subjects';
+  info: {
+    description: '';
+    displayName: 'Subject';
+    pluralName: 'subjects';
+    singularName: 'subject';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    defaultMessage: Schema.Attribute.Text &
+      Schema.Attribute.SetMinMaxLength<{
+        minLength: 1;
+      }>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::subject.subject'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    title: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        minLength: 1;
+      }>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiWebsiteConfigurationWebsiteConfiguration
   extends Struct.SingleTypeSchema {
   collectionName: 'website_configurations';
@@ -810,6 +868,11 @@ export interface ApiWebsiteConfigurationWebsiteConfiguration
     draftAndPublish: true;
   };
   attributes: {
+    contactSettings: Schema.Attribute.Component<
+      'blocks.contact-section',
+      false
+    > &
+      Schema.Attribute.Required;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1350,10 +1413,12 @@ declare module '@strapi/strapi' {
       'api::goal.goal': ApiGoalGoal;
       'api::header-configuration.header-configuration': ApiHeaderConfigurationHeaderConfiguration;
       'api::home-page.home-page': ApiHomePageHomePage;
+      'api::inbox.inbox': ApiInboxInbox;
       'api::product-category.product-category': ApiProductCategoryProductCategory;
       'api::product.product': ApiProductProduct;
       'api::program-page.program-page': ApiProgramPageProgramPage;
       'api::shop-page.shop-page': ApiShopPageShopPage;
+      'api::subject.subject': ApiSubjectSubject;
       'api::website-configuration.website-configuration': ApiWebsiteConfigurationWebsiteConfiguration;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;

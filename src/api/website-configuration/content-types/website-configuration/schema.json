@@ -28,6 +28,12 @@
       "repeatable": false,
       "component": "settings.header-styles",
       "required": true
+    },
+    "contactSettings": {
+      "type": "component",
+      "repeatable": false,
+      "component": "blocks.contact-section",
+      "required": true
     }
   }
 }

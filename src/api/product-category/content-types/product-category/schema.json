@@ -4,7 +4,8 @@
   "info": {
     "singularName": "product-category",
     "pluralName": "product-categories",
-    "displayName": "Product Category"
+    "displayName": "Product Category",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -18,11 +19,6 @@
     "slug": {
       "type": "uid",
       "targetField": "category",
-      "required": true
-    },
-    "state": {
-      "type": "boolean",
-      "default": true,
       "required": true
     }
   }

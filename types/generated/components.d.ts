@@ -196,7 +196,7 @@ export interface BlocksContactSection extends Struct.ComponentSchema {
       false
     > &
       Schema.Attribute.Required;
-    description: Schema.Attribute.String & Schema.Attribute.Required;
+    description: Schema.Attribute.Text & Schema.Attribute.Required;
     pill: Schema.Attribute.Component<'component.pill', false> &
       Schema.Attribute.Required;
     sectionStyle: Schema.Attribute.Component<'settings.section-styles', false>;

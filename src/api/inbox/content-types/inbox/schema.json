@@ -1,0 +1,35 @@
+{
+  "kind": "collectionType",
+  "collectionName": "inboxes",
+  "info": {
+    "singularName": "inbox",
+    "pluralName": "inboxes",
+    "displayName": "Inbox",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "email": {
+      "type": "email",
+      "required": true
+    },
+    "phone": {
+      "type": "string",
+      "required": false
+    },
+    "subject": {
+      "type": "string",
+      "required": true
+    },
+    "message": {
+      "type": "richtext",
+      "required": true
+    }
+  }
+}
