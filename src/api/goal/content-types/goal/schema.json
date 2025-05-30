@@ -10,16 +10,17 @@
   "options": {
     "draftAndPublish": true
   },
+  "pluginOptions": {},
   "attributes": {
     "title": {
       "type": "string",
-      "required": true,
-      "minLength": 1
+      "minLength": 1,
+      "required": true
     },
     "description": {
       "type": "text",
-      "required": true,
-      "minLength": 1
+      "minLength": 1,
+      "required": true
     },
     "image": {
       "type": "media",
@@ -30,7 +31,7 @@
       ]
     },
     "goal": {
-      "type": "integer",
+      "type": "decimal",
       "required": true,
       "min": 1
     },
@@ -39,7 +40,7 @@
       "required": true
     },
     "totalCollected": {
-      "type": "integer",
+      "type": "decimal",
       "required": false
     }
   }

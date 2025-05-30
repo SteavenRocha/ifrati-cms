@@ -466,6 +466,41 @@ export interface ApiDonatePageDonatePage extends Struct.SingleTypeSchema {
   };
 }
 
+export interface ApiDonationDonation extends Struct.CollectionTypeSchema {
+  collectionName: 'donations';
+  info: {
+    displayName: 'Donation';
+    pluralName: 'donations';
+    singularName: 'donation';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    amount: Schema.Attribute.Decimal & Schema.Attribute.Required;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    donationForm: Schema.Attribute.String & Schema.Attribute.Required;
+    donationType: Schema.Attribute.String & Schema.Attribute.Required;
+    donor: Schema.Attribute.String;
+    email: Schema.Attribute.Email;
+    frequency: Schema.Attribute.String & Schema.Attribute.Required;
+    goal: Schema.Attribute.Relation<'oneToOne', 'api::goal.goal'>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::donation.donation'
+    > &
+      Schema.Attribute.Private;
+    phone: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiFooterConfigurationFooterConfiguration
   extends Struct.SingleTypeSchema {
   collectionName: 'footer_configurations';
@@ -524,7 +559,7 @@ export interface ApiGoalGoal extends Struct.CollectionTypeSchema {
       Schema.Attribute.SetMinMaxLength<{
         minLength: 1;
       }>;
-    goal: Schema.Attribute.Integer &
+    goal: Schema.Attribute.Decimal &
       Schema.Attribute.Required &
       Schema.Attribute.SetMinMax<
         {
@@ -542,7 +577,7 @@ export interface ApiGoalGoal extends Struct.CollectionTypeSchema {
       Schema.Attribute.SetMinMaxLength<{
         minLength: 1;
       }>;
-    totalCollected: Schema.Attribute.Integer;
+    totalCollected: Schema.Attribute.Decimal;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1409,6 +1444,7 @@ declare module '@strapi/strapi' {
       'admin::user': AdminUser;
       'api::about-page.about-page': ApiAboutPageAboutPage;
       'api::donate-page.donate-page': ApiDonatePageDonatePage;
+      'api::donation.donation': ApiDonationDonation;
       'api::footer-configuration.footer-configuration': ApiFooterConfigurationFooterConfiguration;
       'api::goal.goal': ApiGoalGoal;
       'api::header-configuration.header-configuration': ApiHeaderConfigurationHeaderConfiguration;
