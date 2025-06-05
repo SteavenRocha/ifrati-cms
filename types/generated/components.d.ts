@@ -191,10 +191,7 @@ export interface BlocksContactSection extends Struct.ComponentSchema {
   attributes: {
     contactCard: Schema.Attribute.Component<'component.contact-card', false> &
       Schema.Attribute.Required;
-    contactInformation: Schema.Attribute.Component<
-      'component.contact-information',
-      false
-    > &
+    contactInformation: Schema.Attribute.Component<'shared.component', false> &
       Schema.Attribute.Required;
     description: Schema.Attribute.Text & Schema.Attribute.Required;
     pill: Schema.Attribute.Component<'component.pill', false> &
@@ -366,6 +363,22 @@ export interface ComponentCollaboratorsSection extends Struct.ComponentSchema {
   };
 }
 
+export interface ComponentCompanyInformation extends Struct.ComponentSchema {
+  collectionName: 'components_component_company_informations';
+  info: {
+    displayName: 'Company Information';
+  };
+  attributes: {
+    icon: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
+    style: Schema.Attribute.Component<'settings.section-styles', false>;
+    title: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        minLength: 1;
+      }>;
+  };
+}
+
 export interface ComponentComponent extends Struct.ComponentSchema {
   collectionName: 'components_component_components';
   info: {
@@ -390,34 +403,6 @@ export interface ComponentContactCard extends Struct.ComponentSchema {
   };
   attributes: {
     button: Schema.Attribute.Component<'shared.button', false>;
-    title: Schema.Attribute.String &
-      Schema.Attribute.Required &
-      Schema.Attribute.SetMinMaxLength<{
-        minLength: 1;
-      }>;
-  };
-}
-
-export interface ComponentContactInformation extends Struct.ComponentSchema {
-  collectionName: 'components_component_contact_informations';
-  info: {
-    description: '';
-    displayName: 'Contact Information';
-  };
-  attributes: {
-    googleMapsLink: Schema.Attribute.String &
-      Schema.Attribute.Required &
-      Schema.Attribute.SetMinMaxLength<{
-        minLength: 1;
-      }>;
-    information: Schema.Attribute.Component<'shared.statistics', true> &
-      Schema.Attribute.Required &
-      Schema.Attribute.SetMinMax<
-        {
-          min: 1;
-        },
-        number
-      >;
     title: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.SetMinMaxLength<{
@@ -541,6 +526,37 @@ export interface ComponentFooterComponent extends Struct.ComponentSchema {
       Schema.Attribute.SetMinMax<
         {
           max: 5;
+        },
+        number
+      >;
+  };
+}
+
+export interface ComponentForm extends Struct.ComponentSchema {
+  collectionName: 'components_component_forms';
+  info: {
+    displayName: 'Form';
+  };
+  attributes: {
+    button: Schema.Attribute.Component<'shared.button', false> &
+      Schema.Attribute.Required;
+    description: Schema.Attribute.Text &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        minLength: 1;
+      }>;
+    style: Schema.Attribute.Component<'settings.section-styles', false>;
+    title: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        minLength: 1;
+      }>;
+    titlesSectionForm: Schema.Attribute.Component<'shared.component', true> &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          max: 3;
+          min: 2;
         },
         number
       >;
@@ -744,6 +760,30 @@ export interface ComponentImportantCard extends Struct.ComponentSchema {
         },
         number
       >;
+    title: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        minLength: 1;
+      }>;
+  };
+}
+
+export interface ComponentImportantInformation extends Struct.ComponentSchema {
+  collectionName: 'components_component_important_informations';
+  info: {
+    displayName: 'Important Information';
+  };
+  attributes: {
+    icon: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
+    list: Schema.Attribute.Component<'shared.component', true> &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          min: 1;
+        },
+        number
+      >;
+    style: Schema.Attribute.Component<'settings.section-styles', false>;
     title: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.SetMinMaxLength<{
@@ -995,6 +1035,27 @@ export interface ComponentTeamCardSection extends Struct.ComponentSchema {
         number
       >;
     cardStyle: Schema.Attribute.Component<'settings.section-styles', false>;
+  };
+}
+
+export interface ComponentTitles extends Struct.ComponentSchema {
+  collectionName: 'components_component_titles';
+  info: {
+    displayName: 'Titles';
+  };
+  attributes: {
+    description: Schema.Attribute.Text &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        minLength: 1;
+      }>;
+    pill: Schema.Attribute.Component<'component.pill', false> &
+      Schema.Attribute.Required;
+    title: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        minLength: 1;
+      }>;
   };
 }
 
@@ -1303,6 +1364,30 @@ export interface SettingsHeroStyles extends Struct.ComponentSchema {
   };
 }
 
+export interface SettingsInformation extends Struct.ComponentSchema {
+  collectionName: 'components_settings_information';
+  info: {
+    displayName: 'Information';
+  };
+  attributes: {
+    companyName: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        minLength: 1;
+      }>;
+    googleMapsLink: Schema.Attribute.String & Schema.Attribute.Required;
+    information: Schema.Attribute.Component<'shared.statistics', true> &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          min: 3;
+        },
+        number
+      >;
+    RUC: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
 export interface SettingsSectionStyles extends Struct.ComponentSchema {
   collectionName: 'components_settings_section_styles';
   info: {
@@ -1416,7 +1501,6 @@ export interface SharedComplaintsBook extends Struct.ComponentSchema {
         minLength: 1;
       }>;
     image: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
-    markdown: Schema.Attribute.RichText;
   };
 }
 
@@ -1694,14 +1778,15 @@ declare module '@strapi/strapi' {
       'component.card-important': ComponentCardImportant;
       'component.card-section': ComponentCardSection;
       'component.collaborators-section': ComponentCollaboratorsSection;
+      'component.company-information': ComponentCompanyInformation;
       'component.component': ComponentComponent;
       'component.contact-card': ComponentContactCard;
-      'component.contact-information': ComponentContactInformation;
       'component.contact-links': ComponentContactLinks;
       'component.cta-component': ComponentCtaComponent;
       'component.cta-goals': ComponentCtaGoals;
       'component.footer': ComponentFooter;
       'component.footer-component': ComponentFooterComponent;
+      'component.form': ComponentForm;
       'component.header': ComponentHeader;
       'component.header-up': ComponentHeaderUp;
       'component.hero': ComponentHero;
@@ -1709,6 +1794,7 @@ declare module '@strapi/strapi' {
       'component.impact': ComponentImpact;
       'component.impact-form': ComponentImpactForm;
       'component.important-card': ComponentImportantCard;
+      'component.important-information': ComponentImportantInformation;
       'component.legal-links': ComponentLegalLinks;
       'component.participants-component': ComponentParticipantsComponent;
       'component.pill': ComponentPill;
@@ -1720,6 +1806,7 @@ declare module '@strapi/strapi' {
       'component.social-proof': ComponentSocialProof;
       'component.steps-section': ComponentStepsSection;
       'component.team-card-section': ComponentTeamCardSection;
+      'component.titles': ComponentTitles;
       'component.values-card-section': ComponentValuesCardSection;
       'donate-blocks.donation-form': DonateBlocksDonationForm;
       'donate-blocks.important-section': DonateBlocksImportantSection;
@@ -1733,6 +1820,7 @@ declare module '@strapi/strapi' {
       'settings.global': SettingsGlobal;
       'settings.header-styles': SettingsHeaderStyles;
       'settings.hero-styles': SettingsHeroStyles;
+      'settings.information': SettingsInformation;
       'settings.section-styles': SettingsSectionStyles;
       'settings.texts-styles': SettingsTextsStyles;
       'settings.website-styles': SettingsWebsiteStyles;

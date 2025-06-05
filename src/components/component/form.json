@@ -1,8 +1,7 @@
 {
-  "collectionName": "components_blocks_contact_sections",
+  "collectionName": "components_component_forms",
   "info": {
-    "displayName": "Contact Section",
-    "description": ""
+    "displayName": "Form"
   },
   "options": {},
   "attributes": {
@@ -13,30 +12,29 @@
     },
     "description": {
       "type": "text",
+      "minLength": 1,
       "required": true
     },
-    "pill": {
+    "button": {
       "type": "component",
-      "component": "component.pill",
+      "component": "shared.button",
       "repeatable": false,
       "required": true
     },
-    "contactCard": {
-      "type": "component",
-      "component": "component.contact-card",
-      "repeatable": false,
-      "required": true
-    },
-    "sectionStyle": {
+    "style": {
       "type": "component",
       "component": "settings.section-styles",
-      "repeatable": false
+      "repeatable": false,
+      "required": false
     },
-    "contactInformation": {
+    "titlesSectionForm": {
       "type": "component",
       "component": "shared.component",
-      "repeatable": false,
-      "required": true
+      "repeatable": true,
+      "required": true,
+      "min": 2,
+      "max": 3
     }
-  }
+  },
+  "config": {}
 }

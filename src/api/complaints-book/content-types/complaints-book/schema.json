@@ -1,0 +1,49 @@
+{
+  "kind": "singleType",
+  "collectionName": "complaints_books",
+  "info": {
+    "singularName": "complaints-book",
+    "pluralName": "complaints-books",
+    "displayName": "Complaints Book"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "minLength": 1,
+      "required": true
+    },
+    "header": {
+      "type": "component",
+      "component": "component.titles",
+      "repeatable": false,
+      "required": true
+    },
+    "companyInformation": {
+      "type": "component",
+      "component": "component.company-information",
+      "repeatable": false,
+      "required": true
+    },
+    "form": {
+      "type": "component",
+      "component": "component.form",
+      "repeatable": false,
+      "required": true
+    },
+    "importantInformation": {
+      "type": "component",
+      "component": "component.important-information",
+      "repeatable": false,
+      "required": true
+    },
+    "sectionStyle": {
+      "type": "component",
+      "component": "settings.section-styles",
+      "repeatable": false
+    }
+  }
+}

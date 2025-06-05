@@ -1,0 +1,30 @@
+{
+  "collectionName": "components_settings_information",
+  "info": {
+    "displayName": "Information"
+  },
+  "options": {},
+  "attributes": {
+    "RUC": {
+      "type": "string",
+      "required": true
+    },
+    "companyName": {
+      "type": "string",
+      "minLength": 1,
+      "required": true
+    },
+    "information": {
+      "type": "component",
+      "component": "shared.statistics",
+      "repeatable": true,
+      "required": true,
+      "min": 3
+    },
+    "googleMapsLink": {
+      "type": "string",
+      "required": true
+    }
+  },
+  "config": {}
+}

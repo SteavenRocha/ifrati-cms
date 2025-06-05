@@ -10,29 +10,30 @@
   "options": {
     "draftAndPublish": true
   },
+  "pluginOptions": {},
   "attributes": {
     "globalSettings": {
       "type": "component",
-      "repeatable": false,
       "component": "settings.global",
+      "repeatable": false,
       "required": true
     },
     "styleSettings": {
       "type": "component",
-      "repeatable": false,
       "component": "settings.website-styles",
+      "repeatable": false,
       "required": true
     },
     "pillSettings": {
       "type": "component",
-      "repeatable": false,
       "component": "settings.header-styles",
+      "repeatable": false,
       "required": true
     },
-    "contactSettings": {
+    "companyInformation": {
       "type": "component",
+      "component": "settings.information",
       "repeatable": false,
-      "component": "blocks.contact-section",
       "required": true
     }
   }

@@ -1,0 +1,28 @@
+{
+  "collectionName": "components_component_company_informations",
+  "info": {
+    "displayName": "Company Information"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "minLength": 1,
+      "required": true
+    },
+    "icon": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "style": {
+      "type": "component",
+      "component": "settings.section-styles",
+      "repeatable": false
+    }
+  },
+  "config": {}
+}

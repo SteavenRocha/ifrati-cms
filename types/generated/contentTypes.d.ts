@@ -424,6 +424,54 @@ export interface ApiAboutPageAboutPage extends Struct.SingleTypeSchema {
   };
 }
 
+export interface ApiComplaintsBookComplaintsBook
+  extends Struct.SingleTypeSchema {
+  collectionName: 'complaints_books';
+  info: {
+    displayName: 'Complaints Book';
+    pluralName: 'complaints-books';
+    singularName: 'complaints-book';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    companyInformation: Schema.Attribute.Component<
+      'component.company-information',
+      false
+    > &
+      Schema.Attribute.Required;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    form: Schema.Attribute.Component<'component.form', false> &
+      Schema.Attribute.Required;
+    header: Schema.Attribute.Component<'component.titles', false> &
+      Schema.Attribute.Required;
+    importantInformation: Schema.Attribute.Component<
+      'component.important-information',
+      false
+    > &
+      Schema.Attribute.Required;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::complaints-book.complaints-book'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    sectionStyle: Schema.Attribute.Component<'settings.section-styles', false>;
+    title: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        minLength: 1;
+      }>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiDonatePageDonatePage extends Struct.SingleTypeSchema {
   collectionName: 'donate_pages';
   info: {
@@ -797,6 +845,7 @@ export interface ApiProgramPageProgramPage extends Struct.SingleTypeSchema {
         'program-blocks.results-section',
         'program-blocks.participate-section',
         'blocks.faq-section',
+        'blocks.contact-section',
       ]
     > &
       Schema.Attribute.Required;
@@ -903,8 +952,8 @@ export interface ApiWebsiteConfigurationWebsiteConfiguration
     draftAndPublish: true;
   };
   attributes: {
-    contactSettings: Schema.Attribute.Component<
-      'blocks.contact-section',
+    companyInformation: Schema.Attribute.Component<
+      'settings.information',
       false
     > &
       Schema.Attribute.Required;
@@ -1443,6 +1492,7 @@ declare module '@strapi/strapi' {
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
       'api::about-page.about-page': ApiAboutPageAboutPage;
+      'api::complaints-book.complaints-book': ApiComplaintsBookComplaintsBook;
       'api::donate-page.donate-page': ApiDonatePageDonatePage;
       'api::donation.donation': ApiDonationDonation;
       'api::footer-configuration.footer-configuration': ApiFooterConfigurationFooterConfiguration;
