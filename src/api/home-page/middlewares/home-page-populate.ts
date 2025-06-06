@@ -135,54 +135,52 @@ const populate = {
           }
         }
       },
-      /*
-      "blocks.testimonies-section": {
+      "blocks.testimonials-section": {
         populate: {
-          testimonies: {
+          pill: {
             populate: {
-              testimoniesCard: {
+              icon: {
+                fields: ["url", "alternativeText"]
+              },
+              pillStyle: true
+            }
+          },
+          testimonialsSection: {
+            populate: {
+              testimonies: {
                 populate: {
                   image: {
                     fields: ["url", "alternativeText"]
-                  }
+                  },
                 }
               },
-              cardStyles: {
-                populate: {
-                  backgroundColor: true,
-                  titleColor: true,
-                  textColor: true
-                }
-              }
+              cardStyle: true
             }
           },
-          sectionStyles: {
-            populate: {
-              backgroundColor: true,
-              titleColor: true,
-              textColor: true,
-            }
-          }
+          sectionStyle: true
         }
       },
       "blocks.brands-section": {
         populate: {
+          pill: {
+            populate: {
+              icon: {
+                fields: ["url", "alternativeText"]
+              },
+              pillStyle: true
+            }
+          },
           brands: {
             populate: {
-              image_icon: {
+              image: {
                 fields: ["url", "alternativeText"]
               },
             }
           },
-          sectionStyles: {
-            populate: {
-              backgroundColor: true,
-              textColor: true,
-            }
-          }
+          sectionStyle: true
         }
       },
-      "blocks.donate-section": {
+      /*"blocks.donate-section": {
         populate: {
           donateCTA: {
             populate: {

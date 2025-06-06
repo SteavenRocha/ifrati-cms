@@ -424,6 +424,46 @@ export interface ApiAboutPageAboutPage extends Struct.SingleTypeSchema {
   };
 }
 
+export interface ApiComplaintsBookInboxComplaintsBookInbox
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'complaints_book_inboxes';
+  info: {
+    displayName: 'Complaints Book Inbox';
+    pluralName: 'complaints-book-inboxes';
+    singularName: 'complaints-book-inbox';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    address: Schema.Attribute.String & Schema.Attribute.Required;
+    claimDetail: Schema.Attribute.RichText & Schema.Attribute.Required;
+    claimType: Schema.Attribute.String & Schema.Attribute.Required;
+    consumerRequest: Schema.Attribute.RichText & Schema.Attribute.Required;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    description: Schema.Attribute.RichText & Schema.Attribute.Required;
+    documentNumber: Schema.Attribute.String & Schema.Attribute.Required;
+    documentType: Schema.Attribute.String & Schema.Attribute.Required;
+    email: Schema.Attribute.Email & Schema.Attribute.Required;
+    firstName: Schema.Attribute.String & Schema.Attribute.Required;
+    lastName: Schema.Attribute.String & Schema.Attribute.Required;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::complaints-book-inbox.complaints-book-inbox'
+    > &
+      Schema.Attribute.Private;
+    phone: Schema.Attribute.String & Schema.Attribute.Required;
+    productType: Schema.Attribute.String & Schema.Attribute.Required;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiComplaintsBookComplaintsBook
   extends Struct.SingleTypeSchema {
   collectionName: 'complaints_books';
@@ -687,7 +727,13 @@ export interface ApiHomePageHomePage extends Struct.SingleTypeSchema {
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
     sections: Schema.Attribute.DynamicZone<
-      ['blocks.hero-section', 'blocks.about-section', 'blocks.program-section']
+      [
+        'blocks.hero-section',
+        'blocks.about-section',
+        'blocks.program-section',
+        'blocks.testimonials-section',
+        'blocks.brands-section',
+      ]
     > &
       Schema.Attribute.Required;
     title: Schema.Attribute.String &
@@ -1492,6 +1538,7 @@ declare module '@strapi/strapi' {
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
       'api::about-page.about-page': ApiAboutPageAboutPage;
+      'api::complaints-book-inbox.complaints-book-inbox': ApiComplaintsBookInboxComplaintsBookInbox;
       'api::complaints-book.complaints-book': ApiComplaintsBookComplaintsBook;
       'api::donate-page.donate-page': ApiDonatePageDonatePage;
       'api::donation.donation': ApiDonationDonation;

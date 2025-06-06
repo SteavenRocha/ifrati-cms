@@ -1,0 +1,33 @@
+{
+  "collectionName": "components_blocks_brands_sections",
+  "info": {
+    "displayName": "Brands Section"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "minLength": 1,
+      "required": true
+    },
+    "pill": {
+      "type": "component",
+      "component": "component.pill",
+      "repeatable": false,
+      "required": true
+    },
+    "brands": {
+      "type": "component",
+      "component": "shared.complaints-book",
+      "repeatable": true,
+      "required": true,
+      "min": 1
+    },
+    "sectionStyle": {
+      "type": "component",
+      "component": "settings.header-styles",
+      "repeatable": false
+    }
+  },
+  "config": {}
+}

@@ -182,6 +182,31 @@ export interface BlocksAboutSection extends Struct.ComponentSchema {
   };
 }
 
+export interface BlocksBrandsSection extends Struct.ComponentSchema {
+  collectionName: 'components_blocks_brands_sections';
+  info: {
+    displayName: 'Brands Section';
+  };
+  attributes: {
+    brands: Schema.Attribute.Component<'shared.complaints-book', true> &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          min: 1;
+        },
+        number
+      >;
+    pill: Schema.Attribute.Component<'component.pill', false> &
+      Schema.Attribute.Required;
+    sectionStyle: Schema.Attribute.Component<'settings.header-styles', false>;
+    title: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        minLength: 1;
+      }>;
+  };
+}
+
 export interface BlocksContactSection extends Struct.ComponentSchema {
   collectionName: 'components_blocks_contact_sections';
   info: {
@@ -263,6 +288,33 @@ export interface BlocksProgramSection extends Struct.ComponentSchema {
       Schema.Attribute.Required;
     program: Schema.Attribute.Component<'component.program-section', false> &
       Schema.Attribute.Required;
+  };
+}
+
+export interface BlocksTestimonialsSection extends Struct.ComponentSchema {
+  collectionName: 'components_blocks_testimonials_sections';
+  info: {
+    displayName: 'Testimonials Section';
+  };
+  attributes: {
+    description: Schema.Attribute.Text &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        minLength: 1;
+      }>;
+    pill: Schema.Attribute.Component<'component.pill', false> &
+      Schema.Attribute.Required;
+    sectionStyle: Schema.Attribute.Component<'settings.section-styles', false>;
+    testimonialsSection: Schema.Attribute.Component<
+      'component.testimony-section',
+      false
+    > &
+      Schema.Attribute.Required;
+    title: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        minLength: 1;
+      }>;
   };
 }
 
@@ -1038,6 +1090,52 @@ export interface ComponentTeamCardSection extends Struct.ComponentSchema {
   };
 }
 
+export interface ComponentTestimony extends Struct.ComponentSchema {
+  collectionName: 'components_component_testimonies';
+  info: {
+    displayName: 'Testimony';
+  };
+  attributes: {
+    description: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        minLength: 1;
+      }>;
+    image: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
+    name: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        minLength: 1;
+      }>;
+    statuS: Schema.Attribute.Boolean &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<true>;
+    testimony: Schema.Attribute.Text &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        minLength: 1;
+      }>;
+  };
+}
+
+export interface ComponentTestimonySection extends Struct.ComponentSchema {
+  collectionName: 'components_component_testimony_sections';
+  info: {
+    displayName: 'Testimony Section';
+  };
+  attributes: {
+    cardStyle: Schema.Attribute.Component<'settings.section-styles', false>;
+    testimonies: Schema.Attribute.Component<'component.testimony', true> &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          min: 1;
+        },
+        number
+      >;
+  };
+}
+
 export interface ComponentTitles extends Struct.ComponentSchema {
   collectionName: 'components_component_titles';
   info: {
@@ -1769,10 +1867,12 @@ declare module '@strapi/strapi' {
       'about-blocks.values-section': AboutBlocksValuesSection;
       'about-blocks.vision-section': AboutBlocksVisionSection;
       'blocks.about-section': BlocksAboutSection;
+      'blocks.brands-section': BlocksBrandsSection;
       'blocks.contact-section': BlocksContactSection;
       'blocks.faq-section': BlocksFaqSection;
       'blocks.hero-section': BlocksHeroSection;
       'blocks.program-section': BlocksProgramSection;
+      'blocks.testimonials-section': BlocksTestimonialsSection;
       'component.card-button': ComponentCardButton;
       'component.card-goals': ComponentCardGoals;
       'component.card-important': ComponentCardImportant;
@@ -1806,6 +1906,8 @@ declare module '@strapi/strapi' {
       'component.social-proof': ComponentSocialProof;
       'component.steps-section': ComponentStepsSection;
       'component.team-card-section': ComponentTeamCardSection;
+      'component.testimony': ComponentTestimony;
+      'component.testimony-section': ComponentTestimonySection;
       'component.titles': ComponentTitles;
       'component.values-card-section': ComponentValuesCardSection;
       'donate-blocks.donation-form': DonateBlocksDonationForm;

@@ -1,0 +1,38 @@
+{
+  "collectionName": "components_component_testimonies",
+  "info": {
+    "displayName": "Testimony"
+  },
+  "options": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "required": true
+    },
+    "description": {
+      "type": "string",
+      "minLength": 1,
+      "required": true
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "testimony": {
+      "type": "text",
+      "minLength": 1,
+      "required": true
+    },
+    "statuS": {
+      "type": "boolean",
+      "required": true,
+      "default": true
+    }
+  },
+  "config": {}
+}

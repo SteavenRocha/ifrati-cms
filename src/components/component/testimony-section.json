@@ -1,0 +1,22 @@
+{
+  "collectionName": "components_component_testimony_sections",
+  "info": {
+    "displayName": "Testimony Section"
+  },
+  "options": {},
+  "attributes": {
+    "testimonies": {
+      "type": "component",
+      "component": "component.testimony",
+      "repeatable": true,
+      "required": true,
+      "min": 1
+    },
+    "cardStyle": {
+      "type": "component",
+      "component": "settings.section-styles",
+      "repeatable": false
+    }
+  },
+  "config": {}
+}
