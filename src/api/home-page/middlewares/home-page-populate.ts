@@ -180,56 +180,23 @@ const populate = {
           sectionStyle: true
         }
       },
-      /*"blocks.donate-section": {
+      "blocks.donate-section": {
         populate: {
-          donateCTA: {
+          pill: {
             populate: {
-              testimonies: {
-                populate: {
-                  testimoniesCard: {
-                    populate: {
-                      image: {
-                        fields: ["url", "alternativeText"]
-                      }
-                    }
-                  },
-                  cardStyles: {
-                    populate: {
-                      backgroundColor: true,
-                      titleColor: true,
-                      textColor: true
-                    }
-                  }
-                }
-              },
-              button: {
-                populate: {
-                  icon: {
-                    fields: ["url", "alternativeText"]
-                  }
-                }
-              },
-              sideImage: {
+              icon: {
                 fields: ["url", "alternativeText"]
               },
-              componentStyles: {
-                populate: {
-                  backgroundColor: true,
-                  titleColor: true,
-                  textColor: true
-                }
-              }
+              pillStyle: true
             }
           },
-          sectionStyles: {
-            populate: {
-              backgroundColor: true,
-              titleColor: true,
-              textColor: true
-            }
-          }
+          donors: {
+            fields: ["url", "alternativeText"]
+          },
+          sectionStyle: true
         }
       },
+      /*
       "blocks.choose-card": {
         populate: {
           chooseCard: {

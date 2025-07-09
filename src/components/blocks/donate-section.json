@@ -1,0 +1,50 @@
+{
+  "collectionName": "components_blocks_donate_sections",
+  "info": {
+    "displayName": "Donate Section"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "minLength": 1,
+      "required": true
+    },
+    "description": {
+      "type": "text",
+      "minLength": 1,
+      "required": true
+    },
+    "pill": {
+      "type": "component",
+      "component": "component.pill",
+      "repeatable": false,
+      "required": true
+    },
+    "number": {
+      "type": "string",
+      "minLength": 1,
+      "required": true
+    },
+    "donors": {
+      "type": "media",
+      "multiple": true,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "secondDescription": {
+      "type": "text",
+      "minLength": 1,
+      "required": true
+    },
+    "sectionStyle": {
+      "type": "component",
+      "component": "settings.section-styles",
+      "repeatable": false,
+      "required": false
+    }
+  },
+  "config": {}
+}

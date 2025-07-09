@@ -1,0 +1,5 @@
+/**
+ * session service
+ */
+
+export default () => ({});

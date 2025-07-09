@@ -230,6 +230,39 @@ export interface BlocksContactSection extends Struct.ComponentSchema {
   };
 }
 
+export interface BlocksDonateSection extends Struct.ComponentSchema {
+  collectionName: 'components_blocks_donate_sections';
+  info: {
+    displayName: 'Donate Section';
+  };
+  attributes: {
+    description: Schema.Attribute.Text &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        minLength: 1;
+      }>;
+    donors: Schema.Attribute.Media<'images', true> & Schema.Attribute.Required;
+    number: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        minLength: 1;
+      }>;
+    pill: Schema.Attribute.Component<'component.pill', false> &
+      Schema.Attribute.Required;
+    secondDescription: Schema.Attribute.Text &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        minLength: 1;
+      }>;
+    sectionStyle: Schema.Attribute.Component<'settings.section-styles', false>;
+    title: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        minLength: 1;
+      }>;
+  };
+}
+
 export interface BlocksFaqSection extends Struct.ComponentSchema {
   collectionName: 'components_blocks_faq_sections';
   info: {
@@ -1869,6 +1902,7 @@ declare module '@strapi/strapi' {
       'blocks.about-section': BlocksAboutSection;
       'blocks.brands-section': BlocksBrandsSection;
       'blocks.contact-section': BlocksContactSection;
+      'blocks.donate-section': BlocksDonateSection;
       'blocks.faq-section': BlocksFaqSection;
       'blocks.hero-section': BlocksHeroSection;
       'blocks.program-section': BlocksProgramSection;
