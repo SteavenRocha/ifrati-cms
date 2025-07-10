@@ -1,0 +1,54 @@
+{
+  "collectionName": "components_component_choose_components",
+  "info": {
+    "displayName": "Choose Component"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "minLength": 1,
+      "required": true
+    },
+    "description": {
+      "type": "text",
+      "minLength": 1,
+      "required": true
+    },
+    "icon": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "benefits": {
+      "type": "component",
+      "component": "component.component",
+      "repeatable": false,
+      "required": true
+    },
+    "characteristics": {
+      "type": "component",
+      "component": "shared.methodology-component",
+      "repeatable": true,
+      "required": true
+    },
+    "button": {
+      "type": "component",
+      "component": "shared.button",
+      "repeatable": false,
+      "required": true
+    }
+  },
+  "config": {}
+}

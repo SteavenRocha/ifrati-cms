@@ -207,6 +207,37 @@ export interface BlocksBrandsSection extends Struct.ComponentSchema {
   };
 }
 
+export interface BlocksChooseSection extends Struct.ComponentSchema {
+  collectionName: 'components_blocks_choose_sections';
+  info: {
+    displayName: 'Choose Section';
+  };
+  attributes: {
+    choose: Schema.Attribute.Component<'component.choose-component', true> &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          min: 3;
+        },
+        number
+      >;
+    chooseStyles: Schema.Attribute.Component<'settings.section-styles', false>;
+    description: Schema.Attribute.Text &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        minLength: 1;
+      }>;
+    pill: Schema.Attribute.Component<'component.pill', false> &
+      Schema.Attribute.Required;
+    sectionStyle: Schema.Attribute.Component<'settings.section-styles', false>;
+    title: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        minLength: 1;
+      }>;
+  };
+}
+
 export interface BlocksContactSection extends Struct.ComponentSchema {
   collectionName: 'components_blocks_contact_sections';
   info: {
@@ -236,6 +267,15 @@ export interface BlocksDonateSection extends Struct.ComponentSchema {
     displayName: 'Donate Section';
   };
   attributes: {
+    buttons: Schema.Attribute.Component<'shared.button', true> &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          max: 2;
+          min: 1;
+        },
+        number
+      >;
     description: Schema.Attribute.Text &
       Schema.Attribute.Required &
       Schema.Attribute.SetMinMaxLength<{
@@ -420,6 +460,36 @@ export interface ComponentCardSection extends Struct.ComponentSchema {
     cardButton: Schema.Attribute.Component<'shared.link', false> &
       Schema.Attribute.Required;
     cardStyle: Schema.Attribute.Component<'settings.section-styles', false>;
+  };
+}
+
+export interface ComponentChooseComponent extends Struct.ComponentSchema {
+  collectionName: 'components_component_choose_components';
+  info: {
+    displayName: 'Choose Component';
+  };
+  attributes: {
+    benefits: Schema.Attribute.Component<'component.component', false> &
+      Schema.Attribute.Required;
+    button: Schema.Attribute.Component<'shared.button', false> &
+      Schema.Attribute.Required;
+    characteristics: Schema.Attribute.Component<
+      'shared.methodology-component',
+      true
+    > &
+      Schema.Attribute.Required;
+    description: Schema.Attribute.Text &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        minLength: 1;
+      }>;
+    icon: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
+    image: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
+    title: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        minLength: 1;
+      }>;
   };
 }
 
@@ -1901,6 +1971,7 @@ declare module '@strapi/strapi' {
       'about-blocks.vision-section': AboutBlocksVisionSection;
       'blocks.about-section': BlocksAboutSection;
       'blocks.brands-section': BlocksBrandsSection;
+      'blocks.choose-section': BlocksChooseSection;
       'blocks.contact-section': BlocksContactSection;
       'blocks.donate-section': BlocksDonateSection;
       'blocks.faq-section': BlocksFaqSection;
@@ -1911,6 +1982,7 @@ declare module '@strapi/strapi' {
       'component.card-goals': ComponentCardGoals;
       'component.card-important': ComponentCardImportant;
       'component.card-section': ComponentCardSection;
+      'component.choose-component': ComponentChooseComponent;
       'component.collaborators-section': ComponentCollaboratorsSection;
       'component.company-information': ComponentCompanyInformation;
       'component.component': ComponentComponent;

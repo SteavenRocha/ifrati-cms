@@ -1,7 +1,7 @@
 {
-  "collectionName": "components_blocks_donate_sections",
+  "collectionName": "components_blocks_choose_sections",
   "info": {
-    "displayName": "Donate Section"
+    "displayName": "Choose Section"
   },
   "options": {},
   "attributes": {
@@ -21,37 +21,22 @@
       "repeatable": false,
       "required": true
     },
-    "number": {
-      "type": "string",
-      "minLength": 1,
-      "required": true
-    },
-    "donors": {
-      "type": "media",
-      "multiple": true,
-      "required": true,
-      "allowedTypes": [
-        "images"
-      ]
-    },
-    "secondDescription": {
-      "type": "text",
-      "minLength": 1,
-      "required": true
-    },
-    "buttons": {
+    "choose": {
       "type": "component",
-      "component": "shared.button",
+      "component": "component.choose-component",
       "repeatable": true,
       "required": true,
-      "min": 1,
-      "max": 2
+      "min": 3
+    },
+    "chooseStyles": {
+      "type": "component",
+      "component": "settings.section-styles",
+      "repeatable": false
     },
     "sectionStyle": {
       "type": "component",
       "component": "settings.section-styles",
-      "repeatable": false,
-      "required": false
+      "repeatable": false
     }
   },
   "config": {}

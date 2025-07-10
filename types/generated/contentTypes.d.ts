@@ -734,6 +734,7 @@ export interface ApiHomePageHomePage extends Struct.SingleTypeSchema {
         'blocks.testimonials-section',
         'blocks.brands-section',
         'blocks.donate-section',
+        'blocks.choose-section',
       ]
     > &
       Schema.Attribute.Required;

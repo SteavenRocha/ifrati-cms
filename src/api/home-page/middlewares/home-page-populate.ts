@@ -42,9 +42,7 @@ const populate = {
               statisticsStyle: true
             }
           }
-
         }
-
       },
       "blocks.about-section": {
         populate: {
@@ -193,46 +191,54 @@ const populate = {
           donors: {
             fields: ["url", "alternativeText"]
           },
+          buttons: {
+            populate: {
+              icon: {
+                fields: ["url", "alternativeText"]
+              }
+            }
+          },
+          sectionStyle: true
+        }
+      },
+      "blocks.choose-section": {
+        populate: {
+          pill: {
+            populate: {
+              icon: {
+                fields: ["url", "alternativeText"]
+              },
+              pillStyle: true
+            }
+          },
+          choose: {
+            populate: {
+              icon: {
+                fields: ["url", "alternativeText"]
+              },
+              image: {
+                fields: ["url", "alternativeText"]
+              },
+              benefits: {
+                populate: {
+                  textComponent: true
+                }
+              },
+              characteristics: true,
+              button: {
+                populate: {
+                  icon: {
+                    fields: ["url", "alternativeText"]
+                  },
+                }
+              }
+            }
+          },
+          chooseStyles: true,
           sectionStyle: true
         }
       },
       /*
-      "blocks.choose-card": {
-        populate: {
-          chooseCard: {
-            populate: {
-              chooseCard: {
-                populate: {
-                  button: {
-                    populate: {
-                      icon: {
-                        fields: ["url", "alternativeText"]
-                      }
-                    }
-                  },
-                  image: {
-                    fields: ["url", "alternativeText"]
-                  },
-                }
-              },
-              cardStyles: {
-                populate: {
-                  backgroundColor: true,
-                  titleColor: true,
-                  textColor: true
-                }
-              },
-            }
-          },
-          sectionStyles: {
-            populate: {
-              backgroundColor: true,
-              titleColor: true,
-              textColor: true
-            }
-          }
-        }
-      },
       "blocks.product-section": {
         populate: {
           productSection: {
