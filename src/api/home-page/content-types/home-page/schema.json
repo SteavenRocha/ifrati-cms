@@ -26,7 +26,9 @@
         "blocks.testimonials-section",
         "blocks.brands-section",
         "blocks.donate-section",
-        "blocks.choose-section"
+        "blocks.choose-section",
+        "blocks.faq-section",
+        "blocks.contact-section"
       ],
       "required": true
     }

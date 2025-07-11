@@ -238,73 +238,45 @@ const populate = {
           sectionStyle: true
         }
       },
-      /*
-      "blocks.product-section": {
-        populate: {
-          productSection: {
-            populate: {
-              productButton : {
-                populate: {
-                  icon: { 
-                    fields: ["url", "alternativeText"]
-                  },
-                }
-              },
-              cardStyles: {
-                populate: {
-                  backgroundColor: true,
-                  titleColor: true,
-                  textColor: true
-                }
-              },
-            },
-          },
-          button: {
-            populate: {
-              icon: { 
-                fields: ["url", "alternativeText"]
-              },
-            }
-          },
-          sectionStyles: {
-            populate: {
-              backgroundColor: true,
-              titleColor: true,
-              textColor: true
-            }
-          }
-        },
-      },
       "blocks.faq-section": {
         populate: {
-          faq: {
+          pill: {
             populate: {
-              faqComponent: {
+              icon: {
+                fields: ["url", "alternativeText"]
+              },
+              pillStyle: true
+            }
+          },
+          questions: true,
+          sectionStyle: true
+        }
+      },
+      "blocks.contact-section": {
+        populate: {
+          pill: {
+            populate: {
+              icon: {
+                fields: ["url", "alternativeText"]
+              },
+              pillStyle: true
+            }
+          },
+          contactCard: {
+            populate: {
+              button: {
                 populate: {
-                  icon: { 
+                  icon: {
                     fields: ["url", "alternativeText"]
                   },
-                  faq: true
                 }
               },
-              cardStyles: {
-                populate: {
-                  backgroundColor: true,
-                  titleColor: true,
-                  textColor: true
-                }
-              },
-            },
-          },
-          sectionStyles: {
-            populate: {
-              backgroundColor: true,
-              titleColor: true,
-              textColor: true
             }
-          }
-        },
-      } */
+          },
+          contactInformation: true,
+          sectionStyle: true
+        }
+      },
     }
   }
 }
