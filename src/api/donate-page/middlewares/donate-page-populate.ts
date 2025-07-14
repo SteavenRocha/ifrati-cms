@@ -63,6 +63,31 @@ const populate = {
               formStyle: true
             }
           },
+          volunteerForm: {
+            populate: {
+              card: {
+                populate: {
+                  icon: {
+                    fields: ["url", "alternativeText"]
+                  },
+                  characteristics: true
+                }
+              },
+              cardStyle: true,
+              form: {
+                populate: {
+                  button: {
+                    populate: {
+                      icon: {
+                        fields: ["url", "alternativeText"]
+                      },
+                    }
+                  },
+                }
+              },
+              formStyle: true,
+            }
+          },
           sectionStyle: true
         }
       },

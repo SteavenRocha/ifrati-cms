@@ -8,35 +8,41 @@
   "attributes": {
     "title": {
       "type": "string",
-      "required": true,
-      "minLength": 1
+      "minLength": 1,
+      "required": true
     },
     "description": {
       "type": "text",
-      "required": true,
-      "minLength": 1
+      "minLength": 1,
+      "required": true
     },
     "pill": {
       "type": "component",
-      "repeatable": false,
       "component": "component.pill",
+      "repeatable": false,
       "required": true
     },
     "donationForm": {
       "type": "component",
-      "repeatable": false,
       "component": "component.impact-form",
+      "repeatable": false,
       "required": true
     },
     "sectionStyle": {
       "type": "component",
-      "repeatable": false,
-      "component": "settings.section-styles"
+      "component": "settings.section-styles",
+      "repeatable": false
     },
     "specificGoalsForm": {
       "type": "component",
-      "repeatable": false,
       "component": "shared.specific-goals-form",
+      "repeatable": false,
+      "required": true
+    },
+    "volunteerForm": {
+      "type": "component",
+      "component": "component.volunteer-form",
+      "repeatable": false,
       "required": true
     }
   }

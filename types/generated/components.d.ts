@@ -1279,6 +1279,68 @@ export interface ComponentValuesCardSection extends Struct.ComponentSchema {
   };
 }
 
+export interface ComponentVolunteerCard extends Struct.ComponentSchema {
+  collectionName: 'components_component_volunteer_cards';
+  info: {
+    displayName: 'Volunteer Card';
+  };
+  attributes: {
+    characteristics: Schema.Attribute.Component<
+      'shared.methodology-component',
+      true
+    > &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          min: 1;
+        },
+        number
+      >;
+    description: Schema.Attribute.Text &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        minLength: 1;
+      }>;
+    icon: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
+    title: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        minLength: 1;
+      }>;
+  };
+}
+
+export interface ComponentVolunteerForm extends Struct.ComponentSchema {
+  collectionName: 'components_component_volunteer_forms';
+  info: {
+    displayName: 'Volunteer Form';
+  };
+  attributes: {
+    card: Schema.Attribute.Component<'component.volunteer-card', true> &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          min: 1;
+        },
+        number
+      >;
+    cardStyle: Schema.Attribute.Component<'settings.section-styles', false>;
+    firstTitle: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        minLength: 1;
+      }>;
+    form: Schema.Attribute.Component<'component.contact-card', false> &
+      Schema.Attribute.Required;
+    formStyle: Schema.Attribute.Component<'settings.section-styles', false>;
+    selectedTitle: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        minLength: 1;
+      }>;
+  };
+}
+
 export interface DonateBlocksDonationForm extends Struct.ComponentSchema {
   collectionName: 'components_donate_blocks_donation_forms';
   info: {
@@ -1306,6 +1368,11 @@ export interface DonateBlocksDonationForm extends Struct.ComponentSchema {
       Schema.Attribute.SetMinMaxLength<{
         minLength: 1;
       }>;
+    volunteerForm: Schema.Attribute.Component<
+      'component.volunteer-form',
+      false
+    > &
+      Schema.Attribute.Required;
   };
 }
 
@@ -2016,6 +2083,8 @@ declare module '@strapi/strapi' {
       'component.testimony-section': ComponentTestimonySection;
       'component.titles': ComponentTitles;
       'component.values-card-section': ComponentValuesCardSection;
+      'component.volunteer-card': ComponentVolunteerCard;
+      'component.volunteer-form': ComponentVolunteerForm;
       'donate-blocks.donation-form': DonateBlocksDonationForm;
       'donate-blocks.important-section': DonateBlocksImportantSection;
       'program-blocks.hero-section': ProgramBlocksHeroSection;

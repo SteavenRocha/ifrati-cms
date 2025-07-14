@@ -989,6 +989,43 @@ export interface ApiSubjectSubject extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiVolunteerInboxVolunteerInbox
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'volunteer_inboxes';
+  info: {
+    displayName: 'Volunteer Inbox';
+    pluralName: 'volunteer-inboxes';
+    singularName: 'volunteer-inbox';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    availability: Schema.Attribute.String & Schema.Attribute.Required;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    documentNumber: Schema.Attribute.String & Schema.Attribute.Required;
+    documnetType: Schema.Attribute.String & Schema.Attribute.Required;
+    email: Schema.Attribute.Email & Schema.Attribute.Required;
+    experience: Schema.Attribute.RichText;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::volunteer-inbox.volunteer-inbox'
+    > &
+      Schema.Attribute.Private;
+    motivation: Schema.Attribute.RichText;
+    name: Schema.Attribute.String & Schema.Attribute.Required;
+    phone: Schema.Attribute.String & Schema.Attribute.Required;
+    publishedAt: Schema.Attribute.DateTime;
+    type: Schema.Attribute.String & Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiWebsiteConfigurationWebsiteConfiguration
   extends Struct.SingleTypeSchema {
   collectionName: 'website_configurations';
@@ -1556,6 +1593,7 @@ declare module '@strapi/strapi' {
       'api::program-page.program-page': ApiProgramPageProgramPage;
       'api::shop-page.shop-page': ApiShopPageShopPage;
       'api::subject.subject': ApiSubjectSubject;
+      'api::volunteer-inbox.volunteer-inbox': ApiVolunteerInboxVolunteerInbox;
       'api::website-configuration.website-configuration': ApiWebsiteConfigurationWebsiteConfiguration;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;

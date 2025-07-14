@@ -1,0 +1,49 @@
+{
+  "kind": "collectionType",
+  "collectionName": "volunteer_inboxes",
+  "info": {
+    "singularName": "volunteer-inbox",
+    "pluralName": "volunteer-inboxes",
+    "displayName": "Volunteer Inbox"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "documnetType": {
+      "type": "string",
+      "required": true
+    },
+    "documentNumber": {
+      "type": "string",
+      "required": true
+    },
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "email": {
+      "type": "email",
+      "required": true
+    },
+    "phone": {
+      "type": "string",
+      "required": true
+    },
+    "type": {
+      "type": "string",
+      "required": true
+    },
+    "availability": {
+      "type": "string",
+      "required": true
+    },
+    "experience": {
+      "type": "richtext"
+    },
+    "motivation": {
+      "type": "richtext"
+    }
+  }
+}
