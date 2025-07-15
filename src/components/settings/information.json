@@ -22,7 +22,7 @@
       "min": 3
     },
     "googleMapsLink": {
-      "type": "string",
+      "type": "text",
       "required": true
     }
   },

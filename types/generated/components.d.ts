@@ -1643,7 +1643,7 @@ export interface SettingsInformation extends Struct.ComponentSchema {
       Schema.Attribute.SetMinMaxLength<{
         minLength: 1;
       }>;
-    googleMapsLink: Schema.Attribute.String & Schema.Attribute.Required;
+    googleMapsLink: Schema.Attribute.Text & Schema.Attribute.Required;
     information: Schema.Attribute.Component<'shared.statistics', true> &
       Schema.Attribute.Required &
       Schema.Attribute.SetMinMax<
