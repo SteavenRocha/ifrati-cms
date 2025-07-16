@@ -506,18 +506,26 @@ module.exports = {
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td style="padding: 15px; background-color: #F9FAFB; border-radius: 5px;">
-                                                        <p style="font-weight: bold;">Tu contribucion:</p>
-                                                        <h3 style="font-weight: bold;">${amount} PEN</h3>
-                                                    </td>
-                                                </tr>
-                                                <tr>
                                                     <td>
                                                         <p>Tu contribución nos permite continuar con nuestra misión.
                                                             Gracias a personas como tú, podemos seguir impactando positivamente en la
                                                             vida de nuestros jovenes.</p>
                                                     </td>
                                                 </tr>
+                                                <tr>
+                                                    <td colspan="2" style="height: 20px;"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="padding: 15px; background-color: #F9FAFB; border-radius: 5px;">
+                                                        <p style="font-weight: bold;">Tu contribucion:</p>
+                                                        <h3 style="font-weight: bold;">${amount} PEN</h3>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td colspan="2" style="height: 20px;"></td>
+                                                </tr>
+
                                                 <tr>
                                                     <td style="background-color: #F9FAFB; border-radius: 5px; padding: 15px;">
                                                         <h4 style="margin-top: 0;">El impacto de tu donación:</h4>
@@ -937,6 +945,17 @@ module.exports = {
                                                         </p>
                                                     </td>
                                                 </tr>
+
+                                                <tr>
+                                                    <td>
+                                                        <p>Tu contribución nos permite continuar con nuestra misión.
+                                                            Gracias a personas como tú, podemos seguir impactando positivamente en la
+                                                            vida de nuestros jovenes.</p>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="2" style="height: 20px;"></td>
+                                                </tr>
                                                 <tr>
                                                     <td style="padding: 15px; background-color: #F9FAFB; border-radius: 5px;">
                                                         <p style="font-weight: bold;">Meta especifica:</p>
@@ -952,13 +971,7 @@ module.exports = {
                                                         <h3 style="font-weight: bold;">${amount} PEN</h3>
                                                     </td>
                                                 </tr>
-                                                <tr>
-                                                    <td>
-                                                        <p>Tu contribución nos permite continuar con nuestra misión.
-                                                            Gracias a personas como tú, podemos seguir impactando positivamente en la
-                                                            vida de nuestros jovenes.</p>
-                                                    </td>
-                                                </tr>
+
                                                 <tr>
                                                     <td style="background-color: #F9FAFB; border-radius: 5px; padding: 15px;">
                                                         <p style="margin-top: 0; font-size: 16px; font-weight: bold;">
@@ -971,7 +984,8 @@ module.exports = {
                                                             style="font-family: Arial, sans-serif;">
                                                             <tr>
                                                                 <td>
-                                                                    <p style="margin: 0 0 8px 0; font-weight: bold;">${percentage}% completado</p>
+                                                                    <p style="margin: 0 0 8px 0; font-weight: bold;">${percentage}%
+                                                                        completado</p>
 
                                                                     <table width="100%" cellpadding="0" cellspacing="0"
                                                                         role="presentation">
@@ -979,14 +993,17 @@ module.exports = {
                                                                             <td style="background-color: #e0e0e0; border-radius: 5px;">
                                                                                 <div
                                                                                     style="height: 12px; width: 100%; background-color: #e0e0e0; border-radius: 5px; overflow: hidden;">
-                                                                                    <div style="height: 12px; width: ${percentage}%; background-color: #EF4444;"></div>
+                                                                                    <div
+                                                                                        style="height: 12px; width: ${percentage}%; background-color: #EF4444;">
+                                                                                    </div>
                                                                                 </div>
                                                                             </td>
                                                                         </tr>
                                                                     </table>
 
                                                                     <p style="margin-top: 10px; font-size: 14px;">
-                                                                        <strong>${collected} S/.</strong> de <strong>${goal} S/.</strong> recaudado
+                                                                        <strong>${collected} S/.</strong> de <strong>${goal}
+                                                                            S/.</strong> recaudado
                                                                     </p>
                                                                 </td>
                                                             </tr>
@@ -1109,5 +1126,380 @@ module.exports = {
         })
 
         return ctx.send({ ok: true, message: 'Correo enviado con éxito' })
-    }
+    },
+
+    async submitVolunteerEmail(ctx) {
+        const { documentType, documentNumber, name, email, phone, type, availability, experience, motivation } = ctx.request.body
+
+        if (!documentType || !documentNumber || !name || !email || !phone || !type || !availability || !experience || !motivation) {
+            return ctx.badRequest('Faltan datos requeridos')
+        }
+
+        const fecha = new Intl.DateTimeFormat('es-PE', {
+            dateStyle: 'long',
+            timeStyle: 'short',
+            timeZone: 'America/Lima',
+        }).format(new Date())
+
+        // Enviar correo al admin
+        await strapi.plugin('email').service('email').send({
+            to: process.env.ZOHO_USER,
+            subject: 'Nueva solicitud de voluntariado',
+            html: `
+                <html lang="es">
+                <body style="font-family: Arial, sans-serif; margin: 0; background-color: #F3F5F9;">
+                    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#F3F5F9">
+                        <tr>
+                            <td align="center" style="padding: 10px 5px;">
+                                <table role="presentation" width="100%" cellpadding="0" cellspacing="0"
+                                    style="max-width: 600px; background-color: #ffffff; border-radius: 5px; padding: 20px;">
+                                    <tr>
+                                        <td align="center" style="padding: 20px;">
+                                            <div
+                                                style="background-color: #9333EA; border-radius: 50%; padding: 10px; display: inline-block;">
+                                                <img src="https://api.ifrati.org.pe/uploads/Healthicons_Dollar_15dd034ceb.png"
+                                                    alt="Mail icon" width="40" height="40" style="display: block;">
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td align="center" style="padding-bottom: 10px;">
+                                            <h3 style="margin: 0; font-size: 22px;">Nueva solicitud de voluntariado</h3>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td align="center" style="padding-bottom: 20px;">
+                                            <p style="margin: 0;">Un candidato ha completado el formulario de registro</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border: 1px solid #dbdbdb; border-radius: 5px;">
+                                            <h3 style="font-size: 18px; padding: 20px; margin: 0; background-color: #FAF5FF;">
+                                                Información del postulante</h3>
+                                            <table role="presentation" width="100%" cellpadding="0" cellspacing="0"
+                                                style="padding: 10px 20px; font-size: 16px;">
+
+                                                <tr>
+                                                    <td width="50%" valign="top" style="padding-right: 10px;">
+                                                        <p style="margin: 0; font-weight: bold;">Tipo de documento</p>
+                                                        <p style="margin-top: 5px;">${documentType}</p>
+                                                    </td>
+                                                    <td width="50%" valign="top" style="padding-left: 10px;">
+                                                        <p style="margin: 0; font-weight: bold;">Numero de documento</p>
+                                                        <p style="margin-top: 5px;">${documentNumber}</p>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td width="50%" valign="top" style="padding-right: 10px;">
+                                                        <p style="margin: 0; font-weight: bold;">Nombre completo</p>
+                                                        <p style="margin-top: 5px;">${name}</p>
+                                                    </td>
+                                                    <td width="50%" valign="top" style="padding-left: 10px;">
+                                                        <p style="margin: 0; font-weight: bold;">Fecha de envío</p>
+                                                        <p style="margin-top: 5px;">${fecha}</p>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td width="50%" valign="top" style="padding-right: 10px;">
+                                                        <p style="margin: 0; font-weight: bold;">Correo electrónico</p>
+                                                        <p style="margin-top: 5px;">${email}</p>
+                                                    </td>
+                                                    <td width="50%" valign="top" style="padding-left: 10px;">
+                                                        <p style="margin: 0; font-weight: bold;">Celular</p>
+                                                        <p style="margin-top: 5px;">${phone}</p>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td width="50%" valign="top" style="padding-right: 10px;">
+                                                        <p style="margin: 0; font-weight: bold;">Tipo de voluntariado</p>
+                                                        <p style="margin-top: 5px;">${type}</p>
+                                                    </td>
+                                                    <td width="50%" valign="top" style="padding-left: 10px;">
+                                                        <p style="margin: 0; font-weight: bold;">Disponibilidad</p>
+                                                        <p style="margin-top: 5px;">${availability}</p>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td colspan="2"
+                                                        style="background-color: #F9FAFB; border-radius: 5px; padding: 15px; margin-top: 10px;">
+                                                        <h4 style="margin: 0 0 10px 0;">Experiencia</h4>
+                                                        <p style="margin: 0;">${experience || 'Mensaje Predeterminado'}</p>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td colspan="2" style="height: 20px;"></td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td colspan="2"
+                                                        style="background-color: #F9FAFB; border-radius: 5px; padding: 15px; margin-top: 10px;">
+                                                        <h4 style="margin: 0 0 10px 0;">Motivacion</h4>
+                                                        <p style="margin: 0;">${motivation || 'Mensaje Predeterminado'}</p>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td colspan="2" style="height: 20px;"></td>
+                                                </tr>
+
+                                                <!-- Botón -->
+                                                <tr>
+                                                    <td colspan="2" align="center" style="padding: 10px 0;">
+                                                        <a href="https://api.ifrati.org.pe/admin" target="_blank"
+                                                            rel="noopener noreferrer"
+                                                            style="text-decoration: none; color: #4B5563; background-color: #ffffff; padding: 10px 20px; border-radius: 5px; display: inline-block; border: 1px solid #dbdbdb;">Ver
+                                                            en Panel Admin</a>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td align="center" style="font-size: 14px; color: #4B5563; padding-top: 20px;">
+                                            <p style="margin: 0;"><strong>Recordatorio:</strong> El tiempo de respuesta objetivo es de
+                                                24-48 horas hábiles.</p>
+                                            <p style="margin: 0;">Este correo fue enviado automáticamente desde el sistema de
+                                                formularios de voluntariado.</p>
+                                            <p style="margin: 5px 0;">© 2025 <strong>IFRATI.</strong> Todos los derechos reservados.</p>
+
+                                            <table role="presentation" cellpadding="0" cellspacing="0" style="margin: 10px auto;">
+                                                <tr>
+                                                    <td align="center">
+                                                        <a href="https://ifrati-website.vercel.app/legal/Pol%C3%ADtica%20de%20privacidad"
+                                                            target="_blank" rel="noopener noreferrer"
+                                                            style="text-decoration: none; color: #4B5563; font-size: 14px;">Política de
+                                                            Privacidad</a>
+                                                    </td>
+                                                    <td style="padding: 0 10px;">
+                                                        <div style="width: 1px; height: 16px; background-color: #999;"></div>
+                                                    </td>
+                                                    <td align="center">
+                                                        <a href="https://ifrati-website.vercel.app/legal/T%C3%A9rminos%20y%20condiciones"
+                                                            target="_blank" rel="noopener noreferrer"
+                                                            style="text-decoration: none; color: #4B5563; font-size: 14px;">Términos y
+                                                            Condiciones</a>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </body>
+                </html>
+            `
+        })
+
+        // Enviar confirmación al usuario
+        await strapi.plugin('email').service('email').send({
+            to: email,
+            subject: 'Gracias por querer ser voluntario',
+            html: `
+                <html lang="es">
+                <body style="font-family: Arial, sans-serif; margin: 0; background-color: #F3F5F9;">
+                    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#F3F5F9">
+                        <tr>
+                            <td align="center" style="padding: 10px 5px;">
+                                <table role="presentation" width="100%" cellpadding="0" cellspacing="0"
+                                    style="max-width: 600px; background-color: #ffffff; border-radius: 5px; padding: 20px;">
+                                    <!-- ICONO -->
+                                    <tr>
+                                        <td align="center" style="padding: 20px;">
+                                            <div
+                                                style="background-color: #9333EA; border-radius: 50%; padding: 10px; display: inline-block;">
+                                                <img src="https://api.ifrati.org.pe/uploads/Healthicons_Dollar_15dd034ceb.png"
+                                                    alt="Mail icon" width="40" height="40" style="display: block;">
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                    <!-- TÍTULO -->
+                                    <tr>
+                                        <td align="center" style="padding-bottom: 10px;">
+                                            <h3 style="margin: 0; font-size: 22px;">¡Gracias por querer ser voluntario!</h3>
+                                        </td>
+                                    </tr>
+
+                                    <!-- MENSAJE PRINCIPAL -->
+                                    <tr>
+                                        <td align="center" style="padding-bottom: 20px;">
+                                            <p style="margin: 0;">Tu solicitud ha sido recibida exitosamente</p>
+                                        </td>
+                                    </tr>
+
+                                    <!-- CONFIRMACIÓN -->
+                                    <tr>
+                                        <td style="border: 1px solid #dbdbdb; border-radius: 5px;">
+                                            <h3 style="font-size: 18px; padding: 20px; margin: 0; background-color: #FAF5FF;">
+                                                Confirmación de solicitud de voluntariado</h3>
+                                            <table role="presentation" width="100%" cellpadding="0" cellspacing="0"
+                                                style="padding: 10px 20px; font-size: 16px;">
+                                                <tr>
+                                                    <td colspan="2" style="padding-top: 10px;">
+                                                        <p>Estimado/a <strong>${name || 'Usuario'}</strong>,</p>
+                                                        <p>¡Qué emocionante saber que quieres formar parte de nuestro equipo de
+                                                            voluntarios! Hemos recibido tu solicitud el <strong>${fecha}</strong> y
+                                                            queremos agradecerte por tu interés en contribuir a nuestra causa.</p>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td colspan="2"
+                                                        style="background-color: #F9FAFB; border-radius: 5px; padding: 15px; margin-top: 10px;">
+                                                        <h4 style="margin: 0 0 10px 0;">Tu solicitud está siendo procesada</h4>
+                                                        <p style="margin: 0;">Nuestro equipo de coordinación de voluntarios revisará tu
+                                                            información y se pondrá en contacto contigo en un plazo máximo de 3-5 días
+                                                            hábiles.</p>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td style="height: 20px;"></td>
+                                    </tr>
+
+                                    <!-- RESUMEN -->
+                                    <tr>
+                                        <td style="border: 1px solid #dbdbdb; border-radius: 5px;">
+                                            <table role="presentation" width="100%" cellpadding="0" cellspacing="0"
+                                                style="padding: 10px 20px; font-size: 16px;">
+                                                <tr>
+                                                    <td colspan="2">
+                                                        <h4>Resumen de tu solicitud</h4>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td width="50%" valign="top" style="padding-right: 10px;">
+                                                        <p style="margin: 0; font-weight: bold;">Tipo de documento</p>
+                                                        <p style="margin-top: 5px;">${documentType}</p>
+                                                    </td>
+                                                    <td width="50%" valign="top" style="padding-left: 10px;">
+                                                        <p style="margin: 0; font-weight: bold;">Numero de documento</p>
+                                                        <p style="margin-top: 5px;">${documentNumber}</p>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td width="50%" valign="top" style="padding-right: 10px;">
+                                                        <p style="margin: 0; font-weight: bold;">Nombre completo</p>
+                                                        <p style="margin-top: 5px;">${name}</p>
+                                                    </td>
+                                                    <td width="50%" valign="top" style="padding-left: 10px;">
+                                                        <p style="margin: 0; font-weight: bold;">Fecha de envío</p>
+                                                        <p style="margin-top: 5px;">${fecha}</p>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td width="50%" valign="top" style="padding-right: 10px;">
+                                                        <p style="margin: 0; font-weight: bold;">Correo electrónico</p>
+                                                        <p style="margin-top: 5px;">${email}</p>
+                                                    </td>
+                                                    <td width="50%" valign="top" style="padding-left: 10px;">
+                                                        <p style="margin: 0; font-weight: bold;">Celular</p>
+                                                        <p style="margin-top: 5px;">${phone}</p>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td width="50%" valign="top" style="padding-right: 10px;">
+                                                        <p style="margin: 0; font-weight: bold;">Tipo de voluntariado</p>
+                                                        <p style="margin-top: 5px;">${type}</p>
+                                                    </td>
+                                                    <td width="50%" valign="top" style="padding-left: 10px;">
+                                                        <p style="margin: 0; font-weight: bold;">Disponibilidad</p>
+                                                        <p style="margin-top: 5px;">${availability}</p>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td colspan="2"
+                                                        style="background-color: #F9FAFB; border-radius: 5px; padding: 15px; margin-top: 10px;">
+                                                        <h4 style="margin: 0 0 10px 0;">Experiencia</h4>
+                                                        <p style="margin: 0;">${experience || 'Mensaje Predeterminado'}</p>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td colspan="2" style="height: 20px;"></td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td colspan="2"
+                                                        style="background-color: #F9FAFB; border-radius: 5px; padding: 15px; margin-top: 10px;">
+                                                        <h4 style="margin: 0 0 10px 0;">Motivación</h4>
+                                                        <p style="margin: 0;">${motivation || 'Mensaje Predeterminado'}</p>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td colspan="2">
+                                                        <hr style="border: none; border-top: 1px solid #dbdbdb; margin: 20px 0;">
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td align="center" colspan="2">
+                                                        <p style="margin: 0;">Atentamente,</p>
+                                                        <img src="https://api.ifrati.org.pe/uploads/logo_544fbbd601.png" alt="logo"
+                                                            style="max-width: 125px; margin: 8px 0;">
+                                                        <p style="margin: 0; font-size: 12px; color: #4B5563;">Equipo de Atención al
+                                                            Cliente</p>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+
+                                    <!-- FOOTER -->
+                                    <tr>
+                                        <td align="center" style="font-size: 14px; color: #4B5563; padding-top: 20px;">
+                                            <p style="margin: 0;"><strong>Recordatorio:</strong> El tiempo de respuesta objetivo es de
+                                                24-48 horas hábiles.</p>
+                                            <p style="margin: 0;">Este correo fue enviado automáticamente desde el sistema de
+                                                formularios de voluntariado.</p>
+                                            <p style="margin: 5px 0;">© 2025 <strong>IFRATI.</strong> Todos los derechos reservados.</p>
+
+                                            <table role="presentation" cellpadding="0" cellspacing="0" style="margin: 10px auto;">
+                                                <tr>
+                                                    <td align="center">
+                                                        <a href="https://ifrati-website.vercel.app/legal/Pol%C3%ADtica%20de%20privacidad"
+                                                            target="_blank" rel="noopener noreferrer"
+                                                            style="text-decoration: none; color: #4B5563; font-size: 14px;">Política de
+                                                            Privacidad</a>
+                                                    </td>
+                                                    <td style="padding: 0 10px;">
+                                                        <div style="width: 1px; height: 16px; background-color: #999;"></div>
+                                                    </td>
+                                                    <td align="center">
+                                                        <a href="https://ifrati-website.vercel.app/legal/T%C3%A9rminos%20y%20condiciones"
+                                                            target="_blank" rel="noopener noreferrer"
+                                                            style="text-decoration: none; color: #4B5563; font-size: 14px;">Términos y
+                                                            Condiciones</a>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </body>
+                </html>
+            `
+        })
+
+        return ctx.send({ ok: true, message: 'Correo enviado con éxito' })
+    },
 }

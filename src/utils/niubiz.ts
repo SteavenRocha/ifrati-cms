@@ -146,5 +146,4 @@ export const generateAuthorization = async (token: string, amount: number, token
         console.error('❌ Error al generar autorización Niubiz:', niubizError);
         throw new Error(JSON.stringify(niubizError));
     }
-
 };

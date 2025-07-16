@@ -1006,7 +1006,7 @@ export interface ApiVolunteerInboxVolunteerInbox
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     documentNumber: Schema.Attribute.String & Schema.Attribute.Required;
-    documnetType: Schema.Attribute.String & Schema.Attribute.Required;
+    documentType: Schema.Attribute.String & Schema.Attribute.Required;
     email: Schema.Attribute.Email & Schema.Attribute.Required;
     experience: Schema.Attribute.RichText;
     locale: Schema.Attribute.String & Schema.Attribute.Private;

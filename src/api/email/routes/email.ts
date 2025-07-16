@@ -27,5 +27,14 @@ export default {
         middlewares: [],
       }, */
     },
+    {
+      method: 'POST',
+      path: '/email/submitVolunteerEmail',
+      handler: 'email.submitVolunteerEmail',
+      /* config: {
+        policies: [],
+        middlewares: [],
+      }, */
+    },
   ],
 };

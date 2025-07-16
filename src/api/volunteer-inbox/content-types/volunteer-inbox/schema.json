@@ -11,7 +11,7 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "documnetType": {
+    "documentType": {
       "type": "string",
       "required": true
     },

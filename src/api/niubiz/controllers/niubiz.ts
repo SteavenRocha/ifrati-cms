@@ -19,6 +19,7 @@ export default {
 
       const responseData = {
         sessionKey,
+        /* experationTime, */ // NO LO ESTOY USANDO -> NO DEVUELVE ESTE VALOR MI CONFIGURACION
         merchantId: config.merchantId,
         /*  purchaseNumber, */
         amount,
@@ -77,5 +78,4 @@ export default {
       return ctx.internalServerError('Error al obtener los datos del DNI');
     }
   }
-
 };
