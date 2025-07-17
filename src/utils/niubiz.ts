@@ -1,12 +1,12 @@
 import axios from 'axios';
 
-interface NiubizConfig {
+interface NiubizConfig {    // NIUBIZ CONFIG
     isDev: boolean;
     urlApiDniReniec: string;
     tokenApiDniReniec: string;
     merchantId: string;
     user: string;
-    password: string;
+    pwd: string;
     urlSecurity: string;
     urlSession: string;
     urlAuthorization: string;
@@ -14,9 +14,33 @@ interface NiubizConfig {
     currency: string;
 }
 
-export const getDataDni = async (dni: string) => {
-    const config = strapi.config.get('niubiz') as NiubizConfig;
+interface MDD {     // VARIABLES MDD
+    email: string;
+    dni: string;
+    type: string;
+    days: Number;
+}
 
+interface cardDataMap {  // DATAMAP
+    city: string;
+    country: string;
+    address: string;
+    postalCode: string;
+    state: string;
+    phoneNumber: string;
+}
+
+interface locationDataMap {   // DATAMAP
+    urlAddress: string;
+    city: string;
+    state: string;
+    country: string;
+    postalCode: string;
+}
+
+const config = strapi.config.get('niubiz') as NiubizConfig;
+
+export const getDataDni = async (dni: string) => {
     try {
         const response = await axios.get(`${config.urlApiDniReniec}?numero=${dni}`, {
             headers: {
@@ -32,10 +56,16 @@ export const getDataDni = async (dni: string) => {
     }
 };
 
-export const generateSecurityToken = async () => {
-    const config = strapi.config.get('niubiz') as NiubizConfig;
+export function generatePurchaseNumber(): string {
+    const timestamp = Date.now().toString(); // 13 dígitos
+    const random = Math.floor(100 + Math.random() * 900).toString(); // 3 dígitos aleatorios
 
-    const authString = Buffer.from(`${config.user}:${config.password}`).toString('base64');
+    // 9 últimos del timestamp + 3 random = 12 dígitos
+    return timestamp.slice(-9) + random;
+}
+
+export const generateSecurityToken = async () => {
+    const authString = Buffer.from(`${config.user}:${config.pwd}`).toString('base64');
 
     try {
         const response = await axios.get(config.urlSecurity, {
@@ -52,81 +82,85 @@ export const generateSecurityToken = async () => {
     }
 };
 
-export const generateSessionKey = async (amount: number, token: string, channel: string): Promise<string> => {
-    const config = strapi.config.get('niubiz') as NiubizConfig;
+export const generateSessionKey = async (
+    token: string,
+    amount: string,
+    clientIp: string,
+    mdd: MDD,
+    dataMap: cardDataMap
+): Promise<{ sessionKey: string; expirationTime: number }> => {
+
+    console.log('📥 Datos recibidos en generateSessionKey → dataMap:', dataMap);
+
     const sessionUrl = `${config.urlSession}/${config.merchantId}`;
+    const channel = config.channel;
 
     const sessionPayload = {
         channel,
-        amount,
+        amount: parseFloat(parseFloat(amount).toFixed(2)),
         antifraud: {
-            clientIp: '38.25.26.129', // IP del cliente
-            merchantDefineData: { // DATOS DINAMICOS DEL CLIENTE
-                MDD4: 'correo.demo@gmail.com',
-                MDD32: '202415003', // Identificador unico para cada cliente
-                MDD75: 'Invitado', // Tipo de cliente Registrado - Invitado - Empleado
-                MDD77: '1', // Dias registrado, si aplica
+            clientIp,
+            merchantDefineData: {
+                MDD4: mdd.email,
+                MDD32: mdd.dni,
+                MDD75: mdd.type,
+                MDD77: mdd.days,
             },
         },
-        dataMap: { //Datos de la empresa
-            cardholderCity: 'Lima',
-            cardholderCountry: 'PE',
-            cardholderAddress: "Jr. La Floresta 147. Urb. Camacho - Surco",
-            cardholderPostalCode: "15023",
-            cardholderState: "LIM",
-            cardholderPhoneNumber: "959863269"
+        dataMap: {
+            cardholderCity: dataMap.city,
+            cardholderCountry: dataMap.country,
+            cardholderAddress: dataMap.address,
+            cardholderPostalCode: dataMap.postalCode,
+            cardholderState: dataMap.state,
+            cardholderPhoneNumber: dataMap.phoneNumber,
         },
     };
 
-    try {
-        const response = await axios.post(
-            sessionUrl,
-            sessionPayload,
-            {
-                headers: {
-                    Accept: '*/*',
-                    Authorization: `${token}`,
-                    'Content-Type': 'application/json',
-                },
-            }
-        );
+    console.log('🔎 Payload enviado a Niubiz:', JSON.stringify(sessionPayload, null, 2));
 
-        return response.data.sessionKey;
+    try {
+        const response = await axios.post(sessionUrl, sessionPayload, {
+            headers: {
+                Accept: '*/*',
+                Authorization: `${token}`,
+                'Content-Type': 'application/json',
+            },
+        });
+
+        return response.data;
     } catch (error) {
         strapi.log.error('Error al generar sesión Niubiz:', error);
         throw error;
     }
 };
 
-export const generateAuthorization = async (token: string, amount: number, tokenId: string, channel: string): Promise<string> => {
-    const config = strapi.config.get('niubiz') as NiubizConfig;
+export const generateAuthorization = async (token: string, amount: string, purchaseNumber: string, tokenId: string, dataMap: locationDataMap): Promise<string> => {
     const authorizationUrl = `${config.urlAuthorization}/${config.merchantId}`;
-    const purchaseNumber = 2020100901;
+    const channel = config.channel;
 
     const authorizationPayload = {
-        captureType: 'manual',
+        captureType: 'manual', // SIEMPRE ES MANUAL
         channel,
-        countable: true,
+        countable: true, // TRUE PARA LIQUIDACION AUTOMATICA
         order: {
-            amount,
+            amount: parseFloat(parseFloat(amount).toFixed(2)),
             currency: "PEN",
             purchaseNumber,
             tokenId
         },
-        dataMap: {
-            urlAddress: "https://ifrati.org.pe", //Dinámico
+        dataMap: { // Cliente
+            urlAddress: dataMap.urlAddress, //Dinámico
             partnerIdCode: "", //En blanco
-            serviceLocationCityName: "Lima",
-            serviceLocationCountrySubdivisionCode: "LMA",
-            serviceLocationCountryCode: "PER",
-            serviceLocationPostalCode: "15023"
+            serviceLocationCityName: dataMap.city,
+            serviceLocationCountrySubdivisionCode: dataMap.state,
+            serviceLocationCountryCode: dataMap.country,
+            serviceLocationPostalCode: dataMap.postalCode
         }
     };
 
     try {
         console.log('🔎 Payload enviado a Niubiz:', JSON.stringify(authorizationPayload, null, 2));
-        console.log('🔎 URL de autorización:', authorizationUrl);
-        console.log('🔎 Token:', token);
 
         const response = await axios.post(
             authorizationUrl,
