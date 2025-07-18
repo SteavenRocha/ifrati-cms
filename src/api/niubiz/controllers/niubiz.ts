@@ -26,9 +26,6 @@ export default {
         return ctx.badRequest('Valores "amount", "mdd" y "cardDataMap" son requeridos.');
       }
 
-      // AMOUNT PARSEADO A DOS DECIMALES
-      const decimalAmount = parseFloat(parseFloat(amount).toFixed(2));
-
       // OBTENER EL CHANNEL Y MERCHANTID
       const config = strapi.config.get('niubiz') as {
         merchantId: string;
@@ -43,7 +40,7 @@ export default {
 
       // EJECUCION DE LAS FUNCIONES
       const token = await generateSecurityToken();
-      const sessionKeyData = await generateSessionKey(token, String(amount), String(clientIp), mdd, cardDataMap);
+      const sessionKeyData = await generateSessionKey(token, Number(amount).toFixed(2), String(clientIp), mdd, cardDataMap);  // el amount lo envia como string "10.00"
 
       // DEESTRUCTURAMOS PARA ENVIAR DATOS PLANOS
       const { sessionKey, expirationTime } = sessionKeyData;
@@ -56,7 +53,7 @@ export default {
         expirationTime,
         merchantId: config.merchantId,
         channel: config.channel,
-        decimalAmount,
+        amount,
         purchaseNumber
       };
 
@@ -76,7 +73,7 @@ export default {
       }
 
       const token = await generateSecurityToken();
-      const authorization = await generateAuthorization(token, String(amount), String(purchaseNumber), String(tokenId), locationDataMap
+      const authorization = await generateAuthorization(token, Number(amount).toFixed(2), String(purchaseNumber), String(tokenId), locationDataMap // el amount lo envia como string "10.00"
       );
 
       ctx.send({ authorization });

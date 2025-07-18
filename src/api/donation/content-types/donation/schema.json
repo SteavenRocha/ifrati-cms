@@ -11,35 +11,125 @@
   },
   "pluginOptions": {},
   "attributes": {
+    "purchaseNumber": {
+      "type": "string",
+      "minLength": 1,
+      "required": true
+    },
+    "productDescription": {
+      "type": "string",
+      "minLength": 1,
+      "required": true
+    },
     "donationType": {
       "type": "string",
+      "minLength": 1,
       "required": true
-    },
-    "donationForm": {
-      "type": "string",
-      "required": true
-    },
-    "donor": {
-      "type": "string"
-    },
-    "email": {
-      "type": "email"
-    },
-    "phone": {
-      "type": "string"
     },
     "frequency": {
       "type": "string",
+      "minLength": 1,
       "required": true
     },
-    "amount": {
-      "type": "decimal",
+    "documentType": {
+      "type": "string",
+      "minLength": 1,
+      "required": true
+    },
+    "documentNumber": {
+      "type": "string",
+      "minLength": 1,
+      "required": true
+    },
+    "type": {
+      "type": "string",
+      "minLength": 1,
+      "required": true
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "required": true
+    },
+    "lastName": {
+      "type": "string",
+      "minLength": 1,
+      "required": true
+    },
+    "email": {
+      "type": "email",
+      "required": true,
+      "minLength": 1
+    },
+    "phone": {
+      "type": "string",
+      "minLength": 1,
       "required": true
     },
     "goal": {
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::goal.goal"
+    },
+    "amount": {
+      "type": "decimal",
+      "required": true,
+      "min": 0
+    },
+    "currency": {
+      "type": "string",
+      "minLength": 1,
+      "required": true
+    },
+    "card": {
+      "type": "string",
+      "minLength": 1,
+      "required": false
+    },
+    "brand": {
+      "type": "string",
+      "minLength": 1,
+      "required": false
+    },
+    "transactionDate": {
+      "type": "string",
+      "minLength": 1,
+      "required": false
+    },
+    "country": {
+      "type": "string",
+      "minLength": 1,
+      "required": true
+    },
+    "state": {
+      "type": "string",
+      "minLength": 1,
+      "required": true
+    },
+    "city": {
+      "type": "string",
+      "minLength": 1,
+      "required": true
+    },
+    "address": {
+      "type": "string",
+      "minLength": 1,
+      "required": true
+    },
+    "postalCode": {
+      "type": "string",
+      "minLength": 1,
+      "required": true
+    },
+    "transactionStatus": {
+      "type": "string",
+      "minLength": 1,
+      "required": false
+    },
+    "actionDescription": {
+      "type": "string",
+      "minLength": 1,
+      "required": false
     }
   }
 }

@@ -84,7 +84,7 @@ export const generateSecurityToken = async () => {
 
 export const generateSessionKey = async (
     token: string,
-    amount: string,
+    amount: string, // recibo un string "10.00" -> ¿ Puede ser Number?
     clientIp: string,
     mdd: MDD,
     dataMap: cardDataMap
@@ -97,7 +97,7 @@ export const generateSessionKey = async (
 
     const sessionPayload = {
         channel,
-        amount: parseFloat(parseFloat(amount).toFixed(2)),
+        amount,
         antifraud: {
             clientIp,
             merchantDefineData: {
@@ -144,7 +144,7 @@ export const generateAuthorization = async (token: string, amount: string, purch
         channel,
         countable: true, // TRUE PARA LIQUIDACION AUTOMATICA
         order: {
-            amount: parseFloat(parseFloat(amount).toFixed(2)),
+            amount,
             currency: "PEN",
             purchaseNumber,
             tokenId
