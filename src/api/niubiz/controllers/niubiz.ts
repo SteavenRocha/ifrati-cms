@@ -73,8 +73,7 @@ export default {
       }
 
       const token = await generateSecurityToken();
-      const authorization = await generateAuthorization(token, Number(amount).toFixed(2), String(purchaseNumber), String(tokenId), locationDataMap // el amount lo envia como string "10.00"
-      );
+      const authorization = await generateAuthorization(token, Number(amount).toFixed(2), String(purchaseNumber), String(tokenId), locationDataMap); // el amount lo envia como string "10.00"
 
       ctx.send({ authorization });
 
@@ -87,7 +86,7 @@ export default {
 
       ctx.status = 500;
       ctx.body = {
-        message: 'Error generando información de autorización',
+        message: 'errorGetAuthorization',
         error: errorData,
       };
     }

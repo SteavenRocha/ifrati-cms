@@ -267,24 +267,43 @@ module.exports = {
     },
 
     async submitGeneralDonationEmail(ctx) {
-        const { name, email, amount, title, description, aditional, transaction, type } = ctx.request.body
+        const { type, transactionData, impactData } = ctx.request.body
 
-        if (!type || !name || !email || !amount || !title || !description || !aditional || !transaction) {
+        if (!type || !transactionData || !impactData) {
             return ctx.badRequest('Faltan datos requeridos')
         }
 
-        const fecha = new Intl.DateTimeFormat('es-PE', {
-            dateStyle: 'long',
-            timeStyle: 'short',
-            timeZone: 'America/Lima',
-        }).format(new Date())
+        const amount = Number(transactionData.amount).toFixed(2)
 
-        const rows = aditional.map(item => `
-            <td width="50%" valign="top" style="padding-right: 10px;">
-                <p style="margin: 0; font-weight: bold;">${item.title}</p>
-                <p style="margin-top: 5px;">${item.description}</p>
-            </td>
-        `).join('')
+        const rawDate = transactionData.date // "250718192144"
+        let formattedDate = 'Fecha inválida'
+
+        if (rawDate) {
+            const year = parseInt(rawDate.slice(0, 2), 10) + 2000
+            const month = parseInt(rawDate.slice(2, 4), 10) - 1
+            const day = parseInt(rawDate.slice(4, 6), 10)
+            const hour = rawDate.slice(6, 8)
+            const minute = rawDate.slice(8, 10)
+
+            const meses = [
+                'enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio',
+                'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'
+            ]
+
+            formattedDate = `${day} de ${meses[month]} del ${year}, ${hour}:${minute}`
+        }
+
+        let rows = ''
+        const hasImpactContent = (Array.isArray(impactData.sanitizedDetails) && impactData.sanitizedDetails.length > 0)
+
+        if (hasImpactContent) {
+            rows = (impactData.sanitizedDetails || []).map(item => `
+                <td width="50%" valign="top" style="padding-right: 10px;">
+                    <p style="margin: 0; font-weight: bold;">${item.title}</p>
+                    <p style="margin-top: 5px;">${item.description}</p>
+                </td>
+            `).join('')
+        }
 
         // Enviar correo al admin
         await strapi.plugin('email').service('email').send({
@@ -335,22 +354,22 @@ module.exports = {
                                                 <tr>
                                                     <td width="50%" valign="top" style="padding-right: 10px;">
                                                         <p style="margin: 0; font-weight: bold;">Donante</p>
-                                                        <p style="margin-top: 5px;">${name}</p>
+                                                        <p style="margin-top: 5px;">${transactionData.name}</p>
                                                     </td>
                                                     <td width="50%" valign="top" style="padding-left: 10px;">
                                                         <p style="margin: 0; font-weight: bold;">Monto donado</p>
-                                                        <p style="margin-top: 5px;">${amount}</p>
+                                                        <p style="margin-top: 5px;">${amount} ${transactionData.currency}</p>
                                                     </td>
                                                 </tr>
 
                                                 <tr>
                                                     <td width="50%" valign="top" style="padding-right: 10px;">
                                                         <p style="margin: 0; font-weight: bold;">Correo electrónico</p>
-                                                        <p style="margin-top: 5px;">${email}</p>
+                                                        <p style="margin-top: 5px;">${transactionData.email}</p>
                                                     </td>
                                                     <td width="50%" valign="top" style="padding-left: 10px;">
                                                         <p style="margin: 0; font-weight: bold;">Fecha y hora</p>
-                                                        <p style="margin-top: 5px;">${fecha}</p>
+                                                        <p style="margin-top: 5px;">${formattedDate}</p>
                                                     </td>
                                                 </tr>
 
@@ -364,7 +383,7 @@ module.exports = {
                                                             <!-- Estado -->
                                                             <tr>
                                                                 <td width="100%" valign="top" style="padding: 5px 0;">
-                                                                    <p style="margin: 0;"><strong>Estado:</strong> ${transaction.state}
+                                                                    <p style="margin: 0;"><strong>Estado:</strong> ${transactionData.status}
                                                                     </p>
                                                                 </td>
                                                             </tr>
@@ -373,7 +392,7 @@ module.exports = {
                                                             <tr>
                                                                 <td width="100%" valign="top" style="padding: 5px 0;">
                                                                     <p style="margin: 0;"><strong>Número de pedido:</strong>
-                                                                        ${transaction.number}</p>
+                                                                        ${transactionData.purchaseNumber}</p>
                                                                 </td>
                                                             </tr>
 
@@ -381,15 +400,15 @@ module.exports = {
                                                             <tr>
                                                                 <td width="100%" valign="top" style="padding: 5px 0;">
                                                                     <p style="margin: 0;"><strong>Fecha y hora del pedido:</strong>
-                                                                        ${fecha}</p>
+                                                                        ${formattedDate}</p>
                                                                 </td>
                                                             </tr>
 
-                                                            <!-- Tarjeta -->
+                                                            <!-- Donante -->
                                                             <tr>
                                                                 <td width="100%" valign="top" style="padding: 5px 0;">
-                                                                    <p style="margin: 0;"><strong>Tarjeta:</strong> ${transaction.card}
-                                                                    </p>
+                                                                    <p style="margin: 0;"><strong>Donante:</strong>
+                                                                        ${transactionData.name}</p>
                                                                 </td>
                                                             </tr>
 
@@ -397,7 +416,15 @@ module.exports = {
                                                             <tr>
                                                                 <td width="100%" valign="top" style="padding: 5px 0;">
                                                                     <p style="margin: 0;"><strong>Importe de la transacción:</strong>
-                                                                        ${amount}</p>
+                                                                        ${amount} ${transactionData.currency}</p>
+                                                                </td>
+                                                            </tr>
+
+                                                            <!-- Tarjeta -->
+                                                            <tr>
+                                                                <td width="100%" valign="top" style="padding: 5px 0;">
+                                                                    <p style="margin: 0;"><strong>Tarjeta:</strong> ${transactionData.card} ${transactionData.brand}
+                                                                    </p>
                                                                 </td>
                                                             </tr>
 
@@ -405,7 +432,7 @@ module.exports = {
                                                             <tr>
                                                                 <td width="100%" valign="top" style="padding: 5px 0;">
                                                                     <p style="margin: 0;"><strong>Descripción del producto:</strong>
-                                                                        ${title}</p>
+                                                                        ${transactionData.productDescription}</p>
                                                                 </td>
                                                             </tr>
                                                         </table>
@@ -461,7 +488,7 @@ module.exports = {
 
         // Enviar confirmación al usuario
         await strapi.plugin('email').service('email').send({
-            to: email,
+            to: transactionData.email,
             subject: 'Gracias por tu donación',
             html: `
                 <html lang="es">
@@ -498,16 +525,16 @@ module.exports = {
                                                 style="padding: 10px 20px; font-size: 16px;">
                                                 <tr>
                                                     <td>
-                                                        <p>Querido/a <strong>${name || 'Usuario'}</strong>,</p>
+                                                        <p>Querido/a <strong>${transactionData.name || 'Usuario'}</strong>,</p>
                                                         <p>Desde <strong>IFRATI</strong> queremos expresarte nuestro más sincero
                                                             agradecimiento por tu donación realizada el
-                                                            <strong>${fecha}</strong> a través de nuestra pagina web.
+                                                            <strong>${formattedDate}</strong> a través de nuestra pagina web.
                                                         </p>
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td>
-                                                        <p>Tu contribución nos permite continuar con nuestra misión.
+                                                        <p style="margin: 0;">Tu contribución nos permite continuar con nuestra misión.
                                                             Gracias a personas como tú, podemos seguir impactando positivamente en la
                                                             vida de nuestros jovenes.</p>
                                                     </td>
@@ -518,7 +545,7 @@ module.exports = {
                                                 <tr>
                                                     <td style="padding: 15px; background-color: #F9FAFB; border-radius: 5px;">
                                                         <p style="font-weight: bold;">Tu contribucion:</p>
-                                                        <h3 style="font-weight: bold;">${amount} PEN</h3>
+                                                        <h3 style="font-weight: bold;">${amount} ${transactionData.currency}</h3>
                                                     </td>
                                                 </tr>
 
@@ -535,17 +562,15 @@ module.exports = {
                                                             <!-- Fila: Descripción del impacto -->
                                                             <tr>
                                                                 <td colspan="2" valign="top" style="padding-bottom: 15px;">
-                                                                    <p style="margin: 0 0 8px 0; font-weight: bold;">${title}</p>
+                                                                    <p style="margin: 0 0 8px 0; font-weight: bold;">${impactData.title}</p>
                                                                     <p style="margin: 0;">
-                                                                        ${description}
+                                                                        ${impactData.description}
                                                                     </p>
                                                                 </td>
                                                             </tr>
 
                                                             <!-- Fila: Información adicional -->
-                                                            <tr>
-                                                                ${rows}
-                                                            </tr>
+                                                            ${rows ? `<tr>${rows}</tr>` : ''}
                                                         </table>
                                                     </td>
                                                 </tr>
@@ -556,14 +581,14 @@ module.exports = {
 
                                                 <tr>
                                                     <td style="background-color: #F9FAFB; border-radius: 5px; padding: 15px;">
-                                                        <h4>Detalles de la transacción:</h4>
+                                                        <h4 style="margin-top: 0;">Detalles de la transacción:</h4>
 
                                                         <table role="presentation" width="100%" cellpadding="0" cellspacing="0"
                                                             style="font-size: 16px;">
                                                             <!-- Estado -->
                                                             <tr>
                                                                 <td width="100%" valign="top" style="padding: 5px 0;">
-                                                                    <p style="margin: 0;"><strong>Estado:</strong> ${transaction.state}
+                                                                    <p style="margin: 0;"><strong>Estado:</strong> ${transactionData.status}
                                                                     </p>
                                                                 </td>
                                                             </tr>
@@ -572,7 +597,7 @@ module.exports = {
                                                             <tr>
                                                                 <td width="100%" valign="top" style="padding: 5px 0;">
                                                                     <p style="margin: 0;"><strong>Número de pedido:</strong>
-                                                                        ${transaction.number}</p>
+                                                                        ${transactionData.purchaseNumber}</p>
                                                                 </td>
                                                             </tr>
 
@@ -580,15 +605,15 @@ module.exports = {
                                                             <tr>
                                                                 <td width="100%" valign="top" style="padding: 5px 0;">
                                                                     <p style="margin: 0;"><strong>Fecha y hora del pedido:</strong>
-                                                                        ${fecha}</p>
+                                                                        ${formattedDate}</p>
                                                                 </td>
                                                             </tr>
 
-                                                            <!-- Tarjeta -->
+                                                            <!-- Donante -->
                                                             <tr>
                                                                 <td width="100%" valign="top" style="padding: 5px 0;">
-                                                                    <p style="margin: 0;"><strong>Tarjeta:</strong> ${transaction.card}
-                                                                    </p>
+                                                                    <p style="margin: 0;"><strong>Donante:</strong>
+                                                                        ${transactionData.name}</p>
                                                                 </td>
                                                             </tr>
 
@@ -596,7 +621,15 @@ module.exports = {
                                                             <tr>
                                                                 <td width="100%" valign="top" style="padding: 5px 0;">
                                                                     <p style="margin: 0;"><strong>Importe de la transacción:</strong>
-                                                                        ${amount}</p>
+                                                                        ${amount} ${transactionData.currency}</p>
+                                                                </td>
+                                                            </tr>
+
+                                                            <!-- Tarjeta -->
+                                                            <tr>
+                                                                <td width="100%" valign="top" style="padding: 5px 0;">
+                                                                    <p style="margin: 0;"><strong>Tarjeta:</strong> ${transactionData.card} ${transactionData.brand}
+                                                                    </p>
                                                                 </td>
                                                             </tr>
 
@@ -604,11 +637,10 @@ module.exports = {
                                                             <tr>
                                                                 <td width="100%" valign="top" style="padding: 5px 0;">
                                                                     <p style="margin: 0;"><strong>Descripción del producto:</strong>
-                                                                        ${title}</p>
+                                                                        ${transactionData.productDescription}</p>
                                                                 </td>
                                                             </tr>
                                                         </table>
-
                                                     </td>
                                                 </tr>
 
@@ -668,17 +700,38 @@ module.exports = {
     },
 
     async submitGoalDonationEmail(ctx) {
-        const { name, email, amount, title, percentage, collected, goal, transaction, type } = ctx.request.body
+        const { type, transactionData, impactData } = ctx.request.body
 
-        if (!type || !name || !email || !amount || !title || !transaction || !percentage || !collected || !goal) {
+        if (!type || !transactionData || !impactData) {
             return ctx.badRequest('Faltan datos requeridos')
         }
 
-        const fecha = new Intl.DateTimeFormat('es-PE', {
-            dateStyle: 'long',
-            timeStyle: 'short',
-            timeZone: 'America/Lima',
-        }).format(new Date())
+        const rawDate = transactionData.date // "250718192144"
+        let formattedDate = 'Fecha inválida'
+
+        if (rawDate) {
+            const year = parseInt(rawDate.slice(0, 2), 10) + 2000
+            const month = parseInt(rawDate.slice(2, 4), 10) - 1
+            const day = parseInt(rawDate.slice(4, 6), 10)
+            const hour = rawDate.slice(6, 8)
+            const minute = rawDate.slice(8, 10)
+
+            const meses = [
+                'enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio',
+                'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'
+            ]
+
+            formattedDate = `${day} de ${meses[month]} del ${year}, ${hour}:${minute}`
+        }
+
+        const amount = Number(transactionData.amount)
+        const amount__ = Number(transactionData.amount).toFixed(2)
+        const goal = Number(impactData.goal)
+        const collected = Number(impactData.collected)
+        const newCollected = Number(collected + amount)
+
+        const percentage = (goal && newCollected) ? (newCollected / goal) * 100 : 0
+        const advencePercentage = (goal && amount) ? (amount / goal) * 100 : 0
 
         // Enviar correo al admin
         await strapi.plugin('email').service('email').send({
@@ -729,22 +782,22 @@ module.exports = {
                                                 <tr>
                                                     <td width="50%" valign="top" style="padding-right: 10px;">
                                                         <p style="margin: 0; font-weight: bold;">Donante</p>
-                                                        <p style="margin-top: 5px;">${name}</p>
+                                                        <p style="margin-top: 5px;">${transactionData.name}</p>
                                                     </td>
                                                     <td width="50%" valign="top" style="padding-left: 10px;">
                                                         <p style="margin: 0; font-weight: bold;">Monto donado</p>
-                                                        <p style="margin-top: 5px;">${amount}</p>
+                                                        <p style="margin-top: 5px;">${amount__} ${transactionData.currency}</p>
                                                     </td>
                                                 </tr>
 
                                                 <tr>
                                                     <td width="50%" valign="top" style="padding-right: 10px;">
                                                         <p style="margin: 0; font-weight: bold;">Correo electrónico</p>
-                                                        <p style="margin-top: 5px;">${email}</p>
+                                                        <p style="margin-top: 5px;">${transactionData.email}</p>
                                                     </td>
                                                     <td width="50%" valign="top" style="padding-left: 10px;">
                                                         <p style="margin: 0; font-weight: bold;">Fecha y hora</p>
-                                                        <p style="margin-top: 5px;">${fecha}</p>
+                                                        <p style="margin-top: 5px;">${formattedDate}</p>
                                                     </td>
                                                 </tr>
 
@@ -753,7 +806,7 @@ module.exports = {
                                                         style="background-color: #F9FAFB; border-radius: 5px; padding: 15px; width: 100%;">
                                                         <p style="margin: 0; font-size: 16px; font-weight: bold;">
                                                             Progreso hacia nuestra meta:
-                                                            <span style="font-weight: normal;"> ${title}</span>
+                                                            <span style="font-weight: normal;"> ${impactData.title}</span>
                                                         </p>
 
                                                         <!-- Progress container -->
@@ -761,7 +814,7 @@ module.exports = {
                                                             style="font-family: Arial, sans-serif;">
                                                             <tr>
                                                                 <td>
-                                                                    <p style="margin: 0 0 8px 0; font-weight: bold;">${percentage}%
+                                                                    <p style="margin: 8px 0; font-weight: bold;">${percentage}%
                                                                         completado</p>
 
                                                                     <!-- Barra de progreso -->
@@ -781,7 +834,7 @@ module.exports = {
 
                                                                     <!-- Texto debajo de la barra -->
                                                                     <p style="margin-top: 10px; font-size: 14px;">
-                                                                        <strong>${collected} S/.</strong> de <strong>${goal}
+                                                                        <strong>${newCollected} S/.</strong> de <strong>${goal}
                                                                             S/.</strong> recaudado
                                                                     </p>
                                                                 </td>
@@ -804,7 +857,7 @@ module.exports = {
                                                             <!-- Estado -->
                                                             <tr>
                                                                 <td width="100%" valign="top" style="padding: 5px 0;">
-                                                                    <p style="margin: 0;"><strong>Estado:</strong> ${transaction.state}
+                                                                    <p style="margin: 0;"><strong>Estado:</strong> ${transactionData.status}
                                                                     </p>
                                                                 </td>
                                                             </tr>
@@ -813,7 +866,7 @@ module.exports = {
                                                             <tr>
                                                                 <td width="100%" valign="top" style="padding: 5px 0;">
                                                                     <p style="margin: 0;"><strong>Número de pedido:</strong>
-                                                                        ${transaction.number}</p>
+                                                                        ${transactionData.purchaseNumber}</p>
                                                                 </td>
                                                             </tr>
 
@@ -821,14 +874,21 @@ module.exports = {
                                                             <tr>
                                                                 <td width="100%" valign="top" style="padding: 5px 0;">
                                                                     <p style="margin: 0;"><strong>Fecha y hora del pedido:</strong>
-                                                                        ${fecha}</p>
+                                                                        ${formattedDate}</p>
+                                                                </td>
+                                                            </tr>
+
+                                                            <tr>
+                                                                <td width="100%" valign="top" style="padding: 5px 0;">
+                                                                    <p style="margin: 0;"><strong>Donante:</strong>
+                                                                        ${transactionData.name}</p>
                                                                 </td>
                                                             </tr>
 
                                                             <!-- Tarjeta -->
                                                             <tr>
                                                                 <td width="100%" valign="top" style="padding: 5px 0;">
-                                                                    <p style="margin: 0;"><strong>Tarjeta:</strong> ${transaction.card}
+                                                                    <p style="margin: 0;"><strong>Tarjeta:</strong> ${transactionData.card} ${transactionData.brand}
                                                                     </p>
                                                                 </td>
                                                             </tr>
@@ -837,7 +897,7 @@ module.exports = {
                                                             <tr>
                                                                 <td width="100%" valign="top" style="padding: 5px 0;">
                                                                     <p style="margin: 0;"><strong>Importe de la transacción:</strong>
-                                                                        ${amount}</p>
+                                                                        ${amount__} ${transactionData.currency}</p>
                                                                 </td>
                                                             </tr>
 
@@ -845,7 +905,7 @@ module.exports = {
                                                             <tr>
                                                                 <td width="100%" valign="top" style="padding: 5px 0;">
                                                                     <p style="margin: 0;"><strong>Descripción del producto:</strong>
-                                                                        ${title}</p>
+                                                                        ${transactionData.productDescription}</p>
                                                                 </td>
                                                             </tr>
                                                         </table>
@@ -901,7 +961,7 @@ module.exports = {
 
         // Enviar confirmación al usuario
         await strapi.plugin('email').service('email').send({
-            to: email,
+            to: transactionData.email,
             subject: 'Gracias por tu donación',
             html: `
                 <html lang="es">
@@ -938,17 +998,17 @@ module.exports = {
                                                 style="padding: 10px 20px; font-size: 16px;">
                                                 <tr>
                                                     <td>
-                                                        <p>Querido/a <strong>${name || 'Usuario'}</strong>,</p>
+                                                        <p>Querido/a <strong>${transactionData.name || 'Usuario'}</strong>,</p>
                                                         <p>Desde <strong>IFRATI</strong> queremos expresarte nuestro más sincero
                                                             agradecimiento por tu donación realizada el
-                                                            <strong>${fecha}</strong> a través de nuestra pagina web.
+                                                            <strong>${formattedDate}</strong> a través de nuestra pagina web.
                                                         </p>
                                                     </td>
                                                 </tr>
 
                                                 <tr>
                                                     <td>
-                                                        <p>Tu contribución nos permite continuar con nuestra misión.
+                                                        <p style="margin: 0;">Tu contribución nos permite continuar con nuestra misión.
                                                             Gracias a personas como tú, podemos seguir impactando positivamente en la
                                                             vida de nuestros jovenes.</p>
                                                     </td>
@@ -959,24 +1019,19 @@ module.exports = {
                                                 <tr>
                                                     <td style="padding: 15px; background-color: #F9FAFB; border-radius: 5px;">
                                                         <p style="font-weight: bold;">Meta especifica:</p>
-                                                        <h3 style="font-weight: bold;">${title}</h3>
+                                                        <h3 style="font-weight: bold;">${impactData.title}</h3>
                                                     </td>
                                                 </tr>
+
                                                 <tr>
                                                     <td colspan="2" style="height: 20px;"></td>
-                                                </tr>
-                                                <tr>
-                                                    <td style="padding: 15px; background-color: #F9FAFB; border-radius: 5px;">
-                                                        <p style="font-weight: bold;">Tu contribucion:</p>
-                                                        <h3 style="font-weight: bold;">${amount} PEN</h3>
-                                                    </td>
                                                 </tr>
 
                                                 <tr>
                                                     <td style="background-color: #F9FAFB; border-radius: 5px; padding: 15px;">
                                                         <p style="margin-top: 0; font-size: 16px; font-weight: bold;">
                                                             Progreso hacia nuestra meta:
-                                                            <span style="font-weight: normal;"> ${title}</span>
+                                                            <span style="font-weight: normal;"> ${impactData.title}</span>
                                                         </p>
 
                                                         <!-- Progress container -->
@@ -1002,12 +1057,25 @@ module.exports = {
                                                                     </table>
 
                                                                     <p style="margin-top: 10px; font-size: 14px;">
-                                                                        <strong>${collected} S/.</strong> de <strong>${goal}
+                                                                        <strong>${newCollected} S/.</strong> de <strong>${goal}
                                                                             S/.</strong> recaudado
                                                                     </p>
                                                                 </td>
                                                             </tr>
                                                         </table>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td colspan="2" style="height: 20px;"></td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td style="padding: 15px; background-color: #F9FAFB; border-radius: 5px;">
+                                                    <p style="font-weight: bold;">Tu contribucion:</p>
+                                                    <h3>Gracias a tu donacion de <strong>${amount__}
+                                                        ${transactionData.currency}</strong> estamos un <strong>${advencePercentage}%</strong> mas cerca
+                                                        de nuestra meta.</h3>
                                                     </td>
                                                 </tr>
 
@@ -1024,7 +1092,7 @@ module.exports = {
                                                             <!-- Estado -->
                                                             <tr>
                                                                 <td width="100%" valign="top" style="padding: 5px 0;">
-                                                                    <p style="margin: 0;"><strong>Estado:</strong> ${transaction.state}
+                                                                    <p style="margin: 0;"><strong>Estado:</strong> ${transactionData.status}
                                                                     </p>
                                                                 </td>
                                                             </tr>
@@ -1033,7 +1101,7 @@ module.exports = {
                                                             <tr>
                                                                 <td width="100%" valign="top" style="padding: 5px 0;">
                                                                     <p style="margin: 0;"><strong>Número de pedido:</strong>
-                                                                        ${transaction.number}</p>
+                                                                        ${transactionData.purchaseNumber}</p>
                                                                 </td>
                                                             </tr>
 
@@ -1041,14 +1109,21 @@ module.exports = {
                                                             <tr>
                                                                 <td width="100%" valign="top" style="padding: 5px 0;">
                                                                     <p style="margin: 0;"><strong>Fecha y hora del pedido:</strong>
-                                                                        ${fecha}</p>
+                                                                        ${formattedDate}</p>
+                                                                </td>
+                                                            </tr>
+
+                                                            <tr>
+                                                                <td width="100%" valign="top" style="padding: 5px 0;">
+                                                                    <p style="margin: 0;"><strong>Donante:</strong>
+                                                                        ${transactionData.name}</p>
                                                                 </td>
                                                             </tr>
 
                                                             <!-- Tarjeta -->
                                                             <tr>
                                                                 <td width="100%" valign="top" style="padding: 5px 0;">
-                                                                    <p style="margin: 0;"><strong>Tarjeta:</strong> ${transaction.card}
+                                                                    <p style="margin: 0;"><strong>Tarjeta:</strong> ${transactionData.card} ${transactionData.brand}
                                                                     </p>
                                                                 </td>
                                                             </tr>
@@ -1057,7 +1132,7 @@ module.exports = {
                                                             <tr>
                                                                 <td width="100%" valign="top" style="padding: 5px 0;">
                                                                     <p style="margin: 0;"><strong>Importe de la transacción:</strong>
-                                                                        ${amount}</p>
+                                                                        ${amount__} ${transactionData.currency}</p>
                                                                 </td>
                                                             </tr>
 
@@ -1065,7 +1140,7 @@ module.exports = {
                                                             <tr>
                                                                 <td width="100%" valign="top" style="padding: 5px 0;">
                                                                     <p style="margin: 0;"><strong>Descripción del producto:</strong>
-                                                                        ${title}</p>
+                                                                        ${transactionData.productDescription}</p>
                                                                 </td>
                                                             </tr>
                                                         </table>
@@ -1157,7 +1232,7 @@ module.exports = {
                                         <td align="center" style="padding: 20px;">
                                             <div
                                                 style="background-color: #9333EA; border-radius: 50%; padding: 10px; display: inline-block;">
-                                                <img src="https://api.ifrati.org.pe/uploads/Healthicons_Dollar_15dd034ceb.png"
+                                                <img src="https://api.ifrati.org.pe/uploads/Material_Symbols_Order_Approve_Outline_e009684464.png"
                                                     alt="Mail icon" width="40" height="40" style="display: block;">
                                             </div>
                                         </td>
@@ -1314,7 +1389,7 @@ module.exports = {
                                         <td align="center" style="padding: 20px;">
                                             <div
                                                 style="background-color: #9333EA; border-radius: 50%; padding: 10px; display: inline-block;">
-                                                <img src="https://api.ifrati.org.pe/uploads/Healthicons_Dollar_15dd034ceb.png"
+                                                <img src="https://api.ifrati.org.pe/uploads/Material_Symbols_Order_Approve_Outline_e009684464.png"
                                                     alt="Mail icon" width="40" height="40" style="display: block;">
                                             </div>
                                         </td>
@@ -1463,10 +1538,7 @@ module.exports = {
                                     <!-- FOOTER -->
                                     <tr>
                                         <td align="center" style="font-size: 14px; color: #4B5563; padding-top: 20px;">
-                                            <p style="margin: 0;"><strong>Recordatorio:</strong> El tiempo de respuesta objetivo es de
-                                                24-48 horas hábiles.</p>
-                                            <p style="margin: 0;">Este correo fue enviado automáticamente desde el sistema de
-                                                formularios de voluntariado.</p>
+                                            <p style="margin: 0;">Este es un mensaje automático, por favor no respondas a este correo.</p>
                                             <p style="margin: 5px 0;">© 2025 <strong>IFRATI.</strong> Todos los derechos reservados.</p>
 
                                             <table role="presentation" cellpadding="0" cellspacing="0" style="margin: 10px auto;">
