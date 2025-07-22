@@ -90,7 +90,7 @@ export const generateSessionKey = async (
     dataMap: cardDataMap
 ): Promise<{ sessionKey: string; expirationTime: number }> => {
 
-    console.log('📥 Datos recibidos en generateSessionKey → dataMap:', dataMap);
+  /*   console.log('📥 Datos recibidos en generateSessionKey → dataMap:', dataMap); */
 
     const sessionUrl = `${config.urlSession}/${config.merchantId}`;
     const channel = config.channel;
@@ -117,7 +117,7 @@ export const generateSessionKey = async (
         },
     };
 
-    console.log('🔎 Payload enviado a Niubiz:', JSON.stringify(sessionPayload, null, 2));
+   /*  console.log('🔎 Payload enviado a Niubiz:', JSON.stringify(sessionPayload, null, 2)); */
 
     try {
         const response = await axios.post(sessionUrl, sessionPayload, {
@@ -160,7 +160,7 @@ export const generateAuthorization = async (token: string, amount: string, purch
     };
 
     try {
-        console.log('🔎 Payload enviado a Niubiz:', JSON.stringify(authorizationPayload, null, 2));
+       /*  console.log('🔎 Payload enviado a Niubiz:', JSON.stringify(authorizationPayload, null, 2)); */
 
         const response = await axios.post(
             authorizationUrl,
