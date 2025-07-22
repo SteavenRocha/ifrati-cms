@@ -33,7 +33,7 @@ module.exports = {
                                         <td align="center" style="padding: 20px;">
                                             <div
                                                 style="background-color: #DC6722; border-radius: 50%; padding: 10px; display: inline-block;">
-                                                <img src="https://api.ifrati.org.pe/uploads/Material_Symbols_Info_38f71ea0fb.png"
+                                                <img src="https://api.ifrati.org.pe/uploads/Material_Symbols_Info_0f8815908f.png"
                                                     alt="Mail icon" width="40" height="40" style="display: block;">
                                             </div>
                                         </td>
@@ -170,7 +170,7 @@ module.exports = {
                                         <td align="center" style="padding: 20px;">
                                             <div
                                                 style="background-color: #DC6722; border-radius: 50%; padding: 10px; display: inline-block;">
-                                                <img src="https://api.ifrati.org.pe/uploads/Mdi_Email_5c68617875.png" alt="Mail icon"
+                                                <img src="https://api.ifrati.org.pe/uploads/Material_Symbols_Info_0f8815908f.png" alt="Mail icon"
                                                     width="40" height="40" style="display: block;">
                                             </div>
                                         </td>
@@ -321,7 +321,7 @@ module.exports = {
                                         <td align="center" style="padding: 20px;">
                                             <div
                                                 style="background-color: #EF4444; border-radius: 50%; padding: 10px; display: inline-block;">
-                                                <img src="https://api.ifrati.org.pe/uploads/Healthicons_Dollar_15dd034ceb.png"
+                                                <img src="https://api.ifrati.org.pe/uploads/Tabler_Heart_Dollar_ab883fc945.png"
                                                     alt="Mail icon" width="40" height="40" style="display: block;">
                                             </div>
                                         </td>
@@ -494,7 +494,7 @@ module.exports = {
                                         <td align="center" style="padding: 20px;">
                                             <div
                                                 style="background-color: #EF4444; border-radius: 50%; padding: 10px; display: inline-block;">
-                                                <img src="https://api.ifrati.org.pe/uploads/Mdi_Heart_47e52419d3.png" alt="Mail icon"
+                                                <img src="https://api.ifrati.org.pe/uploads/Mdi_Heart_6fe7e1edd9.png" alt="Mail icon"
                                                     width="40" height="40" style="display: block;">
                                             </div>
                                         </td>
@@ -734,7 +734,7 @@ module.exports = {
                                         <td align="center" style="padding: 20px;">
                                             <div
                                                 style="background-color: #EF4444; border-radius: 50%; padding: 10px; display: inline-block;">
-                                                <img src="https://api.ifrati.org.pe/uploads/Healthicons_Dollar_15dd034ceb.png"
+                                                <img src="https://api.ifrati.org.pe/uploads/Tabler_Heart_Dollar_ab883fc945.png"
                                                     alt="Mail icon" width="40" height="40" style="display: block;">
                                             </div>
                                         </td>
@@ -953,7 +953,7 @@ module.exports = {
                                         <td align="center" style="padding: 20px;">
                                             <div
                                                 style="background-color: #EF4444; border-radius: 50%; padding: 10px; display: inline-block;">
-                                                <img src="https://api.ifrati.org.pe/uploads/Mdi_Heart_47e52419d3.png" alt="Mail icon"
+                                                <img src="https://api.ifrati.org.pe/uploads/Mdi_Heart_6fe7e1edd9.png" alt="Mail icon"
                                                     width="40" height="40" style="display: block;">
                                             </div>
                                         </td>
@@ -1203,7 +1203,7 @@ module.exports = {
                                         <td align="center" style="padding: 20px;">
                                             <div
                                                 style="background-color: #9333EA; border-radius: 50%; padding: 10px; display: inline-block;">
-                                                <img src="https://api.ifrati.org.pe/uploads/Material_Symbols_Order_Approve_Outline_e009684464.png"
+                                                <img src="https://api.ifrati.org.pe/uploads/Fluent_Mdl2_Nonprofit_Logo32_cd875416a9.png"
                                                     alt="Mail icon" width="40" height="40" style="display: block;">
                                             </div>
                                         </td>
@@ -1360,7 +1360,7 @@ module.exports = {
                                         <td align="center" style="padding: 20px;">
                                             <div
                                                 style="background-color: #9333EA; border-radius: 50%; padding: 10px; display: inline-block;">
-                                                <img src="https://api.ifrati.org.pe/uploads/Material_Symbols_Order_Approve_Outline_e009684464.png"
+                                                <img src="https://api.ifrati.org.pe/uploads/Fluent_Mdl2_Nonprofit_Logo32_cd875416a9.png"
                                                     alt="Mail icon" width="40" height="40" style="display: block;">
                                             </div>
                                         </td>
@@ -1575,7 +1575,7 @@ module.exports = {
                                         <td align="center" style="padding: 20px;">
                                             <div
                                                 style="background-color: #DC6722; border-radius: 50%; padding: 10px; display: inline-block;">
-                                                <img src="https://api.ifrati.org.pe/uploads/Material_Symbols_Info_38f71ea0fb.png"
+                                                <img src="https://api.ifrati.org.pe/uploads/Material_Symbols_Book2_28cd573936.png"
                                                     alt="Mail icon" width="40" height="40" style="display: block;">
                                             </div>
                                         </td>
@@ -1750,7 +1750,7 @@ module.exports = {
                                         <td align="center" style="padding: 20px;">
                                             <div
                                                 style="background-color: #DC6722; border-radius: 50%; padding: 10px; display: inline-block;">
-                                                <img src="https://api.ifrati.org.pe/uploads/Mdi_Email_5c68617875.png" alt="Mail icon"
+                                                <img src="https://api.ifrati.org.pe/uploads/Material_Symbols_Book2_28cd573936.png" alt="Mail icon"
                                                     width="40" height="40" style="display: block;">
                                             </div>
                                         </td>
