@@ -36,5 +36,14 @@ export default {
         middlewares: [],
       }, */
     },
+    {
+      method: 'POST',
+      path: '/email/submitBookEmail',
+      handler: 'email.submitBookEmail',
+      /* config: {
+        policies: [],
+        middlewares: [],
+      }, */
+    },
   ],
 };
