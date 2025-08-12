@@ -24,6 +24,12 @@
     "googleMapsLink": {
       "type": "text",
       "required": true
+    },
+    "floatingWhatsApp": {
+      "type": "component",
+      "component": "component.floating-whats-app",
+      "repeatable": false,
+      "required": true
     }
   },
   "config": {}

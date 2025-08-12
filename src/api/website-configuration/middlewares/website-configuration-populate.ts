@@ -24,6 +24,13 @@ const populate = {
           },
         },
       },
+      floatingWhatsApp: {
+        populate: {
+          icon: {
+            fields: ["alternativeText", "url"],
+          },
+        },
+      }
     },
   },
   styleSettings: true,

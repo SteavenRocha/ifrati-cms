@@ -632,6 +632,31 @@ export interface ComponentCtaGoals extends Struct.ComponentSchema {
   };
 }
 
+export interface ComponentFloatingWhatsApp extends Struct.ComponentSchema {
+  collectionName: 'components_component_floating_whats_apps';
+  info: {
+    displayName: 'floatingWhatsApp';
+  };
+  attributes: {
+    href: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        minLength: 1;
+      }>;
+    icon: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
+    message: Schema.Attribute.Text &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        minLength: 1;
+      }>;
+    number: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        minLength: 1;
+      }>;
+  };
+}
+
 export interface ComponentFooter extends Struct.ComponentSchema {
   collectionName: 'components_component_footers';
   info: {
@@ -907,14 +932,7 @@ export interface ComponentImportantCard extends Struct.ComponentSchema {
         minLength: 1;
       }>;
     icon: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
-    listCard: Schema.Attribute.Component<'shared.component', true> &
-      Schema.Attribute.Required &
-      Schema.Attribute.SetMinMax<
-        {
-          min: 1;
-        },
-        number
-      >;
+    listCard: Schema.Attribute.Component<'shared.component', true>;
     title: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.SetMinMaxLength<{
@@ -1643,6 +1661,11 @@ export interface SettingsInformation extends Struct.ComponentSchema {
       Schema.Attribute.SetMinMaxLength<{
         minLength: 1;
       }>;
+    floatingWhatsApp: Schema.Attribute.Component<
+      'component.floating-whats-app',
+      false
+    > &
+      Schema.Attribute.Required;
     googleMapsLink: Schema.Attribute.Text & Schema.Attribute.Required;
     information: Schema.Attribute.Component<'shared.statistics', true> &
       Schema.Attribute.Required &
@@ -2008,6 +2031,11 @@ export interface ShopBlocksShopSection extends Struct.ComponentSchema {
   };
   attributes: {
     cardStyle: Schema.Attribute.Component<'settings.section-styles', false>;
+    message: Schema.Attribute.Text &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        minLength: 1;
+      }>;
     sectionStyle: Schema.Attribute.Component<'settings.section-styles', false>;
     subTitle: Schema.Attribute.String &
       Schema.Attribute.Required &
@@ -2057,6 +2085,7 @@ declare module '@strapi/strapi' {
       'component.contact-links': ComponentContactLinks;
       'component.cta-component': ComponentCtaComponent;
       'component.cta-goals': ComponentCtaGoals;
+      'component.floating-whats-app': ComponentFloatingWhatsApp;
       'component.footer': ComponentFooter;
       'component.footer-component': ComponentFooterComponent;
       'component.form': ComponentForm;

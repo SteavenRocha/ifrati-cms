@@ -8,28 +8,27 @@
   "attributes": {
     "listCard": {
       "type": "component",
-      "repeatable": true,
       "component": "shared.component",
-      "required": true,
-      "min": 1
+      "repeatable": true,
+      "required": false
     },
     "icon": {
-      "allowedTypes": [
-        "images"
-      ],
       "type": "media",
       "multiple": false,
-      "required": true
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
     },
     "title": {
       "type": "string",
-      "required": true,
-      "minLength": 1
+      "minLength": 1,
+      "required": true
     },
     "description": {
       "type": "text",
-      "required": true,
-      "minLength": 1
+      "minLength": 1,
+      "required": true
     }
   }
 }

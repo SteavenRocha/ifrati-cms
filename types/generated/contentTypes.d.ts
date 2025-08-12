@@ -916,6 +916,9 @@ export interface ApiProductCategoryProductCategory
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
     slug: Schema.Attribute.UID<'category'> & Schema.Attribute.Required;
+    state: Schema.Attribute.Boolean &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<true>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -956,6 +959,9 @@ export interface ApiProductProduct extends Struct.CollectionTypeSchema {
     >;
     publishedAt: Schema.Attribute.DateTime;
     slug: Schema.Attribute.UID<'title'> & Schema.Attribute.Required;
+    state: Schema.Attribute.Boolean &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<true>;
     tag: Schema.Attribute.Enumeration<['Nuevo', 'Oferta', 'Mas vendido']> &
       Schema.Attribute.Required &
       Schema.Attribute.DefaultTo<'Nuevo'>;

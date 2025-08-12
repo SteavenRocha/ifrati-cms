@@ -1,0 +1,33 @@
+{
+  "collectionName": "components_component_floating_whats_apps",
+  "info": {
+    "displayName": "floatingWhatsApp"
+  },
+  "options": {},
+  "attributes": {
+    "number": {
+      "type": "string",
+      "minLength": 1,
+      "required": true
+    },
+    "href": {
+      "type": "string",
+      "minLength": 1,
+      "required": true
+    },
+    "message": {
+      "type": "text",
+      "minLength": 1,
+      "required": true
+    },
+    "icon": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
+    }
+  },
+  "config": {}
+}

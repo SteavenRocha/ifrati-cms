@@ -10,16 +10,22 @@
   "options": {
     "draftAndPublish": true
   },
+  "pluginOptions": {},
   "attributes": {
     "category": {
       "type": "string",
-      "required": true,
-      "minLength": 1
+      "minLength": 1,
+      "required": true
     },
     "slug": {
       "type": "uid",
       "targetField": "category",
       "required": true
+    },
+    "state": {
+      "type": "boolean",
+      "required": true,
+      "default": true
     }
   }
 }
