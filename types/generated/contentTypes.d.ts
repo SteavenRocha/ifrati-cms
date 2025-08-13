@@ -405,14 +405,7 @@ export interface ApiAboutPageAboutPage extends Struct.SingleTypeSchema {
         'about-blocks.cta-section',
       ]
     > &
-      Schema.Attribute.Required &
-      Schema.Attribute.SetMinMax<
-        {
-          max: 6;
-          min: 6;
-        },
-        number
-      >;
+      Schema.Attribute.Required;
     title: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.SetMinMaxLength<{

@@ -10,11 +10,12 @@
   "options": {
     "draftAndPublish": true
   },
+  "pluginOptions": {},
   "attributes": {
     "title": {
       "type": "string",
-      "required": true,
-      "minLength": 1
+      "minLength": 1,
+      "required": true
     },
     "sections": {
       "type": "dynamiczone",
@@ -26,9 +27,7 @@
         "about-blocks.team-section",
         "about-blocks.cta-section"
       ],
-      "required": true,
-      "max": 6,
-      "min": 6
+      "required": true
     }
   }
 }
