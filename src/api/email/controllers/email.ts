@@ -1349,12 +1349,15 @@ module.exports = {
             subject: 'Gracias por querer ser voluntario',
             html: `
                 <html lang="es">
+                <head>
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                </head>
                 <body style="font-family: Arial, sans-serif; margin: 0; background-color: #F3F5F9;">
-                    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#F3F5F9">
+                    <table role="presentation" width="100%" height="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#F3F5F9">
                         <tr>
                             <td align="center" style="padding: 10px 5px;">
                                 <table role="presentation" width="100%" cellpadding="0" cellspacing="0"
-                                    style="max-width: 600px; background-color: #ffffff; border-radius: 5px; padding: 20px;">
+                                    style="width:100%; max-width: 600px; background-color: #ffffff; border-radius: 5px; padding: 20px;">
                                     <!-- ICONO -->
                                     <tr>
                                         <td align="center" style="padding: 20px;">
@@ -1447,11 +1450,14 @@ module.exports = {
                                                 </tr>
 
                                                 <tr>
-                                                    <td width="50%" valign="top" style="padding-right: 10px;">
+                                                    <td colspan="2">
                                                         <p style="margin: 0; font-weight: bold;">Correo electrónico</p>
                                                         <p style="margin-top: 5px;">${email}</p>
                                                     </td>
-                                                    <td width="50%" valign="top" style="padding-left: 10px;">
+                                                </tr>
+
+                                                <tr>
+                                                    <td colspan="2">
                                                         <p style="margin: 0; font-weight: bold;">Celular</p>
                                                         <p style="margin-top: 5px;">${phone}</p>
                                                     </td>
