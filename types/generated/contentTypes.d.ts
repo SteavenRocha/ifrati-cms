@@ -955,9 +955,10 @@ export interface ApiProductProduct extends Struct.CollectionTypeSchema {
     state: Schema.Attribute.Boolean &
       Schema.Attribute.Required &
       Schema.Attribute.DefaultTo<true>;
-    tag: Schema.Attribute.Enumeration<['Nuevo', 'Oferta', 'Mas vendido']> &
-      Schema.Attribute.Required &
-      Schema.Attribute.DefaultTo<'Nuevo'>;
+    tag: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        minLength: 1;
+      }>;
     title: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.SetMinMaxLength<{
